@@ -16,9 +16,6 @@ using System.Data.SqlClient;
 
 namespace Airport_Management_System
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class LandingPage : Window
     {
         public string[] serverTypes { get; set; }
@@ -68,39 +65,12 @@ namespace Airport_Management_System
             return true;
         }
 
-        private void Connect_To_Database(object sender, RoutedEventArgs e)
+        private void Connect_To_Database()
         {
-
-            if (!Valid_Input(out int n))
-            {
-                switch (n)
-                {
-                    case 1:
-                        MessageBox.Show("Please enter a server name.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        serverNameInput.Focus();
-                        break;
-                    case 2:
-                        MessageBox.Show("Please enter a database name.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        databaseNameInput.Focus();
-                        break;
-                    case 3:
-                        MessageBox.Show("Please enter a Log In Username.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        UsernameInput.Focus();
-                        break;
-                    case 4:
-                        MessageBox.Show("Please enter a password.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        PasswordInput.Focus(); 
-                        break;
-                }
-                return;
-            }
-
             string connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text};User Id={UsernameInput.Text};Password={PasswordInput.Password};";
-            //string connectionString = $@"Data Source={serverNameInput.Text}; Initial Catalog={databaseNameInput.Text}; Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // DESKTOP - 4CVBSIM\SQLEXPRESS
                 try
                 {
                     // Open the connection
@@ -109,38 +79,75 @@ namespace Airport_Management_System
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        // This method is invoked when user pressed "Connect" button.
+        // Validates proper inputs first before establishing a connection to the Database.
+        private void Request_Server_Connection(object sender, RoutedEventArgs e)
+        {
+            if (!Valid_Input(out int n))
+            {
+                string errorMessage = "";
+                switch (n)
+                {
+                    case 1:
+                        errorMessage = "Please enter a Server Name.";
+                        serverNameInput.Focus();
+                        break;
+                    case 2:
+                        errorMessage = "Please enter a Database Name.";
+                        databaseNameInput.Focus();
+                        break;
+                    case 3:
+                        errorMessage = "Please enter a Log In Username.";
+                        UsernameInput.Focus();
+                        break;
+                    case 4:
+                        errorMessage = "Please enter a Password.";
+                        PasswordInput.Focus();
+                        break;
+                }
+
+                MessageBox.Show($"{errorMessage}", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
+            else
+            {
+                Connect_To_Database();
             }
         }
 
         private void AuthTypePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AdditionalAuthControls.Children.Clear();
-
             string selectedAuthType = AuthTypePicker.SelectedItem as string;
+
             if (selectedAuthType != null)
             {
                 switch (selectedAuthType)
                 {
+                    // hide log in and password label and text box
                     case "Windows Authentication":
                         AdditionalAuthControls.Visibility = Visibility.Collapsed;
                         this.Height = 589;
                         break;
+
+                    // show log in and password label and text box
                     case "SQL Server Authentication":
                         this.Height = 689;
                         ShowLogInAndPasswordInputs();
                         break;
                 }
-
             }
-
         }
 
         private TextBox UsernameInput;
         private PasswordBox PasswordInput;
 
+        // This method initializes Log In Username and Password input and labels when the Server's
+        // Authentication is SQL Server Authentication
         private void ShowLogInAndPasswordInputs()
         {
             TextBlock tb1 = new TextBlock
@@ -201,6 +208,5 @@ namespace Airport_Management_System
             AdditionalAuthControls.Visibility = Visibility.Visible;
 
         }
-
     }
 }
