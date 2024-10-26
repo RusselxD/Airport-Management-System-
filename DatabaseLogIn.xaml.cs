@@ -16,12 +16,14 @@ using System.Data.SqlClient;
 
 namespace Airport_Management_System
 {
-    public partial class LandingPage : Window
+    public partial class DatabaseLogin : Window
     {
         public string[] serverTypes { get; set; }
         public string[] authTypes { get; set; }
 
-        public LandingPage()
+        private string authenticationType;
+
+        public DatabaseLogin()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -29,6 +31,7 @@ namespace Airport_Management_System
             authTypes = new string[] { "Windows Authentication", "SQL Server Authentication" };
             DataContext = this;
 
+            authenticationType = "Windows Authentication";
             currentUserLabel.Text = WindowsIdentity.GetCurrent().Name;
         }
 
@@ -46,7 +49,7 @@ namespace Airport_Management_System
                 return false;
             }
 
-            if(AuthTypePicker.SelectedItem as string is "SQL Server Authentication")
+            if(authenticationType is "SQL Server Authentication")
             {
                 if(String.IsNullOrWhiteSpace(UsernameInput.Text))
                 {
@@ -67,7 +70,16 @@ namespace Airport_Management_System
 
         private void Connect_To_Database()
         {
-            string connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text};User Id={UsernameInput.Text};Password={PasswordInput.Password};";
+            string connectionString = "";
+
+            if (authenticationType is "Windows Authentication")
+            {
+                connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text}; Trusted_Connection=True;";
+            }
+            else
+            {
+                connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text};User Id={UsernameInput.Text};Password={PasswordInput.Password};";
+            }
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -122,11 +134,13 @@ namespace Airport_Management_System
         private void AuthTypePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AdditionalAuthControls.Children.Clear();
-            string selectedAuthType = AuthTypePicker.SelectedItem as string;
+            authenticationType = AuthTypePicker.SelectedItem as string;
 
-            if (selectedAuthType != null)
+            string localAuthenticationType = authenticationType;
+
+            if (localAuthenticationType != null)
             {
-                switch (selectedAuthType)
+                switch (localAuthenticationType)
                 {
                     // hide log in and password label and text box
                     case "Windows Authentication":
@@ -206,7 +220,6 @@ namespace Airport_Management_System
             AdditionalAuthControls.Children.Add(PasswordInput);
 
             AdditionalAuthControls.Visibility = Visibility.Visible;
-
         }
     }
 }

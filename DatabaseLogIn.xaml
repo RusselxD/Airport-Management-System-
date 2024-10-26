@@ -1,4 +1,4 @@
-﻿<Window x:Class="Airport_Management_System.LandingPage"
+﻿<Window x:Class="Airport_Management_System.DatabaseLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -126,7 +126,7 @@
                       Background="AliceBlue" 
                       Padding="15,5,5,3" 
                       FontSize="13" 
-                      SelectionChanged="AuthTypePicker_SelectionChanged"/>
+                      SelectionChanged="AuthTypePicker_SelectionChanged" />
 
             <Grid x:Name="AdditionalAuthControls" 
                   Margin="0,272,0,104" 

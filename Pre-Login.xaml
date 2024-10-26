@@ -1,0 +1,138 @@
+﻿<Window x:Class="Airport_Management_System.Pre_Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Airport_Management_System"
+        mc:Ignorable="d"
+        Title="Pre_Login" Height="589" Width="826">
+
+    <ScrollViewer HorizontalAlignment="Center" Width="806">
+
+        <Grid Height="1150" Background="#F3F6FA" Width="822">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="186*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="265*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="485*"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Center" Height="72" Margin="0,69,0,0" TextWrapping="Wrap" Text="Airport Management System" VerticalAlignment="Top" Width="590" FontFamily="Ubuntu" FontSize="45" Padding="10,15,10,15"/>
+            <TextBlock HorizontalAlignment="Center" Height="51" Margin="0,140,0,0" TextWrapping="Wrap" Text="Enterprise Aviation Operations Platform v1.0" VerticalAlignment="Top" Width="332" FontFamily="Ubuntu" FontSize="16" Padding="10,5,10,15" Foreground="Black"/>
+
+
+            <Border BorderThickness="1" HorizontalAlignment="Center" Height="106" Margin="0,19,0,0" VerticalAlignment="Top" Width="716" Background="#FFFFFBEB" Grid.RowSpan="2" Grid.Row="1">
+
+                <Grid>
+
+                    <Image Source="/Icons/warning-icon.png" HorizontalAlignment="Left" Height="32" Margin="21,16,0,0" VerticalAlignment="Top" Width="32" OpacityMask="#FFE36969"/>
+
+                    <Rectangle HorizontalAlignment="Left" Height="104" Margin="-1,0,0,0" VerticalAlignment="Center" Width="6" Fill="#FFFBBF24"/>
+                    <TextBlock HorizontalAlignment="Left" Height="22" Margin="69,17,0,0" TextWrapping="Wrap" Text="Restricted Access System" VerticalAlignment="Top" Width="243" Foreground="#FF92400E" FontSize="16" FontFamily="Ubuntu"/>
+                    <TextBlock HorizontalAlignment="Left" Height="51" Margin="69,47,0,0" TextWrapping="Wrap" Text="This system is intended for authorized personnel only. All access are logged and monitored." VerticalAlignment="Top" Width="613" Foreground="#FFB45309" FontSize="16" Padding="0,0,10,0" FontFamily="Ubuntu"/>
+
+
+                </Grid>
+
+            </Border>
+
+            <Border CornerRadius="8" BorderBrush="#FFD6D6D6" BorderThickness="1" HorizontalAlignment="Center" Height="174" Margin="0,99,0,0" VerticalAlignment="Top" Width="716" Background="White" Grid.Row="2">
+
+                <Grid>
+
+                    <TextBlock HorizontalAlignment="Left" Height="29" Margin="30,23,0,0" TextWrapping="Wrap" Text="System Status" VerticalAlignment="Top" Width="271" FontSize="22" FontFamily="Ubuntu"/>
+                    <Rectangle HorizontalAlignment="Left" Height="15" Margin="30,69,0,0" VerticalAlignment="Top" Width="15" RadiusX="50" RadiusY="50" Fill="#FF22C55E"/>
+                    <Rectangle HorizontalAlignment="Left" Height="15" Margin="30,99,0,0" VerticalAlignment="Top" Width="15" RadiusX="50" RadiusY="50" Fill="#FF22C55E"/>
+                    <Rectangle HorizontalAlignment="Left" Height="15" Margin="30,130,0,0" VerticalAlignment="Top" Width="15" RadiusX="50" RadiusY="50" Fill="#FF22C55E"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="59,67,0,0" TextWrapping="Wrap" Text="Database Services: Online" VerticalAlignment="Top" Width="199" FontFamily="Ubuntu" FontSize="15" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="59,97,0,0" TextWrapping="Wrap" Text="Authentication Services: Active" VerticalAlignment="Top" Width="238" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="59,128,0,0" TextWrapping="Wrap" Text="Security Protocols: Enabled" VerticalAlignment="Top" Width="238" FontFamily="Ubuntu" FontSize="15" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="59,97,0,0" TextWrapping="Wrap" Text="Authentication Services: Active" VerticalAlignment="Top" Width="238" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+
+
+                </Grid>
+
+            </Border>
+
+            <Border BorderBrush="#FFD6D6D6" BorderThickness="1" HorizontalAlignment="Center" Height="251" VerticalAlignment="Top" Width="716" CornerRadius="8,8,8,8" Background="White" Grid.Row="2" Grid.RowSpan="3" Margin="0,300,0,0">
+
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="Support Information" VerticalAlignment="Top" Width="271" FontSize="22" FontFamily="Ubuntu" Margin="30,23,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,69,0,0" TextWrapping="Wrap" Text="Technical Support:" VerticalAlignment="Top" Width="158" FontFamily="Ubuntu" FontWeight="Bold" FontSize="16" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,93,0,0" TextWrapping="Wrap" Text="+1 (555) 123 4567" VerticalAlignment="Top" Width="158" FontFamily="Ubuntu" FontSize="16" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,125,0,0" TextWrapping="Wrap" Text="Email Support:" VerticalAlignment="Top" Width="158" FontFamily="Ubuntu" FontWeight="Bold" FontSize="16" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,149,0,0" TextWrapping="Wrap" Text="airsys_support@examplemail.org" VerticalAlignment="Top" Width="271" FontFamily="Ubuntu" FontSize="16" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,182,0,0" TextWrapping="Wrap" Text="Hours:" VerticalAlignment="Top" Width="158" FontFamily="Ubuntu" FontWeight="Bold" FontSize="16" Foreground="#FF474747"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="30,206,0,0" TextWrapping="Wrap" Text="24/7 Emergency services" VerticalAlignment="Top" Width="271" FontFamily="Ubuntu" FontSize="16" Foreground="#FF474747"/>
+
+
+
+                </Grid>
+
+            </Border>
+
+            <Border BorderBrush="#FFD6D6D6" BorderThickness="1" HorizontalAlignment="Center" Height="200" Margin="0,232,0,0" Grid.Row="4" VerticalAlignment="Top" Width="716" CornerRadius="8,8,8,8" Background="White">
+
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="Important Notices" VerticalAlignment="Top" Width="271" FontSize="22" FontFamily="Ubuntu" Margin="30,23,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,69,0,0" TextWrapping="Wrap" Text="Ensure your network connection is secure before proceeding" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,75,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,97,0,0" TextWrapping="Wrap" Text="Use of this system constitutes acceptance of all security monitoring" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,102,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,125,0,0" TextWrapping="Wrap" Text="Report any suspicious activity to system administrators immediately" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,130,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,153,0,0" TextWrapping="Wrap" Text="Keep you database credentials confidential and secure" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,158,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
+
+
+
+                </Grid>
+
+            </Border>
+
+            <Border BorderThickness="1" HorizontalAlignment="Center" Height="62" Margin="0,456,0,0" Grid.Row="4" VerticalAlignment="Top" Width="397" CornerRadius="10,10,10,10" Cursor="Hand" Background="#FF3385DD">
+
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left" Height="22" Margin="29,0,0,0" TextWrapping="Wrap" Text="Continue To Database Connection" VerticalAlignment="Center" Width="321" FontFamily="Ubuntu" Foreground="White" FontSize="20"/>
+                    <Image Source="/Icons/arrow-to-right-icon.png" HorizontalAlignment="Left" Height="24" Margin="337,0,0,0" VerticalAlignment="Center" Width="32"/>
+
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center" Width="395" CornerRadius="10,10,10,10" Panel.ZIndex="10">
+
+                        <Border.Style>
+
+                            <Style TargetType="Border">
+
+                                <Setter Property="Background" 
+                                        Value="{x:Null}"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#33FFFFFF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+
+                        </Border.Style>
+
+                    </Border>
+
+
+
+                </Grid>
+
+            </Border>
+
+
+
+
+
+
+
+        </Grid>
+
+    </ScrollViewer>
+
+
+
+</Window>
