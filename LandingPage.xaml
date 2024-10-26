@@ -5,89 +5,206 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
         mc:Ignorable="d"
-        Title="Airport Manager" Height="589" Width="826" SizeToContent="Height" ResizeMode="NoResize">
+        Title="Airport Manager" 
+        Height="589" 
+        Width="826" 
+        SizeToContent="Height" 
+        ResizeMode="NoResize">
 
     <Grid Background="#FFF0F2F5">
 
-        <Grid Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,95,0,40" Width="579" MaxWidth="579" >
+        <Grid Background="{x:Null}" 
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Center" 
+              Margin="0,95,0,40" 
+              Width="579" 
+              MaxWidth="579" >
 
-            <Border BorderBrush="#FFB7B7B7" BorderThickness="1" CornerRadius="10" Background="White">
+            <Border BorderBrush="#FFB7B7B7" 
+                    BorderThickness="1" 
+                    CornerRadius="10" 
+                    Background="White">
+
                 <Border.Effect>
-                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0"/>
+                    <DropShadowEffect Color="Black" 
+                                      BlurRadius="20" 
+                                      ShadowDepth="0"/>
                 </Border.Effect>
+
             </Border>
 
-            <TextBlock Text="Connection Settings" HorizontalAlignment="Left" Height="36" Margin="45,38,0,0" 
-                VerticalAlignment="Top" Width="195" FontFamily="Ubuntu" FontSize="20"/>
+            <TextBlock Text="Connection Settings" 
+                       HorizontalAlignment="Left" 
+                       Height="36" 
+                       Margin="45,38,0,0" 
+                       VerticalAlignment="Top" 
+                       Width="195" 
+                       FontFamily="Ubuntu" 
+                       FontSize="20"/>
 
-            <TextBlock Text="Server Type:" HorizontalAlignment="Left" Height="34" Margin="45,88,0,0" VerticalAlignment="Top" 
-                Width="133" Padding="20,9,5,5" FontSize="13" FontFamily="Ubuntu"/>
+            <TextBlock Text="Server Type:" 
+                       HorizontalAlignment="Left" 
+                       Height="34" 
+                       Margin="45,88,0,0" 
+                       VerticalAlignment="Top" 
+                       Width="133" 
+                       Padding="20,9,5,5" 
+                       FontSize="13" 
+                       FontFamily="Ubuntu"/>
 
-            <ComboBox x:Name="ServerTypePicker" BorderThickness="1, 1, 1, 1" Height="34" ItemsSource="{Binding serverTypes}" 
-                      Margin="178,88,60,0" VerticalAlignment="Top" VerticalContentAlignment="Center" 
-                      SelectedIndex="0" Cursor="Hand" Background="AliceBlue" Padding="15,5,5,3" FontSize="13"/>
+            <ComboBox x:Name="ServerTypePicker" 
+                      BorderThickness="1, 1, 1, 1"
+                      Height="34" 
+                      ItemsSource="{Binding serverTypes}" 
+                      Margin="178,88,60,0"
+                      VerticalAlignment="Top" 
+                      VerticalContentAlignment="Center" 
+                      SelectedIndex="0" 
+                      Cursor="Hand" 
+                      Padding="15,5,5,3" 
+                      FontSize="13"/>
 
-            <TextBlock Text="Server Name:" HorizontalAlignment="Left" Height="34" Margin="45,134,0,0" VerticalAlignment="Top"
-                       Width="133" Background="White" Padding="20,10,5,5" FontFamily="Ubuntu" FontSize="13"/>
-
-            <TextBox x:Name="serverNameInput" BorderThickness="1, 1, 1, 1" Height="34" Margin="178,134,60,0" 
-                     TextWrapping="Wrap" VerticalAlignment="Top" 
-                     VerticalContentAlignment="Center" Padding="15,2,15,0" FontFamily="Ubuntu" FontSize="13"/>
-
-            <TextBlock Text="Databse Name:" HorizontalAlignment="Left" Height="34" Margin="45,180,0,0" VerticalAlignment="Top"
-                    Width="133" Background="White" Padding="20,10,5,5" FontFamily="Ubuntu" FontSize="13"/>
-
-            <TextBox x:Name="databaseNameInput" BorderThickness="1, 1, 1, 1" Height="34" Margin="178,180,60,0" 
-                    TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" 
-                     Padding="15,2,15,0" FontFamily="Ubuntu" FontSize="13"/>
-
-            <TextBlock Text="Authentication:" HorizontalAlignment="Left" Height="34" Margin="45,226,0,0" 
-                       VerticalAlignment="Top" Width="133" Padding="20,10,5,5" FontFamily="Ubuntu" FontSize="13"/>
-
-            <ComboBox x:Name="AuthTypePicker" BorderThickness="1, 1, 1, 1" Height="34" ItemsSource="{Binding authTypes}" 
-                      Margin="178,226,60,0" VerticalAlignment="Top" VerticalContentAlignment="Center" 
-                      SelectedIndex="0" Cursor="Hand" Background="AliceBlue" Padding="15,5,5,3" FontSize="13" SelectionChanged="AuthTypePicker_SelectionChanged"/>
-
-            <Grid x:Name="AdditionalAuthControls" Margin="0,272,0,104" Visibility="Collapsed" HorizontalAlignment="Center" Width="460" >
-                
-                <!-- Additional controls will be added here -->
-            </Grid>
-
-            <TextBlock Text="Current User: " HorizontalAlignment="Left" Height="36" 
-                       Margin="65,317,0,30" VerticalAlignment="Bottom" Width="84" 
-                       Foreground="#FF8F8F8F" FontFamily="Ubuntu" Padding="0,11,5,11" 
+            <TextBlock Text="Server Name:" 
+                       HorizontalAlignment="Left" 
+                       Height="34" Margin="45,134,0,0" 
+                       VerticalAlignment="Top"
+                       Width="133" Background="White" 
+                       Padding="20,10,5,5" 
+                       FontFamily="Ubuntu" 
                        FontSize="13"/>
 
-            <TextBlock x:Name="currentUserLabel" Height="36" Width="216" Foreground="#FF8F8F8F" 
-                       FontSize="13" FontFamily="Ubuntu" Padding="0,11,5,11" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="149,0,0,30" />
+            <TextBox x:Name="serverNameInput" 
+                     BorderThickness="1, 1, 1, 1" 
+                     Height="34" Margin="178,134,60,0" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     VerticalContentAlignment="Center" 
+                     Padding="15,2,15,0" 
+                     FontFamily="Ubuntu" 
+                     FontSize="13"/>
 
-            <Border CornerRadius="5" BorderBrush="Gray" Margin="420,311,60,35" Cursor="Hand" MouseDown="Request_Server_Connection" VerticalAlignment="Bottom">
+            <TextBlock Text="Databse Name:" 
+                       HorizontalAlignment="Left" 
+                       Height="34" Margin="45,180,0,0" 
+                       VerticalAlignment="Top"
+                       Width="133" 
+                       Background="White" 
+                       Padding="20,10,5,5" 
+                       FontFamily="Ubuntu" 
+                       FontSize="13"/>
+
+            <TextBox x:Name="databaseNameInput" 
+                     BorderThickness="1, 1, 1, 1" 
+                     Height="34" 
+                     Margin="178,180,60,0" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     VerticalContentAlignment="Center" 
+                     Padding="15,2,15,0" 
+                     FontFamily="Ubuntu" 
+                     FontSize="13"/>
+
+            <TextBlock Text="Authentication:" 
+                       HorizontalAlignment="Left" 
+                       Height="34" 
+                       Margin="45,226,0,0" 
+                       VerticalAlignment="Top" 
+                       Width="133" 
+                       Padding="20,10,5,5" 
+                       FontFamily="Ubuntu" 
+                       FontSize="13"/>
+
+            <ComboBox x:Name="AuthTypePicker" 
+                      BorderThickness="1, 1, 1, 1" 
+                      Height="34" 
+                      ItemsSource="{Binding authTypes}" 
+                      Margin="178,226,60,0" 
+                      VerticalAlignment="Top" 
+                      VerticalContentAlignment="Center" 
+                      SelectedIndex="0" 
+                      Cursor="Hand" 
+                      Background="AliceBlue" 
+                      Padding="15,5,5,3" 
+                      FontSize="13" 
+                      SelectionChanged="AuthTypePicker_SelectionChanged"/>
+
+            <Grid x:Name="AdditionalAuthControls" 
+                  Margin="0,272,0,104" 
+                  Visibility="Collapsed" 
+                  HorizontalAlignment="Center" 
+                  Width="460" >
+
+                <!-- Log In Username and Password for SQL Server Authentication is placed here. -->
+
+            </Grid>
+
+            <TextBlock Text="Current User:" 
+                       HorizontalAlignment="Left" 
+                       Height="36" 
+                       Margin="65,317,0,30" 
+                       VerticalAlignment="Bottom" 
+                       Width="84" 
+                       Foreground="#FF8F8F8F" 
+                       FontFamily="Ubuntu" 
+                       Padding="0,11,5,11" 
+                       FontSize="13"/>
+
+            <TextBlock x:Name="currentUserLabel" 
+                       Height="36" 
+                       Width="216" 
+                       Foreground="#FF8F8F8F" 
+                       FontSize="13" 
+                       FontFamily="Ubuntu" 
+                       Padding="0,11,5,11" 
+                       VerticalAlignment="Bottom" 
+                       HorizontalAlignment="Left" 
+                       Margin="149,0,0,30" />
+
+            <Border CornerRadius="5" 
+                    BorderBrush="Gray" 
+                    Margin="420,311,60,35" 
+                    Cursor="Hand" 
+                    MouseDown="Request_Server_Connection" 
+                    VerticalAlignment="Bottom">
 
                 <Border.Style>
+
                     <Style TargetType="Border">
-                        <Setter Property="Background" Value="#FF3385DD"/>
+
+                        <Setter Property="Background" 
+                                Value="#FF3385DD"/>
+
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#FF63A0E0"/>
                             </Trigger>
                         </Style.Triggers>
+
                     </Style>
+
                 </Border.Style>
 
-                <TextBlock Text="Connect" Background="{x:Null}" Foreground="White" 
-                           Height="42" Width="99" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                <TextBlock Text="Connect" 
+                           Background="{x:Null}" 
+                           Foreground="White" 
+                           Height="42"
+                           Width="99" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom" 
                            Padding="27, 12.5, 25, 7"/>
-
             </Border>
 
-
-
-
-
         </Grid>
-        <TextBlock Text="Connect To Database" Height="59" Width="826" VerticalAlignment="Top" FontFamily="Ubuntu" 
-                   FontSize="20" FontWeight="Bold" Padding="25,18,5,18" Background="#FF2C3E50" Foreground="White" 
-                   HorizontalAlignment="Stretch"/>
 
+        <TextBlock Text="Connect To Database" 
+                   Height="59" 
+                   Width="826" 
+                   VerticalAlignment="Top" 
+                   FontFamily="Ubuntu" 
+                   FontSize="20" FontWeight="Bold" 
+                   Padding="25,18,5,18" 
+                   Background="#FF2C3E50" 
+                   Foreground="White" 
+                   HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>
