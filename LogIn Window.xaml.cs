@@ -15,14 +15,25 @@ using System.Windows.Shapes;
 namespace Airport_Management_System
 {
     /// <summary>
-    /// Interaction logic for Pre_Login.xaml
+    /// Interaction logic for LogIn_Window.xaml
     /// </summary>
-    public partial class Pre_Login : Window
+    public partial class LogIn_Window : Window
     {
-        public Pre_Login()
+        public LogIn_Window()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            MainContent.Content = new PreLoginControl();
+        }
+
+        public void GoToLogin()
+        {
+            this.SizeToContent = SizeToContent.Height;
+            MainContent.Content = new LoginControl();
+        }
+        public void AdjustPosition(int n)
+        {
+            this.Top += n;
         }
     }
 }

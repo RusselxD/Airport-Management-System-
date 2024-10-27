@@ -58,6 +58,14 @@
     <Compile Include="DatabaseLogIn.xaml.cs">
       <DependentUpon>DatabaseLogIn.xaml</DependentUpon>
     </Compile>
+    <Page Include="LogIn Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,6 +73,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogIn Window.xaml.cs">
+      <DependentUpon>LogIn Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -74,14 +88,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pre-Login.xaml">
+    <Page Include="PreLoginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pre-Login.xaml.cs">
-      <DependentUpon>Pre-Login.xaml</DependentUpon>
+    <Compile Include="PreLoginControl.xaml.cs">
+      <DependentUpon>PreLoginControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

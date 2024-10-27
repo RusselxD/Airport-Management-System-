@@ -11,9 +11,9 @@
         SizeToContent="Height" 
         ResizeMode="NoResize">
 
-    <Grid Background="#FFF0F2F5">
+    <!--<Grid Background="#FFF0F2F5">-->
 
-        <Grid Background="{x:Null}" 
+        <!--<Grid Background="{x:Null}" 
               HorizontalAlignment="Center" 
               VerticalAlignment="Center" 
               Margin="0,95,0,40" 
@@ -134,7 +134,7 @@
                   HorizontalAlignment="Center" 
                   Width="460" >
 
-                <!-- Log In Username and Password for SQL Server Authentication is placed here. -->
+                --><!-- Log In Username and Password for SQL Server Authentication is placed here. --><!--
 
             </Grid>
 
@@ -205,6 +205,6 @@
                    Padding="25,18,5,18" 
                    Background="#FF2C3E50" 
                    Foreground="White" 
-                   HorizontalAlignment="Stretch"/>
-    </Grid>
+                   Horizontal-->Alignment="Stretch"/>
+    <!--</Grid>-->
 </Window>
