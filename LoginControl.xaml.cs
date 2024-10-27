@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Security.Principal;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Airport_Management_System
 {
@@ -69,34 +58,6 @@ namespace Airport_Management_System
 
             n = 0;
             return true;
-        }
-
-        private void Connect_To_Database()
-        {
-            string connectionString = "";
-
-            if (authenticationType is "Windows Authentication")
-            {
-                connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text}; Trusted_Connection=True;";
-            }
-            else
-            {
-                connectionString = $@"Server={serverNameInput.Text}; Database={databaseNameInput.Text};User Id={UsernameInput.Text};Password={PasswordInput.Password};";
-            }
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    // Open the connection
-                    connection.Open();
-                    MessageBox.Show("Connection Successful.", "Information");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
         }
 
         private TextBox UsernameInput;
@@ -240,10 +201,18 @@ namespace Airport_Management_System
                 }
 
                 MessageBox.Show($"{errorMessage}", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            ConnectionWindow connectionWindow = new ConnectionWindow();
+            
+            if (authenticationType is "Windows Authentication")
+            {
+                connectionWindow.Connect_With_Windows_Authentication(serverNameInput.Text, databaseNameInput.Text);
             }
             else
             {
-                Connect_To_Database();
+                connectionWindow.Connect_With_SQL_Server_Authentication(serverNameInput.Text, databaseNameInput.Text, UsernameInput.Text, PasswordInput.Password);
             }
         }
     }
