@@ -36,7 +36,7 @@ namespace Airport_Management_System
                 Background = Brushes.White,
                 CornerRadius = new CornerRadius(5),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Margin = new Thickness(0, 0, 20, 10),
+                Margin = new Thickness(40, 0, 40, 10),
             };
 
             // Create the Grid for the alert content
@@ -60,7 +60,7 @@ namespace Airport_Management_System
                 FontFamily = new FontFamily("Ubuntu"),
                 Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71C1C")),
                 VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(65, 0, 0, 0),
+                Margin = new Thickness(65, 0, 40, 0),
                 Padding = new Thickness(0, 3, 0, 0)
             };
             alertGrid.Children.Add(alertText);
@@ -71,12 +71,15 @@ namespace Airport_Management_System
             // Add the alert Border to the StackPanel (AlertsPanel)
             AlertsPanel.Children.Add(alertBorder);
 
-            dashboardInnerGrid.Height += 150;
+            a += 60;
+            dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(a);
         }
+
+        private int a = 160;
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AddAlert("This is an alert message");
+            AddAlert("This is an alert message This is an alert message This is an alert message This is an alert message ");
         }
     }
 }

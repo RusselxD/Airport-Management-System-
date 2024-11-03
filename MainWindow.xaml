@@ -101,8 +101,15 @@
             <ScrollViewer Margin="0,59,0,0">
 
                 <Grid x:Name="dashboardInnerGrid">
-                    <Border CornerRadius="15" Height="216" Margin="50,40,50,0" VerticalAlignment="Top" Background="White">
-                        <Grid HorizontalAlignment="Stretch" Height="171" VerticalAlignment="Stretch">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="280"/>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="280"/>
+                    </Grid.RowDefinitions>
+
+                    <Border CornerRadius="15" Margin="65,35,65,25" Background="White">
+                        <Grid>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -132,16 +139,17 @@
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius="15" Margin="52,309,52,0" VerticalAlignment="Top" Background="#FFFFE7E7">
+                    <Border Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="#FFFFE7E7">
                         <Grid HorizontalAlignment="Stretch">
                             <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Active Alerts" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
 
                             <!-- StackPanel to hold dynamic alerts -->
-                            <StackPanel x:Name="AlertsPanel" Margin="0,84,0,84" Width="821" VerticalAlignment="Top"/>
+                            <StackPanel x:Name="AlertsPanel" Margin="0,84,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                         </Grid>
                     </Border>
 
-                    <Button Content="Button" HorizontalAlignment="Left" Height="74" Margin="153,574,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click_1"/>
+                    <Button Grid.Row="2" Content="Button" HorizontalAlignment="Left" Height="74" Margin="759,158,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click_1"/>
+                    <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" Height="88" Margin="65,0,65,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
 
                 </Grid>
 
