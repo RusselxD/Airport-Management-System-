@@ -24,6 +24,7 @@ namespace Airport_Management_System
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
     }
 }

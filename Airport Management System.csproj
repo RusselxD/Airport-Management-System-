@@ -136,5 +136,8 @@
   <ItemGroup>
     <Resource Include="Icons\arrow-to-right-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Airport Logo\logo1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
