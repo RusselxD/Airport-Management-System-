@@ -27,6 +27,11 @@ namespace Airport_Management_System
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
+        private void ewan()
+        {
+            
+        }
+
         private void AddAlert(string alertMessage)
         {
             // Create the Border for the alert
@@ -36,7 +41,7 @@ namespace Airport_Management_System
                 Background = Brushes.White,
                 CornerRadius = new CornerRadius(5),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Margin = new Thickness(40, 0, 40, 10),
+                Margin = new Thickness(40, 0, 40, 9),
             };
 
             // Create the Grid for the alert content
@@ -73,13 +78,55 @@ namespace Airport_Management_System
 
             a += 60;
             dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(a);
+            
         }
 
         private int a = 160;
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AddAlert("This is an alert message This is an alert message This is an alert message This is an alert message ");
+            AddAlert("This is an alert message nigga.");
+        }
+
+        private void addRecentAct(string message)
+        {
+            Border border = new Border
+            {
+                BorderThickness = new Thickness(1),
+                Height = 40,
+                Margin = new Thickness(38, 0, 38, 5),
+                VerticalAlignment = VerticalAlignment.Top,
+                Background = Brushes.White,
+                CornerRadius = new CornerRadius(5, 5, 5, 5)
+            };
+
+            // Create the TextBlock element
+            TextBlock textBlock = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                Text = message,
+                Foreground = new SolidColorBrush(Color.FromRgb(109, 109, 109)),
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 16,
+                Padding = new Thickness(20, 11, 0, 0)
+            };
+
+            // Add the TextBlock to the Border
+            border.Child = textBlock;
+
+            // Assuming you have a parent container (like a Grid or StackPanel) to add this Border to
+            RecentActivitiesPanel.Children.Add(border);
+
+            b += 45;
+            dashboardInnerGrid.RowDefinitions[2].Height = new GridLength(b);
+
+        }
+
+        private int b = 280;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            addRecentAct("Gate B2 assigned to Flight BA 233.");
         }
     }
 }
