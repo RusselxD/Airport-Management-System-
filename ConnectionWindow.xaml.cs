@@ -21,12 +21,22 @@ namespace Airport_Management_System
     /// </summary>
     public partial class ConnectionWindow : Window
     {
-        public ConnectionWindow()
+        private LoginControl lc;
+
+        public ConnectionWindow(LoginControl lc)
         {
             // DESKTOP-4CVBSIM\SQLEXPRESS
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.Show();
+            this.lc = lc;
+        }
+
+        private void Open_Main_Window()
+        {
+            Window.GetWindow(this.lc).Close();
+            MainWindow mw = new MainWindow();
+            mw.Show();
         }
 
         // for windows authentication
@@ -36,6 +46,7 @@ namespace Airport_Management_System
             Connect_To_Database();
         }
 
+        // for sql server authentication
         public void Connect_With_SQL_Server_Authentication(string serverName, string databaseName, string userName, string password)
         {
             this.connectionString = $@"Server={serverName}; Database={databaseName};User Id={userName};Password={password};";
@@ -65,17 +76,17 @@ namespace Airport_Management_System
             "Retrieving essential airport data...",
             "Loading latest flight schedules...",
             "Synchronizing data with the system...",
-            "Performing final data integrity checks..."
+            "Connection established! Loading complete..."
         };
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var worker = sender as BackgroundWorker;
+            BackgroundWorker worker = sender as BackgroundWorker;
             
             for(int i = 0; i <= 10; i++)
             {
                 Thread.Sleep(50);
-                worker.ReportProgress(i, loadingMessages[0]);
+                worker.ReportProgress(i, "Initializing connection with the database...");
             }
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -87,21 +98,20 @@ namespace Airport_Management_System
 
                     for(int i = 10; i <= 99; i++)
                     {
-                        Thread.Sleep(50);
+                        Thread.Sleep(10);
                         worker.ReportProgress(i, loadingMessages[i / 10]);
                     }
+                    this.Dispatcher.BeginInvoke(new Action(() => Open_Main_Window()));
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
-
                     return;
                 }
 
             }
+            this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
 
         }
 
@@ -114,8 +124,6 @@ namespace Airport_Management_System
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 100;
-            textBlock.Text = "Connection established! Loading complete...";
         }
-
     }
 }

@@ -204,7 +204,7 @@ namespace Airport_Management_System
                 return;
             }
             
-            ConnectionWindow connectionWindow = new ConnectionWindow();
+            ConnectionWindow connectionWindow = new ConnectionWindow(this);
             
             if (authenticationType is "Windows Authentication")
             {
@@ -214,6 +214,7 @@ namespace Airport_Management_System
             {
                 connectionWindow.Connect_With_SQL_Server_Authentication(serverNameInput.Text, databaseNameInput.Text, UsernameInput.Text, PasswordInput.Password);
             }
+
         }
     }
 }
