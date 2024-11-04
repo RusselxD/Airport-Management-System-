@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HomePageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogIn Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,9 @@
     </Compile>
     <Compile Include="ConnectionWindow.xaml.cs">
       <DependentUpon>ConnectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomePageControl.xaml.cs">
+      <DependentUpon>HomePageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogIn Window.xaml.cs">
       <DependentUpon>LogIn Window.xaml</DependentUpon>
@@ -144,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\swap icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\goto-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\goto-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\goto-orange.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

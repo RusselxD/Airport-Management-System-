@@ -92,7 +92,7 @@
                 </Label.Style>
             </Label>
 
-            <Grid Margin="0,562,0,0" VerticalAlignment="Bottom" Height="222">
+            <Grid Height="222" VerticalAlignment="Bottom" Background="White">
 
                 <TextBlock x:Name="timeStandard" HorizontalAlignment="Left" Height="28" Margin="17,48,0,0" TextWrapping="Wrap" Text="UTC" VerticalAlignment="Top" Width="124" FontSize="20" FontFamily="Segoe UI Semibold" Foreground="#FF535353"/>
                 <TextBlock x:Name="formattedDate" HorizontalAlignment="Left" Height="22" Margin="17,82,0,0" TextWrapping="Wrap" Text="November 4, 2009" VerticalAlignment="Top" Width="178" FontSize="18" FontFamily="Segoe UI Semibold"/>
@@ -103,104 +103,10 @@
 
             </Grid>
 
-
-
-
-
         </Grid>
 
-
-        <Grid Grid.Column="1" Background="#FFF6F6F6">
-            <TextBlock Height="59" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,16,0,0"/>
-
-            <ScrollViewer Margin="0,59,0,0">
-
-                <Grid x:Name="dashboardInnerGrid">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="280"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="280"/>
-                    </Grid.RowDefinitions>
-
-                    <Border CornerRadius="15" Margin="65,35,65,25" Background="White">
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border Grid.Column="0" BorderThickness="1" Height="150" Margin="40,10,20,11" Background="#FF98FDB3" CornerRadius="8,8,8,8">
-                                <Grid Margin="-1,-1,-1,-1">
-                                    <TextBlock HorizontalAlignment="Left" Margin="35,25,0,0" TextWrapping="Wrap" Text="Active Flights" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="29,63,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Foreground="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
-                                </Grid>
-                            </Border>
-
-                            <Border Grid.Column="1" BorderThickness="1" Height="150" VerticalAlignment="Center" Background="#FFFFC0C0" CornerRadius="8,8,8,8" Margin="20,0,20,0">
-                                <Grid Margin="-1,-1,-1,-1">
-                                    <TextBlock HorizontalAlignment="Left" Margin="35,25,0,0" TextWrapping="Wrap" Text="Occupied Gates" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="29,63,0,0" TextWrapping="Wrap" Text="8/15" VerticalAlignment="Top" Foreground="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
-                                </Grid>
-                            </Border>
-                            <Border Grid.Column="2" BorderThickness="1" Height="150" Margin="20,0,40,0" VerticalAlignment="Center" Background="#FFFFD7A6" CornerRadius="8,8,8,8">
-                                <Grid Height="150" VerticalAlignment="Center" Margin="-1,0,-1,0">
-                                    <TextBlock Margin="35,25,0,0" TextWrapping="Wrap" Text="Staff On Duty" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22" HorizontalAlignment="Left" Width="199"/>
-                                    <TextBlock Margin="29,63,0,0" TextWrapping="Wrap" Text="24" VerticalAlignment="Top" Foreground="#FFF88E0C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55" HorizontalAlignment="Left" Width="203"/>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <Border x:Name="alertsContainer" Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="#FFFFCFCF" >
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Active Alerts" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
-
-                            <!-- StackPanel to hold dynamic alerts -->
-                            <StackPanel x:Name="AlertsPanel" Margin="0,84,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-                        </Grid>
-                    </Border>
-
-                    <Button Grid.Row="2" Content="Button" HorizontalAlignment="Left" Height="74" Margin="813,208,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click_1"/>
-
-                    <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,45" Background="#FFCBF0FF" CornerRadius="15,15,15,15">
-                        <Grid HorizontalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Quick Actions" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
-
-                            <Border BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="30,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF0B8ABF" CornerRadius="8,8,8,8" Cursor="Hand">
-                                <TextBlock TextWrapping="Wrap" Text="Add Flight" Foreground="White" Margin="-1,-1,-1,-1" FontFamily="Ubuntu" FontSize="20" Padding="45,19,0,0"/>
-
-                            </Border>
-
-                            <Border BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="235,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF1EA843" CornerRadius="8,8,8,8" Cursor="Hand">
-                                <TextBlock TextWrapping="Wrap" Foreground="White" Margin="-1,-1,-1,-1" FontFamily="Ubuntu" FontSize="20" Padding="38,19,0,0"><Run Text="Assign Gate"/><LineBreak/><Run/></TextBlock>
-
-                            </Border>
-                            <TextBlock HorizontalAlignment="Left" Height="30" Margin="30,160,0,0" TextWrapping="Wrap" Text="Recent Activities" VerticalAlignment="Top" Width="183" FontFamily="Ubuntu" FontSize="21"/>
-
-                            <StackPanel x:Name="RecentActivitiesPanel" Margin="0,195,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-                            <!--<Border BorderThickness="1" Height="40" Margin="38,195,38,0" VerticalAlignment="Top" Background="White" CornerRadius="5,5,5,5">
-                                <TextBlock TextWrapping="Wrap" Text="Gate B2 assigned to Flight BA 233" Foreground="#FF6D6D6D" FontFamily="Ubuntu" FontSize="16" Padding="20,11,0,0"/>
-                            </Border>-->
-
-                        </Grid>
-                    </Border>
-                    <Button Grid.Row="2" Content="Button" HorizontalAlignment="Left" Height="74" Margin="822,101,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click"/>
-
-                </Grid>
-
-            </ScrollViewer>
-
-
-
-
-
-
-
-        </Grid>
-
+        <ContentControl x:Name="CurrentPage" Grid.Column="1" ></ContentControl>
+        
     </Grid>
 
 </Window>
