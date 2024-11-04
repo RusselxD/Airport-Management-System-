@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,12 +23,24 @@ namespace Airport_Management_System
 
     public partial class MainWindow : Window
     {
+        private SqlConnection sqlConnection;
+        private HomePageControl homePageControl;
+
         private bool appIsRunning = true;
 
         public MainWindow()
         {
+            // NOTICE: Connection only temporary.
+            string connectionString = @"Server=DESKTOP-4CVBSIM\SQLEXPRESS; Database=airport_database;User Id=airport_admin;Password=admin;";
+            this.sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.OpenAsync();
+
+            //Thread.Sleep(3000);
+
             InitializeComponent();
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            //this.sqlConnection = sqlConnection;
 
             new Thread(() =>
             {
@@ -35,10 +48,20 @@ namespace Airport_Management_System
                 DisplayDateAndTime();
             }).Start();
 
-            CurrentPage.Content = new HomePageControl();
+            homePageControl = new HomePageControl(sqlConnection);
 
-            this.Show();
-            this.Closed += (s, e) => appIsRunning = false;
+
+            CurrentPage.Content = homePageControl;
+
+            Show();
+            this.Closed += (s, e) => closeApp();
+        }
+
+        void closeApp()
+        {
+            appIsRunning = false;
+            sqlConnection.Close();
+            sqlConnection.Dispose();
         }
 
         private bool timeStandardIsUTC = true;
@@ -69,7 +92,7 @@ namespace Airport_Management_System
         {
             while (appIsRunning)
             {
-                this.Dispatcher.InvokeAsync(() =>
+                Dispatcher.InvokeAsync(() =>
                 { 
                     updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
                 });

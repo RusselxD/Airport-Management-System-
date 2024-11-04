@@ -27,15 +27,15 @@ namespace Airport_Management_System
         {
             // DESKTOP-4CVBSIM\SQLEXPRESS
             InitializeComponent();
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.Show();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Show();
             this.lc = lc;
         }
 
-        private void Open_Main_Window()
+        private void Open_Main_Window(SqlConnection connection)
         {
-            Window.GetWindow(this.lc).Close();
-            MainWindow mw = new MainWindow();
+            Window.GetWindow(lc).Close();
+            // MainWindow mw = new MainWindow(connection);
         }
 
         // for windows authentication
@@ -54,7 +54,7 @@ namespace Airport_Management_System
 
         private string connectionString;
 
-        private void Connect_To_Database( )
+        private void Connect_To_Database()
         {
             BackgroundWorker worker = new BackgroundWorker();
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -64,7 +64,7 @@ namespace Airport_Management_System
             worker.RunWorkerAsync();
         }
 
-        private string[] loadingMessages = 
+        private string[] loadingMessages =
         {
             "Initializing connection with the database...",
             "Verifying system compatibility...",
@@ -81,35 +81,35 @@ namespace Airport_Management_System
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            
-            for(int i = 0; i <= 10; i++)
+
+            for (int i = 0; i <= 10; i++)
             {
                 Thread.Sleep(50);
                 worker.ReportProgress(i, "Initializing connection with the database...");
             }
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            try
             {
-                try
-                {
-                    // Open the connection
-                    connection.Open();
+                // Open the connection
+                connection.Open();
 
-                    for(int i = 10; i <= 99; i++)
-                    {
-                        Thread.Sleep(10);
-                        worker.ReportProgress(i, loadingMessages[i / 10]);
-                    }
-                    this.Dispatcher.BeginInvoke(new Action(() => Open_Main_Window()));
-
-                }
-                catch (Exception ex)
+                for (int i = 10; i <= 99; i++)
                 {
-                    MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    Thread.Sleep(10);
+                    worker.ReportProgress(i, loadingMessages[i / 10]);
                 }
+                 Dispatcher.BeginInvoke(new Action(() => Open_Main_Window(connection)));
 
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
             this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
 
         }

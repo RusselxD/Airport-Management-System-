@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,17 +22,60 @@ namespace Airport_Management_System
     /// </summary>
     public partial class HomePageControl : UserControl
     {
-        public HomePageControl()
+        private SqlConnection sqlConnection;
+        private bool appIsRunning = true;
+
+        public HomePageControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
+            this.sqlConnection = sqlConnection;
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                QueryAlertsTable();
+            }).Start();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private int a = 0;
+
+        void QueryAlertsTable()
         {
-            AddAlert("This is an alert message nigga.");
+            int l1;
+
+            while (appIsRunning)
+            {
+                 l1 = 0;
+
+                string alertsQuery = "SELECT * FROM alerts_table";
+                using (SqlCommand command1 = new SqlCommand(alertsQuery, sqlConnection))
+                using (SqlDataReader alertsReader = command1.ExecuteReader())
+                {
+                    while (alertsReader.Read())
+                    {
+                        l1++;
+
+                        if (l1 > a)
+                        {
+                            a = l1;
+                            string alertMessage = alertsReader[0].ToString();
+                            int alertCode = Convert.ToInt16(alertsReader[1]);
+
+                            Dispatcher.InvokeAsync(() =>
+                            {
+                                AddAlert(alertMessage, alertCode);
+                            });
+                        }
+                    }
+
+                }
+
+                Thread.Sleep(2000);
+            }
+
         }
 
-        private void AddAlert(string alertMessage)
+        private void AddAlert(string alertMessage, int alertDegree)
         {
             // Create the Border for the alert
             Border alertBorder = new Border
@@ -61,11 +106,14 @@ namespace Airport_Management_System
                 Text = alertMessage,
                 FontSize = 20,
                 FontFamily = new FontFamily("Ubuntu"),
-                Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71C1C")),
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(65, 0, 40, 0),
                 Padding = new Thickness(0, 3, 0, 0)
             };
+
+            alertText.Foreground = alertDegree == 1 ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71C1C")) :
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE37E01"));
+
             alertGrid.Children.Add(alertText);
 
             // Add the Grid to the Border
@@ -74,12 +122,12 @@ namespace Airport_Management_System
             // Add the alert Border to the StackPanel (AlertsPanel)
             AlertsPanel.Children.Add(alertBorder);
 
-            a += 60;
-            dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(a);
+            x += 60;
+            dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(x);
 
         }
 
-        private int a = 160;
+        private int x = 160;
 
         private void addRecentAct(string message)
         {
@@ -110,12 +158,12 @@ namespace Airport_Management_System
             // Assuming you have a parent container (like a Grid or StackPanel) to add this Border to
             RecentActivitiesPanel.Children.Add(border);
 
-            b += 45;
-            dashboardInnerGrid.RowDefinitions[2].Height = new GridLength(b);
+            y += 45;
+            dashboardInnerGrid.RowDefinitions[2].Height = new GridLength(y);
 
         }
 
-        private int b = 280;
+        private int y = 280;
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
