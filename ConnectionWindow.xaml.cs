@@ -36,7 +36,6 @@ namespace Airport_Management_System
         {
             Window.GetWindow(this.lc).Close();
             MainWindow mw = new MainWindow();
-            mw.Show();
         }
 
         // for windows authentication

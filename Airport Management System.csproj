@@ -142,5 +142,8 @@
   <ItemGroup>
     <Resource Include="Icons\alert-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\swap icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

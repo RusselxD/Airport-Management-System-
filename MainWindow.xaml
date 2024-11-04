@@ -92,6 +92,21 @@
                 </Label.Style>
             </Label>
 
+            <Grid Margin="0,562,0,0" VerticalAlignment="Bottom" Height="222">
+
+                <TextBlock x:Name="timeStandard" HorizontalAlignment="Left" Height="28" Margin="17,48,0,0" TextWrapping="Wrap" Text="UTC" VerticalAlignment="Top" Width="124" FontSize="20" FontFamily="Segoe UI Semibold" Foreground="#FF535353"/>
+                <TextBlock x:Name="formattedDate" HorizontalAlignment="Left" Height="22" Margin="17,82,0,0" TextWrapping="Wrap" Text="November 4, 2009" VerticalAlignment="Top" Width="178" FontSize="18" FontFamily="Segoe UI Semibold"/>
+                <TextBlock x:Name="formattedTime" HorizontalAlignment="Left" Height="24" Margin="17,111,0,0" TextWrapping="Wrap" Text="10:45:22 UTC" VerticalAlignment="Top" Width="178" FontSize="18"/>
+                <TextBlock x:Name="dayOfWeek" HorizontalAlignment="Left" Height="24" Margin="17,139,0,0" TextWrapping="Wrap" Text="Monday" VerticalAlignment="Top" Width="178" FontSize="18"/>
+                <TextBlock x:Name="ISOformatted" HorizontalAlignment="Left" Height="19" Margin="17,174,0,0" TextWrapping="Wrap" Text="2024-11-04 10:45:22" VerticalAlignment="Top" Width="176" Foreground="Gray" FontSize="15"/>
+                <Image MouseDown="Change_Time_Standard" Source="/Icons/swap icon.png" HorizontalAlignment="Left" Height="20" Margin="149,51,0,0" VerticalAlignment="Top" Width="21" Cursor="Hand"/>
+
+            </Grid>
+
+
+
+
+
         </Grid>
 
 

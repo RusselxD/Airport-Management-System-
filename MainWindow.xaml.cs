@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,15 +22,65 @@ namespace Airport_Management_System
 
     public partial class MainWindow : Window
     {
+        private bool appIsRunning = true;
+
         public MainWindow()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                DisplayDateAndTime();
+            }).Start();
+
+            this.Show();
+            this.Closed += (s, e) => appIsRunning = false;
         }
 
-        private void ewan()
+        private bool timeStandardIsUTC = true;
+        private string timeLabel = "UTC";
+
+        private void Change_Time_Standard(object sender, MouseButtonEventArgs e)
         {
-            
+            timeStandardIsUTC = !timeStandardIsUTC;
+            Swap_Time_Standard_Label();
+        }
+
+        private void Swap_Time_Standard_Label()
+        {
+            if (timeStandardIsUTC)
+            {
+                timeStandard.Text = "UTC";
+                timeLabel = "UTC";
+            }
+            else
+            {
+                timeStandard.Text = "Local (PST)";
+                timeLabel = "PST";
+            }
+            updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
+        }
+
+        void DisplayDateAndTime()   
+        {
+            while (appIsRunning)
+            {
+                this.Dispatcher.InvokeAsync(() =>
+                { 
+                    updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
+                });
+                Thread.Sleep(1000);
+            }
+        }
+
+        void updateDateAndTime(DateTime dt)
+        {
+            formattedTime.Text = dt.ToString($"HH:mm:ss  {timeLabel}");
+            ISOformatted.Text = dt.ToString("yyyy-MM-dd HH:mm:ss");
+            formattedDate.Text = dt.ToString("MMMM dd, yyyy");
+            dayOfWeek.Text = dt.ToString("dddd");
         }
 
         private void AddAlert(string alertMessage)
@@ -128,5 +179,7 @@ namespace Airport_Management_System
         {
             addRecentAct("Gate B2 assigned to Flight BA 233.");
         }
+
+        
     }
 }
