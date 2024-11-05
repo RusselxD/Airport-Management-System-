@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,9 +34,7 @@ namespace Airport_Management_System
             // NOTICE: Connection only temporary.
             string connectionString = @"Server=DESKTOP-4CVBSIM\SQLEXPRESS; Database=airport_database;User Id=airport_admin;Password=admin;";
             this.sqlConnection = new SqlConnection(connectionString);
-            sqlConnection.OpenAsync();
-
-            //Thread.Sleep(3000);
+            sqlConnection.Open();
 
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -50,11 +49,43 @@ namespace Airport_Management_System
 
             homePageControl = new HomePageControl(sqlConnection);
 
-
             CurrentPage.Content = homePageControl;
+
+            InitializeNavLabels();
+            currentControl = 0;
 
             Show();
             this.Closed += (s, e) => closeApp();
+        }
+
+        void InitializeNavLabels()
+        {
+            homeNavLabel.Background = new SolidColorBrush(Color.FromRgb(246, 246, 246));
+
+            Style navLabelStyle = new Style(typeof(Label));
+            Trigger mouseOverLabel = new Trigger
+            {
+                Property = Label.IsMouseOverProperty,
+                Value = true
+            };
+            mouseOverLabel.Setters.Add(new Setter(Label.BackgroundProperty, new SolidColorBrush(Color.FromRgb(233, 233, 233))));
+            navLabelStyle.Triggers.Add(mouseOverLabel);
+
+            flightsNavLabel.Style = navLabelStyle;
+            flightsNavLabel.Cursor = Cursors.Hand;
+
+            servicesNavLabel.Style = navLabelStyle;
+            servicesNavLabel.Cursor = Cursors.Hand;
+
+            gatesNavLabel.Style = navLabelStyle;
+            gatesNavLabel.Cursor = Cursors.Hand;
+
+            staffNavLabel.Style = navLabelStyle;
+            staffNavLabel.Cursor = Cursors.Hand;
+
+            reportNavLabel.Style = navLabelStyle;
+            reportNavLabel.Cursor = Cursors.Hand;
+
         }
 
         void closeApp()
@@ -107,6 +138,42 @@ namespace Airport_Management_System
             formattedDate.Text = dt.ToString("MMMM dd, yyyy");
             dayOfWeek.Text = dt.ToString("dddd");
         }
-        
+        /*
+         * 0 - Home
+         * 1 - Flights
+         * 2 - Services
+         * 3 - Gates
+         * 4 - Staff
+         * 5 - Report
+         */
+        private int currentControl;
+        private void changeCurrentControl(int i)
+        {
+            if (i == currentControl)
+                return;
+
+            // TODO : Change the current control to the one specified by i
+            switch (i)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+
+        }
+
+        private void homeNavLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
