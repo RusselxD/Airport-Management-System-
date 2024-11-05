@@ -25,12 +25,34 @@ namespace Airport_Management_System
     public partial class MainWindow : Window
     {
         private SqlConnection sqlConnection;
-        private HomePageControl homePageControl;
 
-        private bool appIsRunning = true;
+        private HomePageControl homePageControl;
+        private FlightsControl flightsControl;
+        private ServicesControl servicesControl;
+        private GatesControl gatesControl;
+        private StaffControl staffControl;
+        private ReportControl reportControl;
+
+        private bool appIsRunning;
+
+        /*
+         * 0 - Home
+         * 1 - Flights
+         * 2 - Services
+         * 3 - Gates
+         * 4 - Staff
+         * 5 - Report
+         */
+        private int currentControl;
+        private SolidColorBrush currentNavBackgroundColor;
+
+        private bool timeStandardIsUTC;
+        private string timeLabel;
 
         public MainWindow()
         {
+            appIsRunning = true;
+
             // NOTICE: Connection only temporary.
             string connectionString = @"Server=DESKTOP-4CVBSIM\SQLEXPRESS; Database=airport_database;User Id=airport_admin;Password=admin;";
             this.sqlConnection = new SqlConnection(connectionString);
@@ -46,23 +68,34 @@ namespace Airport_Management_System
                 Thread.CurrentThread.IsBackground = true;
                 DisplayDateAndTime();
             }).Start();
+            timeStandardIsUTC = true;
+            timeLabel = "UTC";
 
             homePageControl = new HomePageControl(sqlConnection);
+            flightsControl = new FlightsControl(sqlConnection);
+            servicesControl = new ServicesControl(sqlConnection);
+            gatesControl = new GatesControl(sqlConnection);
+            staffControl = new StaffControl(sqlConnection);
+            reportControl = new ReportControl(sqlConnection);
 
             CurrentPage.Content = homePageControl;
-
-            InitializeNavLabels();
             currentControl = 0;
+
+            InitializeNavLabelsAndProperties();
 
             Show();
             this.Closed += (s, e) => closeApp();
         }
 
-        void InitializeNavLabels()
-        {
-            homeNavLabel.Background = new SolidColorBrush(Color.FromRgb(246, 246, 246));
+        Style navLabelStyle;
 
-            Style navLabelStyle = new Style(typeof(Label));
+        void InitializeNavLabelsAndProperties()
+        {
+            // Grayish background color for label that represent the current page (User Control)
+            currentNavBackgroundColor = new SolidColorBrush(Color.FromRgb(246, 246, 246));
+
+            // ----------------- LABEL HOVER EFFECT ----------------- //
+            navLabelStyle = new Style(typeof(Label));
             Trigger mouseOverLabel = new Trigger
             {
                 Property = Label.IsMouseOverProperty,
@@ -70,6 +103,10 @@ namespace Airport_Management_System
             };
             mouseOverLabel.Setters.Add(new Setter(Label.BackgroundProperty, new SolidColorBrush(Color.FromRgb(233, 233, 233))));
             navLabelStyle.Triggers.Add(mouseOverLabel);
+            // ------------------------------------------------------ //
+
+            // -------------------- NAVIGATION LABELS -------------------- //
+            homeNavLabel.Background = currentNavBackgroundColor;
 
             flightsNavLabel.Style = navLabelStyle;
             flightsNavLabel.Cursor = Cursors.Hand;
@@ -85,7 +122,7 @@ namespace Airport_Management_System
 
             reportNavLabel.Style = navLabelStyle;
             reportNavLabel.Cursor = Cursors.Hand;
-
+            // ----------------------------------------------------------- //
         }
 
         void closeApp()
@@ -94,9 +131,6 @@ namespace Airport_Management_System
             sqlConnection.Close();
             sqlConnection.Dispose();
         }
-
-        private bool timeStandardIsUTC = true;
-        private string timeLabel = "UTC";
 
         private void Change_Time_Standard(object sender, MouseButtonEventArgs e)
         {
@@ -119,12 +153,12 @@ namespace Airport_Management_System
             updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
         }
 
-        void DisplayDateAndTime()   
+        void DisplayDateAndTime()
         {
             while (appIsRunning)
             {
                 Dispatcher.InvokeAsync(() =>
-                { 
+                {
                     updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
                 });
                 Thread.Sleep(1);
@@ -138,42 +172,122 @@ namespace Airport_Management_System
             formattedDate.Text = dt.ToString("MMMM dd, yyyy");
             dayOfWeek.Text = dt.ToString("dddd");
         }
-        /*
-         * 0 - Home
-         * 1 - Flights
-         * 2 - Services
-         * 3 - Gates
-         * 4 - Staff
-         * 5 - Report
-         */
-        private int currentControl;
+
         private void changeCurrentControl(int i)
         {
             if (i == currentControl)
                 return;
 
-            // TODO : Change the current control to the one specified by i
+            // Current Nav Label
+            RedesignNavLabel();
+            currentControl = i;
+
+            // New Nav Label
+            Label navLabel = default;
             switch (i)
             {
                 case 0:
+                    CurrentPage.Content = homePageControl;
+                    navLabel = homeNavLabel;
                     break;
+
                 case 1:
+                    CurrentPage.Content = flightsControl;
+                    navLabel = flightsNavLabel;
                     break;
+
                 case 2:
+                    CurrentPage.Content = servicesControl;
+                    navLabel = servicesNavLabel;
                     break;
+
                 case 3:
+                    CurrentPage.Content = gatesControl;
+                    navLabel = gatesNavLabel;
                     break;
+
                 case 4:
+                    CurrentPage.Content = staffControl;
+                    navLabel = staffNavLabel;
                     break;
+
                 case 5:
+                    CurrentPage.Content = reportControl;
+                    navLabel = reportNavLabel;
                     break;
             }
 
+            navLabel.Cursor = null;
+            navLabel.Background = currentNavBackgroundColor;
+            navLabel.Style = null;
         }
 
-        private void homeNavLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        /*
+         * These will be applied to the current label
+         * 2. Remove the Background
+         * 1. Apply the Hand Cursor
+         * 3. Re-Apply the hover effect (navLabelStyle)
+         */
+        private void RedesignNavLabel()
         {
+            Label currentLabel = default;
 
+            switch (currentControl)
+            {
+                case 0:
+                    currentLabel = homeNavLabel;
+                    break;
+                case 1:
+                    currentLabel = flightsNavLabel;
+                    break;
+                case 2:
+                    currentLabel = servicesNavLabel;
+                    break;
+                case 3:
+                    currentLabel = gatesNavLabel;
+                    break;
+                case 4:
+                    currentLabel = staffNavLabel;
+                    break;
+                case 5:
+                    currentLabel = reportNavLabel;
+                    break;
+            }
+
+            currentLabel.Background = null;
+            currentLabel.Cursor = Cursors.Hand;
+            currentLabel.ClearValue(Label.BackgroundProperty);
+            currentLabel.Style = navLabelStyle;
+        }
+
+        private void Nav_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Label clickedNavLabel)
+            {
+                string labelName = clickedNavLabel.Name;
+
+                switch (labelName)
+                {
+                    case "homeNavLabel":
+                        changeCurrentControl(0);
+                        break;
+                    case "flightsNavLabel":
+                        changeCurrentControl(1);
+                        break;
+                    case "servicesNavLabel":
+                        changeCurrentControl(2);
+                        break;
+                    case "gatesNavLabel":
+                        changeCurrentControl(3);
+                        break;
+                    case "staffNavLabel":
+                        changeCurrentControl(4);
+                        break;
+                    case "reportNavLabel":
+                        changeCurrentControl(5);
+                        break;
+                }
+            }
         }
     }
 }

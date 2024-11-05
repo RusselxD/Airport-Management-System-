@@ -16,17 +16,17 @@
         <Grid HorizontalAlignment="Left" Width="202">
             <Image Source="/Airport Logo/logo1.png" Height="72" Margin="0,10,0,0" VerticalAlignment="Top"/>
             
-            <Label x:Name="homeNavLabel" Content="Home" MouseDown="homeNavLabel_MouseDown" HorizontalAlignment="Center" Height="55" Margin="0,94,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5" Background="#FFF6F6F6"/>
+            <Label x:Name="homeNavLabel" Content="Home" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="55" Margin="0,94,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
-            <Label x:Name="flightsNavLabel" Content="Flights" HorizontalAlignment="Center" Height="55" Margin="0,149,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
+            <Label x:Name="flightsNavLabel" Content="Flights" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="55" Margin="0,149,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
-            <Label x:Name="servicesNavLabel" Content="Services" HorizontalAlignment="Center" Height="55" Margin="0,204,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
+            <Label x:Name="servicesNavLabel" Content="Services" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="55" Margin="0,204,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
-            <Label x:Name="gatesNavLabel" Content="Gates" HorizontalAlignment="Center" Height="55" Margin="0,259,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
+            <Label x:Name="gatesNavLabel" Content="Gates" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="55" Margin="0,259,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
-            <Label x:Name="staffNavLabel" Content="Staff" HorizontalAlignment="Center" Height="56" Margin="0,314,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
+            <Label x:Name="staffNavLabel" Content="Staff" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="56" Margin="0,314,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
-            <Label x:Name="reportNavLabel" Content="Report" HorizontalAlignment="Center" Height="55" Margin="0,370,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
+            <Label x:Name="reportNavLabel" Content="Report" MouseDown="Nav_Click" HorizontalAlignment="Center" Height="55" Margin="0,370,0,0" VerticalAlignment="Top" Width="202" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="20" Padding="25,5,5,5"/>
 
             <Grid Height="222" VerticalAlignment="Bottom" Background="White">
 

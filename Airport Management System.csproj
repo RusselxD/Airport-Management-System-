@@ -55,7 +55,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FlightsControl.xaml.cs">
+      <DependentUpon>FlightsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GatesControl.xaml.cs">
+      <DependentUpon>GatesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportControl.xaml.cs">
+      <DependentUpon>ReportControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesControl.xaml.cs">
+      <DependentUpon>ServicesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StaffControl.xaml.cs">
+      <DependentUpon>StaffControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="ConnectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GatesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,6 +119,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PreLoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ServicesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StaffControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
