@@ -35,7 +35,47 @@
                 <TextBlock x:Name="formattedTime" HorizontalAlignment="Left" Height="24" Margin="17,111,0,0" TextWrapping="Wrap" Text="10:45:22 UTC" VerticalAlignment="Top" Width="178" FontSize="18"/>
                 <TextBlock x:Name="dayOfWeek" HorizontalAlignment="Left" Height="24" Margin="17,139,0,0" TextWrapping="Wrap" Text="Monday" VerticalAlignment="Top" Width="178" FontSize="18"/>
                 <TextBlock x:Name="ISOformatted" HorizontalAlignment="Left" Height="19" Margin="17,174,0,0" TextWrapping="Wrap" Text="2024-11-04 10:45:22" VerticalAlignment="Top" Width="176" Foreground="Gray" FontSize="15"/>
-                <Image MouseDown="Change_Time_Standard" Source="/Icons/swap icon.png" HorizontalAlignment="Left" Height="20" Margin="149,51,0,0" VerticalAlignment="Top" Width="21" Cursor="Hand"/>
+                <Image MouseDown="Change_Time_Standard" Source="/Icons/swap icon.png" HorizontalAlignment="Left" Height="20" Margin="149,51,0,0" VerticalAlignment="Top" Width="21" Cursor="Hand">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <!-- Trigger for MouseOver event -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <!-- Animate scale transform to 0.1 on hover -->
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+             To="1.1" Duration="0:0:0.10" />
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+             To="1.1" Duration="0:0:0.10" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <!-- Return to original scale when no longer hovering -->
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+             To="1" Duration="0:0:0.10" />
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+             To="1" Duration="0:0:0.10" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                            <!-- Default RenderTransform for the scaling -->
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </Setter.Value>
+                            </Setter>
+                            <!-- Optional: Center the scaling transform to make it zoom smoothly -->
+                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5" />
+                        </Style>
+                    </Image.Style>
+                </Image>
 
             </Grid>
 

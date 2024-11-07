@@ -43,5 +43,110 @@ namespace Airport_Management_System
                 searchBox.Foreground = Brushes.Gray;
             }
         }
+
+        private void Search_Icon_Click(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Border border = new Border
+            {
+                Height = 55,
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                BorderBrush = Brushes.Black
+            };
+
+            // Create Grid
+            Grid grid = new Grid();
+
+            // Define Grid Column Definitions
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.95, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.9, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.7, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.65, GridUnitType.Star) });
+
+            // Define Row Definition (only one row in this case)
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            // Create TextBlocks for each column
+            TextBlock flightNumber = new TextBlock
+            {
+                Text = "AB 223",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(20, 17, 0, 0)
+            };
+            Grid.SetColumn(flightNumber, 0);
+            grid.Children.Add(flightNumber);
+
+            TextBlock destination = new TextBlock
+            {
+                Text = "London (LHR)",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(0, 17, 0, 0)
+            };
+            Grid.SetColumn(destination, 1);
+            grid.Children.Add(destination);
+
+            TextBlock time = new TextBlock
+            {
+                Text = "10:30",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(0, 17, 0, 0)
+            };
+            Grid.SetColumn(time, 2);
+            grid.Children.Add(time);
+
+            TextBlock status = new TextBlock
+            {
+                Text = "On Time",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(0, 17, 0, 0)
+            };
+            Grid.SetColumn(status, 3);
+            grid.Children.Add(status);
+
+            TextBlock gate = new TextBlock
+            {
+                Text = "A3",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(0, 17, 0, 0)
+            };
+            Grid.SetColumn(gate, 4);
+            grid.Children.Add(gate);
+
+            TextBlock terminal = new TextBlock
+            {
+                Text = "2",
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(0, 17, 0, 0)
+            };
+            Grid.SetColumn(terminal, 5);
+            grid.Children.Add(terminal);
+
+            // Add Grid to Border
+            border.Child = grid;
+
+            flightsStackPanel.Children.Add(border);
+            
+            i++;
+            if(i > 9)
+            {
+                flightsBorder.Height += 55;
+                outerMostGrid.Height += 55;
+            }
+        }
+
+        private int i = 1;
+
     }
 }
