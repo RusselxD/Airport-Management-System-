@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -136,8 +137,26 @@ namespace Airport_Management_System
             // Add Grid to Border
             border.Child = grid;
 
+            DoubleAnimation heightAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 55, // Target height, adjust as needed
+                Duration = TimeSpan.FromSeconds(0.4), // Duration of the animation
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } // Smooth easing
+            };
+            DoubleAnimation opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.4),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
             flightsStackPanel.Children.Add(border);
             
+            border.BeginAnimation(Border.HeightProperty, heightAnimation);
+            border.BeginAnimation(Border.OpacityProperty, opacityAnimation);
+
             i++;
             if(i > 9)
             {
