@@ -25,5 +25,23 @@ namespace Airport_Management_System
         {
             InitializeComponent();
         }
+
+        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(searchBox.Text == "Search Flight")
+            {
+                searchBox.Text = "";
+                searchBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(searchBox.Text))
+            {
+                searchBox.Text = "Search Flight";
+                searchBox.Foreground = Brushes.Gray;
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace Airport_Management_System
     public partial class ConnectionWindow : Window
     {
         private LoginControl lc;
+        private CancellationTokenSource cts;
 
         public ConnectionWindow(LoginControl lc)
         {
@@ -30,12 +31,20 @@ namespace Airport_Management_System
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Show();
             this.lc = lc;
+
+            cts = new CancellationTokenSource();
+
+            this.Closing += (s, e) =>
+            {
+                // Request cancellation if the user closes the window
+                cts.Cancel();
+            };
         }
 
         private void Open_Main_Window(SqlConnection connection)
         {
             Window.GetWindow(lc).Close();
-            // MainWindow mw = new MainWindow(connection);
+           // MainWindow mw = new MainWindow(connection);
         }
 
         // for windows authentication
@@ -59,9 +68,11 @@ namespace Airport_Management_System
             BackgroundWorker worker = new BackgroundWorker();
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork;
+            worker.DoWork += (sender, e) => Worker_DoWork(sender, e, cts.Token);
             worker.ProgressChanged += worker_ProgressChanged;
             worker.RunWorkerAsync();
+
+            worker.RunWorkerCompleted += (s, e) => worker.Dispose();
         }
 
         private string[] loadingMessages =
@@ -78,7 +89,7 @@ namespace Airport_Management_System
             "Connection established! Loading complete..."
         };
 
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        private void Worker_DoWork(object sender, DoWorkEventArgs e, CancellationToken token)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
@@ -95,9 +106,11 @@ namespace Airport_Management_System
                 // Open the connection
                 connection.Open();
 
+                Random rand = new Random();
                 for (int i = 10; i <= 99; i++)
                 {
-                    Thread.Sleep(10);
+                    if (token.IsCancellationRequested) return;
+                    Thread.Sleep(rand.Next(1, 30));
                     worker.ReportProgress(i, loadingMessages[i / 10]);
                 }
                  Dispatcher.BeginInvoke(new Action(() => Open_Main_Window(connection)));
@@ -105,12 +118,10 @@ namespace Airport_Management_System
             }
             catch (Exception ex)
             {
+                if (token.IsCancellationRequested) return;
                 MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
             }
-
-
-            this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
 
         }
 
@@ -123,6 +134,7 @@ namespace Airport_Management_System
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 100;
+            this.Dispatcher.BeginInvoke(new Action(() => this.Close()));
         }
     }
 }

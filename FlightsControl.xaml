@@ -6,7 +6,58 @@
              xmlns:local="clr-namespace:Airport_Management_System"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
-    <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" Height="125" Margin="285,352,0,0" TextWrapping="Wrap" Text="Flights" VerticalAlignment="Top" Width="283" FontSize="72"/>
+    <Grid Background="#FFF6F6F6">
+        <TextBlock Height="59" TextWrapping="Wrap" Text="Flight Management" VerticalAlignment="Top" Foreground="White" Background="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+
+        <Border CornerRadius="15" Margin="65,98,65,0" Background="White" VerticalAlignment="Top" Height="106" RenderTransformOrigin="0.5,0.5">
+
+            <Grid>
+
+                <Border BorderThickness="1" HorizontalAlignment="Left" Height="53" Margin="31,0,0,0" VerticalAlignment="Center" Width="138" Background="#FF06611E" CornerRadius="7,7,7,7">
+                    <TextBlock TextWrapping="Wrap" Text="Departures" Width="139" FontFamily="Ubuntu" Foreground="White" FontSize="18" Padding="23,16,0,0" Margin="0,0,-3,0" FontWeight="Medium"/>
+                </Border>
+
+                <Border BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="180,0,0,0" VerticalAlignment="Center" Width="111" Background="#FF90FDAD" CornerRadius="7,7,7,7">
+                    <TextBlock TextWrapping="Wrap" Text="Arrivals" FontFamily="Ubuntu" Foreground="Black" FontSize="18" Padding="25,16,0,0" Margin="0,0,-1,0" FontWeight="Medium"/>
+                </Border>
+
+
+                <Border Margin="0,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="38" Width="256">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0,0,0,0" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="8,0,0,8" >
+
+                            <TextBox x:Name="searchBox" Text="Search Flight" 
+                                 Foreground="Gray" TextWrapping="Wrap" 
+                                 VerticalContentAlignment="Center" FontFamily="Ubuntu" 
+                                 FontSize="16" Padding="10,0,10,0"  
+                                 BorderBrush="{x:Null}" Background="{x:Null}" 
+                                 GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" BorderThickness="0,0,0,0" Margin="0,0,-1,-1"/>
+
+
+
+
+
+                        </Border>
+                        <Border Margin="0,0,0,0" BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0,8,8,0" Grid.Column="1">
+                            <Image Source="/Icons/search-icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="22"/>
+                        </Border>
+
+                    </Grid>
+
+
+                </Border>
+
+
+            </Grid>
+        </Border>
+
+
+
     </Grid>
 </UserControl>
