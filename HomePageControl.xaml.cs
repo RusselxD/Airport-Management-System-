@@ -35,7 +35,15 @@ namespace Airport_Management_System
         private int alertsRow = 165;
         private int actsRow = 280;
 
+        // hover effect for delete Icon
+        private Style deleteIconStyle;
+
+        private DoubleAnimation alertHeightAnimation;
+        private DoubleAnimation alertBorderOpacityAnimation;
+        private DoubleAnimation alertOpacityAnimation;
+
         SqlCommand alertsSelectQuery;
+        SqlCommand deleteAlertStatement;
         // TODO: sqlcommand dispose properly
 
 
@@ -77,6 +85,8 @@ namespace Airport_Management_System
             AlertsPanel.Children.Add(defaultAlertMessage);
 
             alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", sqlConnection);
+            deleteAlertStatement = new SqlCommand("", sqlConnection);
+
 
             new Thread(() =>
             {
@@ -86,9 +96,6 @@ namespace Airport_Management_System
 
             RecentActivitiesPanel.Children.Add(GetRecentActivityText("Logged in as airport_admin"));
         }
-
-        // hover effect for delete Icon
-        private Style deleteIconStyle;
 
         private void InitializeDefaultElements()
         {
@@ -101,8 +108,34 @@ namespace Airport_Management_System
 
 
             // ------------------------------------------------------------------------------ //
-            // ------------------------------------------------------------------------------ //
 
+            // --------------------------------  ANIMATIONS  -------------------------------- //
+
+            this.alertHeightAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 50, // Target height, adjust as needed
+                Duration = TimeSpan.FromSeconds(0.3), // Duration of the animation
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } // Smooth easing
+            };
+
+            this.alertBorderOpacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.3),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            this.alertOpacityAnimation = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.5),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            // ------------------------------------------------------------------------------ //
 
 
             // ------------------------- DELETE ICON HOVER EFFECTS ------------------------- // 
@@ -138,8 +171,6 @@ namespace Airport_Management_System
             deleteIconStyle.Triggers.Add(mouseOverTrigger);
 
             // ---------------------------------------------------------------------------- //
-            // ---------------------------------------------------------------------------- //
-
         }
 
         private Border GetDefaultAlertMessage()
@@ -206,6 +237,7 @@ namespace Airport_Management_System
                                 {
                                     AlertsPanel.Children.Clear();
                                     alertsContainer.Background = greenAlertBackground;
+                                    alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
                                 });
                             }
                             else
@@ -231,7 +263,7 @@ namespace Airport_Management_System
 
                     }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(5);
             }
 
         }
@@ -246,32 +278,54 @@ namespace Airport_Management_System
             // delete from SQL
             await Delete_Alert_Query(alertID);
 
-            AlertsPanel.Children.Remove(alertsMap[name]);
+            Border borderDelete = alertsMap[name];
 
-            alerts--;
-            if (alerts <= 0)
-            {
-                AlertsPanel.Children.Add(defaultAlertMessage);
-                alertsContainer.Background = redAlertBackground;
-            }
-            else
-            {
-                AlertsPanel.Height -= 59;
-                alertsContainer.Height -= 59;
+            //  borderDelete.BeginAnimation(Border.OpacityProperty, alertOpacityAnimation);
 
-                alertsRow -= 59;
-                dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
-            }
+            var storyboard = new Storyboard();
+            storyboard.Children.Add(alertOpacityAnimation);
+            Storyboard.SetTarget(alertOpacityAnimation, borderDelete);
+            Storyboard.SetTargetProperty(alertOpacityAnimation, new PropertyPath(Border.OpacityProperty));
+
+
+            storyboard.Completed += (s, a) =>
+            {
+                AlertsPanel.Children.Remove(borderDelete);
+
+                alerts--;
+                if (alerts <= 0)
+                {
+                    AlertsPanel.Children.Add(defaultAlertMessage);
+                    defaultAlertMessage.BeginAnimation(Border.HeightProperty, alertHeightAnimation);
+                    alertsContainer.Background = redAlertBackground;
+                    alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
+                }
+                else
+                {
+                    AlertsPanel.Height -= 59;
+                    alertsContainer.Height -= 59;
+
+                    alertsRow -= 59;
+                    dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
+                }
+
+                alertsMap.Remove(name);
+            };
+
+            storyboard.Begin();
+
+
+
         }
 
         private async Task Delete_Alert_Query(int alert_ID)
         {
+            deleteAlertStatement.CommandText = $"DELETE FROM alerts_table WHERE alert_id = {alert_ID}";
+
             await Task.Run(() =>
             {
-                using (SqlCommand command = new SqlCommand($"DELETE FROM alerts_table WHERE alert_id = {alert_ID}", this.sqlConnection))
-                {
-                    command.ExecuteNonQuery();
-                }
+                deleteAlertStatement.ExecuteNonQuery();
+
             });
         }
 
@@ -356,6 +410,11 @@ namespace Airport_Management_System
 
             AlertsPanel.Height += 59;
             AlertsPanel.Children.Add(border);
+
+            border.BeginAnimation(Border.HeightProperty, alertHeightAnimation);
+
+
+            //   border.BeginAnimation(Border.OpacityProperty, opacityAnimation);
 
             // this is for accessing the border by name once deleted
             string name = $"_{alertID}";

@@ -26,9 +26,13 @@ namespace Airport_Management_System
         private DoubleAnimation heightAnimation;
         private DoubleAnimation opacityAnimation;
 
+        private bool departureIsShown;
+
         public FlightsControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
+
+            departureIsShown = true;
 
             this.heightAnimation = new DoubleAnimation
             {
@@ -135,12 +139,14 @@ namespace Airport_Management_System
         {
             Border newRow = createNewRow();
 
-            newRow.BeginAnimation(Border.HeightProperty, heightAnimation);
-            newRow.BeginAnimation(Border.OpacityProperty, opacityAnimation);
+            
 
             flightsStackPanel.Children.Add(newRow);
 
-            
+            newRow.BeginAnimation(Border.HeightProperty, heightAnimation);
+            newRow.BeginAnimation(Border.OpacityProperty, opacityAnimation);
+
+
 
             i++;
             if(i > 9)
