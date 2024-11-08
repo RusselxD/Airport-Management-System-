@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Airport_Management_System"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
-    
+
     <Grid Background="#FFF6F6F6">
         <TextBlock Height="59" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
@@ -15,7 +15,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="280"/>
-                    <RowDefinition Height="125"/>
+                    <RowDefinition Height="165"/>
                     <RowDefinition Height="280"/>
                 </Grid.RowDefinitions>
 
@@ -165,20 +165,21 @@
                     </Grid>
                 </Border>
 
-                <Border x:Name="alertsContainer" Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="#FFFFCFCF" >
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Active Alerts" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
+                <Border Height="140" x:Name="alertsContainer" Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="#FF91FFAF" VerticalAlignment="Top" >
+                    <Grid VerticalAlignment="Stretch" >
+                        <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,25,0,0" TextWrapping="Wrap" Text="Active Alerts" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
 
                         <!-- StackPanel to hold dynamic alerts -->
-                        <StackPanel x:Name="AlertsPanel" Margin="0,84,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <StackPanel x:Name="AlertsPanel" Margin="0,70,0,0" VerticalAlignment="Top" Height="50"/>
+
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,45" Background="#FFCBF0FF" CornerRadius="15,15,15,15">
+                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,38" Background="#FFCBF0FF" CornerRadius="15,15,15,15">
                     <Grid HorizontalAlignment="Stretch">
                         <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Quick Actions" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
 
-                        <Border BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="30,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF0B8ABF" CornerRadius="8,8,8,8" Cursor="Hand">
+                        <Border MouseDown="Border_MouseDown" BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="30,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF0B8ABF" CornerRadius="8,8,8,8" Cursor="Hand">
                             <TextBlock TextWrapping="Wrap" Text="Add Flight" Foreground="White" Margin="-1,-1,-1,-1" FontFamily="Ubuntu" FontSize="20" Padding="45,19,0,0"/>
                         </Border>
 
@@ -188,7 +189,9 @@
                         <TextBlock HorizontalAlignment="Left" Height="30" Margin="30,160,0,0" TextWrapping="Wrap" Text="Recent Activities" VerticalAlignment="Top" Width="183" FontFamily="Ubuntu" FontSize="21"/>
 
                         <!-- StackPanel to hold dynamic activities -->
-                        <StackPanel x:Name="RecentActivitiesPanel" Margin="0,195,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <StackPanel x:Name="RecentActivitiesPanel" Margin="0,195,0,0" VerticalAlignment="Top" Height="28">
+                            
+                        </StackPanel>
                     </Grid>
                 </Border>
 

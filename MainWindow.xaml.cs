@@ -54,9 +54,9 @@ namespace Airport_Management_System
             appIsRunning = true;
 
             // NOTICE: Connection only temporary.
-            string connectionstring = @"server=desktop-4cvbsim\sqlexpress; database=airport_database;user id=airport_admin;password=admin;";
+            string connectionstring = @"server=DESKTOP-4CVBSIM\SQLEXPRESS; database=airport_database;user id=airport_admin;password=admin;";
             this.sqlConnection = new SqlConnection(connectionstring);
-            sqlConnection.Open();
+            this.sqlConnection.Open();
 
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,9 +23,28 @@ namespace Airport_Management_System
     /// </summary>
     public partial class FlightsControl : UserControl
     {
+        private DoubleAnimation heightAnimation;
+        private DoubleAnimation opacityAnimation;
+
         public FlightsControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
+
+            this.heightAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 55, // Target height, adjust as needed
+                Duration = TimeSpan.FromSeconds(0.4), // Duration of the animation
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } // Smooth easing
+            };
+
+            this.opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.4),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
         }
 
         private void searchBox_GotFocus(object sender, RoutedEventArgs e)
@@ -50,7 +70,35 @@ namespace Airport_Management_System
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private Grid Create_New_Grid()
+        {
+            Grid grid = new Grid();
+
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.95, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.9, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.7, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.65, GridUnitType.Star) });
+
+            return grid;
+        }
+
+        private TextBlock createTextBlocks(string t, int p1, int p2, int colNum)
+        {
+            TextBlock tb = new TextBlock
+            {
+                Text = t,
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 20,
+                Padding = new Thickness(p1, p2, 0, 0)
+            };
+            Grid.SetColumn(tb, colNum);
+
+            return tb;
+        }
+
+        private Border createNewRow()
         {
             Border border = new Border
             {
@@ -59,50 +107,11 @@ namespace Airport_Management_System
                 BorderBrush = Brushes.Black
             };
 
-            // Create Grid
-            Grid grid = new Grid();
+            Grid grid = Create_New_Grid();
 
-            // Define Grid Column Definitions
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.95, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.9, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.7, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.65, GridUnitType.Star) });
-
-            // Define Row Definition (only one row in this case)
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-
-            // Create TextBlocks for each column
-            TextBlock flightNumber = new TextBlock
-            {
-                Text = "AB 223",
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 20,
-                Padding = new Thickness(20, 17, 0, 0)
-            };
-            Grid.SetColumn(flightNumber, 0);
-            grid.Children.Add(flightNumber);
-
-            TextBlock destination = new TextBlock
-            {
-                Text = "London (LHR)",
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 20,
-                Padding = new Thickness(0, 17, 0, 0)
-            };
-            Grid.SetColumn(destination, 1);
-            grid.Children.Add(destination);
-
-            TextBlock time = new TextBlock
-            {
-                Text = "10:30",
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 20,
-                Padding = new Thickness(0, 17, 0, 0)
-            };
-            Grid.SetColumn(time, 2);
-            grid.Children.Add(time);
+            grid.Children.Add(createTextBlocks("AB 223", 20, 17, 0));
+            grid.Children.Add(createTextBlocks("London (LHR)", 0, 17, 1));
+            grid.Children.Add(createTextBlocks("10:30", 0, 17, 2));
 
             TextBlock status = new TextBlock
             {
@@ -114,48 +123,24 @@ namespace Airport_Management_System
             Grid.SetColumn(status, 3);
             grid.Children.Add(status);
 
-            TextBlock gate = new TextBlock
-            {
-                Text = "A3",
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 20,
-                Padding = new Thickness(0, 17, 0, 0)
-            };
-            Grid.SetColumn(gate, 4);
-            grid.Children.Add(gate);
+            grid.Children.Add(createTextBlocks("A3", 0, 17, 4));
+            grid.Children.Add(createTextBlocks("2", 0, 17, 5));
 
-            TextBlock terminal = new TextBlock
-            {
-                Text = "2",
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 20,
-                Padding = new Thickness(0, 17, 0, 0)
-            };
-            Grid.SetColumn(terminal, 5);
-            grid.Children.Add(terminal);
-
-            // Add Grid to Border
             border.Child = grid;
 
-            DoubleAnimation heightAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 55, // Target height, adjust as needed
-                Duration = TimeSpan.FromSeconds(0.4), // Duration of the animation
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } // Smooth easing
-            };
-            DoubleAnimation opacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(0.4),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            };
+            return border;
+        }
 
-            flightsStackPanel.Children.Add(border);
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Border newRow = createNewRow();
+
+            newRow.BeginAnimation(Border.HeightProperty, heightAnimation);
+            newRow.BeginAnimation(Border.OpacityProperty, opacityAnimation);
+
+            flightsStackPanel.Children.Add(newRow);
+
             
-            border.BeginAnimation(Border.HeightProperty, heightAnimation);
-            border.BeginAnimation(Border.OpacityProperty, opacityAnimation);
 
             i++;
             if(i > 9)
