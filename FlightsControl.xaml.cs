@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,11 +29,14 @@ namespace Airport_Management_System
 
         private bool departureIsShown;
 
+
         public FlightsControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
 
             departureIsShown = true;
+
+            Task.Run(() => QueryFlights(MainWindow.cts.Token));
 
             this.heightAnimation = new DoubleAnimation
             {
@@ -49,6 +53,89 @@ namespace Airport_Management_System
                 Duration = TimeSpan.FromSeconds(0.4),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
+        }
+
+        private string flights_table = "departure_flights";
+
+        private int flights = 0;
+        private async Task QueryFlights(CancellationToken token)
+        {
+            SqlDataReader flightsReader = null;
+            int l1;
+
+            while (!token.IsCancellationRequested)
+            {
+                l1 = 0;
+
+                SqlCommand flightsQuery = new SqlCommand($"SELECT * FROM {flights_table}", MainWindow.sqlConnection);
+
+                using (flightsReader = await flightsQuery.ExecuteReaderAsync(token))
+                {
+                    while (flightsReader.Read())
+                    {
+                        l1++;
+
+                        if (l1 > flights)
+                        {
+                            flights = l1;
+
+                            string flight = flightsReader[0].ToString();
+                            string dest = flightsReader[1].ToString();
+                            string time = flightsReader[2].ToString();
+                            string status = flightsReader[3].ToString();
+                            string gate = flightsReader[4].ToString();
+                            int terminal = Convert.ToInt16(flightsReader[5]);
+
+
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                Add_New_Flight(Create_New_Row(flight, dest, time, status, gate, terminal));
+                            });
+
+                            //alerts = l1;
+
+                            //if (alerts == 1)
+                            //{
+                            //    await Dispatcher.InvokeAsync(() =>
+                            //    {
+                            //        AlertsPanel.Children.Clear();
+                            //        alertsGrid.Children.Add(deleteAllIcon);
+                            //        alertsContainer.Background = greenAlertBackground;
+                            //        alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
+                            //    });
+                            //}
+                            //else
+                            //{
+                            //    await Dispatcher.InvokeAsync(() =>
+                            //    {
+                            //        alertsContainer.Height += 59;
+
+                            //        alertsRow += 59;
+                            //        dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
+                            //    });
+                            //}
+
+                            //int alertID = Convert.ToInt16(alertsReader[0]);
+                            //string alertMessage = alertsReader[1].ToString();
+                            //int alertCode = Convert.ToInt16(alertsReader[2]);
+
+                            //Dispatcher.InvokeAsync(() =>
+                            //{
+                            //    AddAlert(alertID, alertMessage, alertCode);
+                            //}).Task.Wait();
+                        }
+
+                    }
+                }
+
+                if (token.IsCancellationRequested)
+                    break;
+
+                await Task.Delay(5, token);
+            }
+
+            flightsReader?.Dispose();
+            flightsReader?.Close();
         }
 
         private void searchBox_GotFocus(object sender, RoutedEventArgs e)
@@ -102,7 +189,7 @@ namespace Airport_Management_System
             return tb;
         }
 
-        private Border createNewRow()
+        private Border Create_New_Row(string flight, string dest, string time, string status, string gate, int terminal)
         {
             Border border = new Border
             {
@@ -113,22 +200,35 @@ namespace Airport_Management_System
 
             Grid grid = Create_New_Grid();
 
-            grid.Children.Add(createTextBlocks("AB 223", 20, 17, 0));
-            grid.Children.Add(createTextBlocks("London (LHR)", 0, 17, 1));
-            grid.Children.Add(createTextBlocks("10:30", 0, 17, 2));
+            grid.Children.Add(createTextBlocks($"{flight}", 20, 17, 0));
+            grid.Children.Add(createTextBlocks($"{dest}", 0, 17, 1));
+            grid.Children.Add(createTextBlocks($"{time}", 0, 17, 2));
 
-            TextBlock status = new TextBlock
+            TextBlock s = new TextBlock
             {
-                Text = "On Time",
+                Text = $"{status}",
                 FontFamily = new FontFamily("Ubuntu"),
                 FontSize = 20,
                 Padding = new Thickness(0, 17, 0, 0)
             };
-            Grid.SetColumn(status, 3);
-            grid.Children.Add(status);
+            switch (status)
+            {
+                case "On Time":
+                    s.Foreground = Brushes.Green;
+                    break;
+                case "Boarding":
+                    s.Foreground = Brushes.Blue;
+                    break;
+                case "Delayed":
+                    s.Foreground = Brushes.Red;
+                    break;
+            }
 
-            grid.Children.Add(createTextBlocks("A3", 0, 17, 4));
-            grid.Children.Add(createTextBlocks("2", 0, 17, 5));
+            Grid.SetColumn(s, 3);
+            grid.Children.Add(s);
+
+            grid.Children.Add(createTextBlocks($"{gate}", 0, 17, 4));
+            grid.Children.Add(createTextBlocks($"{terminal}", 0, 17, 5));
 
             border.Child = grid;
 
@@ -137,19 +237,19 @@ namespace Airport_Management_System
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Border newRow = createNewRow();
-
             
+        }
 
-            flightsStackPanel.Children.Add(newRow);
+        private void Add_New_Flight(Border newFlight)
+        {
 
-            newRow.BeginAnimation(Border.HeightProperty, heightAnimation);
-            newRow.BeginAnimation(Border.OpacityProperty, opacityAnimation);
+            flightsStackPanel.Children.Add(newFlight);
 
-
+            newFlight.BeginAnimation(Border.HeightProperty, heightAnimation);
+            newFlight.BeginAnimation(Border.OpacityProperty, opacityAnimation);
 
             i++;
-            if(i > 9)
+            if (i > 9)
             {
                 flightsBorder.Height += 55;
                 outerMostGrid.Height += 55;

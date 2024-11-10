@@ -24,7 +24,7 @@ namespace Airport_Management_System
 
     public partial class MainWindow : Window
     {
-        private SqlConnection sqlConnection;
+        public static SqlConnection sqlConnection;
 
         private HomePageControl homePageControl;
         private FlightsControl flightsControl;
@@ -49,19 +49,23 @@ namespace Airport_Management_System
         private bool timeStandardIsUTC;
         private string timeLabel;
 
+        public static CancellationTokenSource cts;
+
         public MainWindow()
         {
             appIsRunning = true;
 
-            // NOTICE: Connection only temporary.
-            string connectionstring = @"server=DESKTOP-4CVBSIM\SQLEXPRESS; database=airport_database;user id=airport_admin;password=admin;";
-            this.sqlConnection = new SqlConnection(connectionstring);
-            this.sqlConnection.Open();
-
+            // NOTE: Connection only temporary.
+            string connectionstring = @"server=DESKTOP-4CVBSIM\SQLEXPRESS; database=airport_database;user id=airport_admin;password=admin;MultipleActiveResultSets = True;";
+            sqlConnection = new SqlConnection(connectionstring);
+            sqlConnection.Open();
+            
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             //this.sqlConnection = sqlConnection;
+
+            cts = new CancellationTokenSource();
 
             new Thread(() =>
             {
@@ -71,7 +75,7 @@ namespace Airport_Management_System
             timeStandardIsUTC = true;
             timeLabel = "UTC";
 
-            homePageControl = new HomePageControl(sqlConnection);
+            homePageControl = new HomePageControl(this);
             flightsControl = new FlightsControl(sqlConnection);
             servicesControl = new ServicesControl(sqlConnection);
             gatesControl = new GatesControl(sqlConnection);
@@ -127,7 +131,9 @@ namespace Airport_Management_System
 
         void closeApp()
         {
-            appIsRunning = false;
+            this.appIsRunning = false;
+            cts.Cancel();
+            //   homePageControl.CloseConnection();
             sqlConnection.Close();
             sqlConnection.Dispose();
         }
@@ -160,7 +166,10 @@ namespace Airport_Management_System
                 Dispatcher.InvokeAsync(() =>
                 {
                     updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
-                });
+                }).Task.Wait();
+
+                if (!appIsRunning)
+                    break;
                 Thread.Sleep(1);
             }
         }
@@ -173,7 +182,7 @@ namespace Airport_Management_System
             dayOfWeek.Text = dt.ToString("dddd");
         }
 
-        private void changeCurrentControl(int i)
+        public void changeCurrentControl(int i)
         {
             if (i == currentControl)
                 return;

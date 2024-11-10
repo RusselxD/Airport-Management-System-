@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Airport_Management_System
@@ -24,8 +20,8 @@ namespace Airport_Management_System
     /// </summary>
     public partial class HomePageControl : UserControl
     {
-        private SqlConnection sqlConnection;
-        private bool appIsRunning;
+    //    private SqlConnection sqlConnection;
+        public bool appIsRunning { get; set; }
 
         private Border defaultAlertMessage;
 
@@ -38,12 +34,14 @@ namespace Airport_Management_System
         // hover effect for delete Icon
         private Style deleteIconStyle;
 
+        private Image deleteAllIcon;
+
         private DoubleAnimation alertHeightAnimation;
         private DoubleAnimation alertBorderOpacityAnimation;
         private DoubleAnimation alertOpacityAnimation;
 
         SqlCommand alertsSelectQuery;
-        SqlCommand deleteAlertStatement;
+
         // TODO: sqlcommand dispose properly
 
 
@@ -73,10 +71,14 @@ namespace Airport_Management_System
 
         // ------------------------------------------------------------------------------------------------------ //
 
-        public HomePageControl(SqlConnection sqlConnection)
+        private MainWindow window;
+
+        public HomePageControl(MainWindow window)
         {
+            this.window = window;
+
             InitializeComponent();
-            this.sqlConnection = sqlConnection;
+         //   this.sqlConnection = sqlConnection;
 
             appIsRunning = true;
             InitializeDefaultElements();
@@ -84,21 +86,76 @@ namespace Airport_Management_System
             defaultAlertMessage = GetDefaultAlertMessage();
             AlertsPanel.Children.Add(defaultAlertMessage);
 
-            alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", sqlConnection);
-            deleteAlertStatement = new SqlCommand("", sqlConnection);
-
-
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                QueryAlertsTable();
-            }).Start();
+            alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", MainWindow.sqlConnection);
+            
+            Task.Run(() => QueryAlertsTable(MainWindow.cts.Token));
 
             RecentActivitiesPanel.Children.Add(GetRecentActivityText("Logged in as airport_admin"));
+
         }
 
         private void InitializeDefaultElements()
         {
+            // ------------------------- DELETE ICON HOVER EFFECTS ------------------------- // 
+
+            this.deleteIconStyle = new Style(typeof(Image));
+
+            // Set the default RenderTransform (ScaleTransform) for scaling
+            this.deleteIconStyle.Setters.Add(new Setter(UIElement.RenderTransformProperty, new ScaleTransform(1, 1)));
+            this.deleteIconStyle.Setters.Add(new Setter(UIElement.RenderTransformOriginProperty, new Point(0.5, 0.5)));
+
+            // Define the Trigger for MouseOver (IsMouseOver)
+            var trigger = new Trigger
+            {
+                Property = UIElement.IsMouseOverProperty,
+                Value = true
+            };
+
+            // Create the MouseOver (scale up) storyboard
+            var enterStoryboard = new Storyboard();
+            var scaleUpX = new DoubleAnimation
+            {
+                To = 1.1,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            Storyboard.SetTargetProperty(scaleUpX, new PropertyPath("RenderTransform.ScaleX"));
+            enterStoryboard.Children.Add(scaleUpX);
+
+            var scaleUpY = new DoubleAnimation
+            {
+                To = 1.1,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            Storyboard.SetTargetProperty(scaleUpY, new PropertyPath("RenderTransform.ScaleY"));
+            enterStoryboard.Children.Add(scaleUpY);
+
+            // Create the MouseLeave (scale down) storyboard
+            var exitStoryboard = new Storyboard();
+            var scaleDownX = new DoubleAnimation
+            {
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            Storyboard.SetTargetProperty(scaleDownX, new PropertyPath("RenderTransform.ScaleX"));
+            exitStoryboard.Children.Add(scaleDownX);
+
+            var scaleDownY = new DoubleAnimation
+            {
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.1)
+            };
+            Storyboard.SetTargetProperty(scaleDownY, new PropertyPath("RenderTransform.ScaleY"));
+            exitStoryboard.Children.Add(scaleDownY);
+
+            // Assign animations to Enter and Exit actions of the trigger
+            trigger.EnterActions.Add(new BeginStoryboard { Storyboard = enterStoryboard });
+            trigger.ExitActions.Add(new BeginStoryboard { Storyboard = exitStoryboard });
+
+            // Add the trigger to the style
+            this.deleteIconStyle.Triggers.Add(trigger);
+
+            // ---------------------------------------------------------------------------- //
+
             // ------------------------- DEFAULT, REUSABLE ELEMENTS ------------------------- // 
 
 
@@ -136,41 +193,19 @@ namespace Airport_Management_System
             };
 
             // ------------------------------------------------------------------------------ //
+            
+            this.deleteAllIcon = new Image
+            {
+                Source = alertDeleteIconImage,
+                Margin = new Thickness(0, 23, 48, 0),
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Top,
+                Width = 29,
+                Cursor = Cursors.Hand
+            };
 
-
-            // ------------------------- DELETE ICON HOVER EFFECTS ------------------------- // 
-
-            this.deleteIconStyle = new Style(typeof(Image));
-            deleteIconStyle.Setters.Add(new Setter(Image.RenderTransformProperty, new ScaleTransform(1, 1)));
-            deleteIconStyle.Setters.Add(new Setter(Image.RenderTransformOriginProperty, new Point(0.5, 0.5)));
-
-            // Create Trigger for MouseOver event
-            Trigger mouseOverTrigger = new Trigger { Property = UIElement.IsMouseOverProperty, Value = true };
-
-            // Define the animations for MouseOver
-            DoubleAnimation scaleUpX = new DoubleAnimation { To = 1.05, Duration = TimeSpan.FromSeconds(0.10) };
-            DoubleAnimation scaleUpY = new DoubleAnimation { To = 1.05, Duration = TimeSpan.FromSeconds(0.10) };
-            Storyboard mouseOverStoryboard = new Storyboard();
-            Storyboard.SetTargetProperty(scaleUpX, new PropertyPath("RenderTransform.ScaleX"));
-            Storyboard.SetTargetProperty(scaleUpY, new PropertyPath("RenderTransform.ScaleY"));
-            mouseOverStoryboard.Children.Add(scaleUpX);
-            mouseOverStoryboard.Children.Add(scaleUpY);
-            mouseOverTrigger.EnterActions.Add(new BeginStoryboard { Storyboard = mouseOverStoryboard });
-
-            // Define animations for MouseLeave (exit actions)
-            DoubleAnimation scaleDownX = new DoubleAnimation { To = 1, Duration = TimeSpan.FromSeconds(0.10) };
-            DoubleAnimation scaleDownY = new DoubleAnimation { To = 1, Duration = TimeSpan.FromSeconds(0.10) };
-            Storyboard mouseLeaveStoryboard = new Storyboard();
-            Storyboard.SetTargetProperty(scaleDownX, new PropertyPath("RenderTransform.ScaleX"));
-            Storyboard.SetTargetProperty(scaleDownY, new PropertyPath("RenderTransform.ScaleY"));
-            mouseLeaveStoryboard.Children.Add(scaleDownX);
-            mouseLeaveStoryboard.Children.Add(scaleDownY);
-            mouseOverTrigger.ExitActions.Add(new BeginStoryboard { Storyboard = mouseLeaveStoryboard });
-
-            // Add trigger to the style
-            deleteIconStyle.Triggers.Add(mouseOverTrigger);
-
-            // ---------------------------------------------------------------------------- //
+            this.deleteAllIcon.Style = this.deleteIconStyle;
+            this.deleteAllIcon.MouseDown += Delete_All_Alert;
         }
 
         private Border GetDefaultAlertMessage()
@@ -213,15 +248,16 @@ namespace Airport_Management_System
             return act;
         }
 
-        void QueryAlertsTable()
+        private async Task QueryAlertsTable(CancellationToken token)
         {
+            SqlDataReader alertsReader = null;
             int l1;
 
-            while (appIsRunning)
+            while (!token.IsCancellationRequested)
             {
                 l1 = 0;
 
-                using (SqlDataReader alertsReader = alertsSelectQuery.ExecuteReader())
+                using (alertsReader = await alertsSelectQuery.ExecuteReaderAsync(token))
                 {
                     while (alertsReader.Read())
                     {
@@ -233,16 +269,17 @@ namespace Airport_Management_System
 
                             if (alerts == 1)
                             {
-                                Dispatcher.InvokeAsync(() =>
+                                await Dispatcher.InvokeAsync(() =>
                                 {
                                     AlertsPanel.Children.Clear();
+                                    alertsGrid.Children.Add(deleteAllIcon);
                                     alertsContainer.Background = greenAlertBackground;
                                     alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
                                 });
                             }
                             else
                             {
-                                Dispatcher.InvokeAsync(() =>
+                                await Dispatcher.InvokeAsync(() =>
                                 {
                                     alertsContainer.Height += 59;
 
@@ -258,19 +295,37 @@ namespace Airport_Management_System
                             Dispatcher.InvokeAsync(() =>
                             {
                                 AddAlert(alertID, alertMessage, alertCode);
-                            });
+                            }).Task.Wait();
                         }
 
                     }
                 }
-                Thread.Sleep(5);
+
+                if (token.IsCancellationRequested)
+                    break;
+
+                await Task.Delay(5, token);
             }
 
+            alertsReader?.Dispose();
+            alertsReader?.Close();
         }
 
-        private async void Delete_Alert(object sender, RoutedEventArgs e)
+        private void Delete_All_Alert(object sender, MouseButtonEventArgs e)
         {
-            string name = (sender as Image).Name;
+            List<string> keys = alertsMap.Keys.ToList(); 
+
+            foreach (string key in keys)
+            {
+                Delete_Alert(key);
+            }
+        }
+
+        private async void Delete_Alert(string name)
+        {
+            Border borderDelete = alertsMap[name];
+
+            alertsMap.Remove(name);
 
             // for SQL ID
             int alertID = Convert.ToInt16(name.Substring(1));
@@ -278,15 +333,10 @@ namespace Airport_Management_System
             // delete from SQL
             await Delete_Alert_Query(alertID);
 
-            Border borderDelete = alertsMap[name];
-
-            //  borderDelete.BeginAnimation(Border.OpacityProperty, alertOpacityAnimation);
-
             var storyboard = new Storyboard();
             storyboard.Children.Add(alertOpacityAnimation);
             Storyboard.SetTarget(alertOpacityAnimation, borderDelete);
             Storyboard.SetTargetProperty(alertOpacityAnimation, new PropertyPath(Border.OpacityProperty));
-
 
             storyboard.Completed += (s, a) =>
             {
@@ -296,6 +346,7 @@ namespace Airport_Management_System
                 if (alerts <= 0)
                 {
                     AlertsPanel.Children.Add(defaultAlertMessage);
+                    alertsGrid.Children.Remove(deleteAllIcon);
                     defaultAlertMessage.BeginAnimation(Border.HeightProperty, alertHeightAnimation);
                     alertsContainer.Background = redAlertBackground;
                     alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
@@ -309,23 +360,29 @@ namespace Airport_Management_System
                     dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
                 }
 
-                alertsMap.Remove(name);
             };
 
             storyboard.Begin();
+        }
 
+        private void Delete_Single_Alert(object sender, RoutedEventArgs e)
+        {
+            (sender as Image).MouseDown -= Delete_Single_Alert;
 
+            string name = (sender as Image).Name;
 
+            Delete_Alert(name);
         }
 
         private async Task Delete_Alert_Query(int alert_ID)
         {
-            deleteAlertStatement.CommandText = $"DELETE FROM alerts_table WHERE alert_id = {alert_ID}";
-
             await Task.Run(() =>
             {
-                deleteAlertStatement.ExecuteNonQuery();
-
+                using (SqlCommand deleteAlertStatement = new SqlCommand($"DELETE FROM alerts_table WHERE alert_id = {alert_ID}", MainWindow.sqlConnection))
+                {
+                    deleteAlertStatement.ExecuteNonQuery();
+                    deleteAlertStatement.Dispose();
+                }
             });
         }
 
@@ -383,6 +440,9 @@ namespace Airport_Management_System
                 Width = 31,
                 Cursor = Cursors.Hand
             };
+
+            alertDeleteIcon.MouseDown += Delete_Single_Alert;
+            alertDeleteIcon.Style = this.deleteIconStyle;
             return alertDeleteIcon;
         }
 
@@ -399,9 +459,6 @@ namespace Airport_Management_System
             Image alertIcon = Get_Alert_Icon();
             Image deleteIcon = Get_Alert_Delete_Icon();
 
-            deleteIcon.MouseDown += Delete_Alert;
-            deleteIcon.Style = this.deleteIconStyle;
-
             alertGrid.Children.Add(alertText);
             alertGrid.Children.Add(alertIcon);
             alertGrid.Children.Add(deleteIcon);
@@ -412,7 +469,6 @@ namespace Airport_Management_System
             AlertsPanel.Children.Add(border);
 
             border.BeginAnimation(Border.HeightProperty, alertHeightAnimation);
-
 
             //   border.BeginAnimation(Border.OpacityProperty, opacityAnimation);
 
@@ -438,6 +494,11 @@ namespace Airport_Management_System
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             addRecentAct("Assigned Flight Nigga to Gate NIGGA");
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            window.changeCurrentControl(1);
         }
     }
 }
