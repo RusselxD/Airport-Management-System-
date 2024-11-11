@@ -39,7 +39,6 @@ namespace Airport_Management_System
         {
             // TODO: yung kapag nag palit from departure to arrival or vice versa, yung size ng inner at outer margins i-resize
 
-
             InitializeComponent();
 
             departureIsShown = true;
@@ -98,13 +97,12 @@ namespace Airport_Management_System
         private async Task QueryDepartureFlights(CancellationToken token)
         {
             SqlDataReader departureReader = null;
+            SqlCommand flightsQuery = new SqlCommand("SELECT * FROM departure_flights", MainWindow.sqlConnection);
             int l1;
 
             while (!token.IsCancellationRequested)
             {
                 l1 = 0;
-
-                SqlCommand flightsQuery = new SqlCommand("SELECT * FROM departure_flights", MainWindow.sqlConnection);
 
                 using (departureReader = await flightsQuery.ExecuteReaderAsync(token))
                 {
@@ -116,12 +114,12 @@ namespace Airport_Management_System
                         {
                             departureFlights = l1;
 
-                            string flight = departureReader[0].ToString();
-                            string dest = departureReader[1].ToString();
-                            string time = departureReader[2].ToString();
-                            string status = departureReader[3].ToString();
-                            string gate = departureReader[4].ToString();
-                            int terminal = Convert.ToInt16(departureReader[5]);
+                            string flight = departureReader[1].ToString();
+                            string dest = departureReader[2].ToString();
+                            string time = departureReader[3].ToString();
+                            string status = departureReader[4].ToString();
+                            string gate = departureReader[5].ToString();
+                            int terminal = Convert.ToInt16(departureReader[6]);
 
                             await Dispatcher.InvokeAsync(() =>
                             {
@@ -152,13 +150,12 @@ namespace Airport_Management_System
         private async Task QueryArrivalFlights(CancellationToken token)
         {
             SqlDataReader arrivalReader = null;
+            SqlCommand flightsQuery = new SqlCommand("SELECT * FROM arrival_flights", MainWindow.sqlConnection);
             int l1;
 
             while (!token.IsCancellationRequested)
             {
                 l1 = 0;
-
-                SqlCommand flightsQuery = new SqlCommand("SELECT * FROM arrival_flights", MainWindow.sqlConnection);
 
                 using (arrivalReader = await flightsQuery.ExecuteReaderAsync(token))
                 {
@@ -170,16 +167,16 @@ namespace Airport_Management_System
                         {
                             arrivalFlights = l1;
 
-                            string flight = arrivalReader[0].ToString();
-                            string dest = arrivalReader[1].ToString();
-                            string time = arrivalReader[2].ToString();
-                            string status = arrivalReader[3].ToString();
-                            string gate = arrivalReader[4].ToString();
-                            int terminal = Convert.ToInt16(arrivalReader[5]);
+                            string flight = arrivalReader[1].ToString();
+                            string origin = arrivalReader[2].ToString();
+                            string time = arrivalReader[3].ToString();
+                            string status = arrivalReader[4].ToString();
+                            string gate = arrivalReader[5].ToString();
+                            int terminal = Convert.ToInt16(arrivalReader[6]);
 
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                Add_New_Flight(Create_New_Row(flight, dest, time, status, gate, terminal), arrivalPanel);
+                                Add_New_Flight(Create_New_Row(flight, origin, time, status, gate, terminal), arrivalPanel);
                                 if (!departureIsShown && arrivalFlights > 8)
                                 {
                                     flightsBorder.Height += 55;
@@ -281,6 +278,9 @@ namespace Airport_Management_System
                     break;
                 case "Delayed":
                     statusTb.Foreground = Brushes.Red;
+                    break;
+                case "Landed":
+                    statusTb.Foreground = Brushes.Gray;
                     break;
             }
             grid.Children.Add(statusTb);

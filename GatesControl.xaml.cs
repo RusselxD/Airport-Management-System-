@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,35 @@ namespace Airport_Management_System
         public GatesControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
+
+            Task.Run(() => QueryGatesTable(MainWindow.cts.Token));
+        }
+
+        private async Task QueryGatesTable(CancellationToken token)
+        {            
+            using (SqlCommand gatesQuery = new SqlCommand("SELECT * FROM gates_table", MainWindow.sqlConnection))
+            {
+                using (SqlDataReader gatesReader = await gatesQuery.ExecuteReaderAsync(token))
+                {
+                    int row = 1;
+
+
+
+                    while (gatesReader.Read())
+                    {
+
+
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            //  AddAlert(alertID, alertMessage, alertCode);
+                        }).Task.Wait();
+
+                    }
+                }
+            }
+            
+
+
         }
     }
 }

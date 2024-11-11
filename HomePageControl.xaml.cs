@@ -20,7 +20,6 @@ namespace Airport_Management_System
     /// </summary>
     public partial class HomePageControl : UserControl
     {
-    //    private SqlConnection sqlConnection;
         public bool appIsRunning { get; set; }
 
         private Border defaultAlertMessage;

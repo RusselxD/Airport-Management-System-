@@ -26,21 +26,21 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Border Grid.Column="0" BorderThickness="1" Margin="60,25,50,25" Background="#FF98FDB3" CornerRadius="8,8,8,8">
+                        <Border Grid.Column="0" BorderThickness="1" Margin="40,25,40,25" Background="#FF98FDB3" CornerRadius="8,8,8,8">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="35,20,0,0" TextWrapping="Wrap" Text="Available" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="42" VerticalAlignment="Top" Foreground="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
                             </Grid>
                         </Border>
 
-                        <Border Grid.Column="1" BorderThickness="1" Background="#FFFFC0C0" CornerRadius="8,8,8,8" Margin="60,25,50,25">
+                        <Border Grid.Column="1" BorderThickness="1" Background="#FFFFC0C0" CornerRadius="8,8,8,8" Margin="40,25,40,25">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="35,20,0,0" TextWrapping="Wrap" Text="Occupied " VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Foreground="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
                             </Grid>
                         </Border>
 
-                        <Border Grid.Column="2" BorderThickness="1" Margin="60,25,50,25" Background="#FFFFD7A6" CornerRadius="8,8,8,8">
+                        <Border Grid.Column="2" BorderThickness="1" Margin="40,25,40,25" Background="#FFFFD7A6" CornerRadius="8,8,8,8">
                             <Grid>
                                 <TextBlock Margin="35,20,0,0" TextWrapping="Wrap" Text="Maintenance" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22" HorizontalAlignment="Left" Width="137"/>
                                 <TextBlock Margin="29,58,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Foreground="#FFF88E0C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55" HorizontalAlignment="Left" Width="143"/>
@@ -49,67 +49,281 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" CornerRadius="15" Margin="65,48,65,45" Background="White">
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
+                <Border Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="White" Height="1290">
+                    
+                    <Grid Margin="0, 5, 0, 0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80" />
-                            <RowDefinition Height="150" />
-                            <RowDefinition Height="150" />
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 1" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
+                        <Border Grid.Row="0">
 
-                        <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="30, 0, 15, 25" CornerRadius="8,8,8,8">
                             <Grid>
-                                <TextBlock Margin="26,19,117,82" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="25"></TextBlock>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                                <TextBlock Margin="26,56,0,51" Text="Available" FontWeight="Medium" FontSize="18" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.45*" />
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
 
-                                <TextBlock Margin="26,88,0,21" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878"></TextBlock>
-                            
+                                <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 1" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
+
+                                <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
                             </Grid>
+
+
                         </Border>
 
-                        <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                        <Border Grid.Row="1">
+
                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.45*" />
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 2" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
+
+                                <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
 
                             </Grid>
+
+
                         </Border>
 
-                        <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 30, 25" CornerRadius="8,8,8,8">
+                        <Border Grid.Row="2">
+
                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.45*" />
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 3" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
+
+                                <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+
+                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+
+                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+
+                                    </Grid>
+                                </Border>
 
                             </Grid>
-                        </Border>
 
-                        <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="30, 0, 15, 25" CornerRadius="8,8,8,8">
-                            <Grid>
 
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
-                            <Grid>
-
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 30, 25" CornerRadius="8,8,8,8">
-                            <Grid>
-
-                            </Grid>
                         </Border>
 
                     </Grid>
-
-
+                    
                 </Border>
 
             </Grid>
