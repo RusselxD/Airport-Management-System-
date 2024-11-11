@@ -76,7 +76,7 @@ namespace Airport_Management_System
             timeLabel = "UTC";
 
             homePageControl = new HomePageControl(this);
-            flightsControl = new FlightsControl(sqlConnection);
+            flightsControl = new FlightsControl();
             servicesControl = new ServicesControl(sqlConnection);
             gatesControl = new GatesControl(sqlConnection);
             staffControl = new StaffControl(sqlConnection);

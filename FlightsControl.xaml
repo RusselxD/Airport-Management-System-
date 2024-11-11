@@ -9,7 +9,7 @@
     <Grid>
         <TextBlock Height="59" TextWrapping="Wrap" Text="Flight Management" VerticalAlignment="Top" Foreground="White" Background="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
-        <ScrollViewer Margin="0,59,0,0">
+        <ScrollViewer Margin="0,59,0,0" Focusable="False">
 
             <Grid x:Name="outerMostGrid" Background="#FFF6F6F6">
 
@@ -22,12 +22,12 @@
 
                     <Grid>
 
-                        <Border BorderThickness="1" HorizontalAlignment="Left" Height="53" Margin="31,0,0,0" VerticalAlignment="Center" Width="138" Background="#FF06611E" CornerRadius="7,7,7,7">
-                            <TextBlock TextWrapping="Wrap" Text="Departures" Width="139" FontFamily="Ubuntu" Foreground="White" FontSize="18" Padding="23,16,0,0" Margin="0,0,-3,0" FontWeight="Medium"/>
+                        <Border x:Name="departureButton" MouseDown="Departure_Button_Click" BorderThickness="1" HorizontalAlignment="Left" Height="53" Margin="31,0,0,0" VerticalAlignment="Center" Width="138" CornerRadius="7,7,7,7">
+                            <TextBlock x:Name="departureText" TextWrapping="Wrap" Text="Departures" Width="139" FontFamily="Ubuntu" Foreground="White" FontSize="18" Padding="23,16,0,0" Margin="0,0,-3,0" FontWeight="Medium"/>
                         </Border>
 
-                        <Border BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="180,0,0,0" VerticalAlignment="Center" Width="111" Background="#FF90FDAD" CornerRadius="7,7,7,7">
-                            <TextBlock TextWrapping="Wrap" Text="Arrivals" FontFamily="Ubuntu" Foreground="Black" FontSize="18" Padding="25,16,0,0" Margin="0,0,-1,0" FontWeight="Medium"/>
+                        <Border x:Name="arrivalButton" MouseDown="Arrival_Button_CLick" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="180,0,0,0" VerticalAlignment="Center" Width="111" CornerRadius="7,7,7,7">
+                            <TextBlock x:Name="arrivalText" TextWrapping="Wrap" Text="Arrivals" FontFamily="Ubuntu" Foreground="Black" FontSize="18" Padding="25,16,0,0" Margin="0,0,-1,0" FontWeight="Medium"/>
                         </Border>
 
 
@@ -64,102 +64,39 @@
 
                 <Border x:Name="flightsBorder" Grid.Row="1" CornerRadius="5" Margin="65,0,65,55" Background="White" VerticalAlignment="Top" Height="498" >
 
-                    <Grid>
+                    <Grid x:Name="flightsGrid">
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
 
-                        <Border Grid.Row="0" Background="#FF98FDB3" CornerRadius="5,5,0,0" >
+                        <Border Grid.Row="0" Background="#FF78FF9C" CornerRadius="5,5,0,0" >
                             <Grid Grid.Row="0" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.95*"/>
+                                    <ColumnDefinition Width="0.80*"/>
                                     <ColumnDefinition Width="1.2*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.9*"/>
                                     <ColumnDefinition Width="0.9*"/>
                                     <ColumnDefinition Width="0.7*"/>
                                     <ColumnDefinition Width="0.65*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" FontWeight="SemiBold" TextWrapping="Wrap" Text="Flight" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="20,16,0,0"/>
-                                <TextBlock Grid.Column="1" FontWeight="SemiBold" TextWrapping="Wrap" Text="Destination" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0" />
+                                <TextBlock Grid.Column="1" FontWeight="SemiBold" TextWrapping="Wrap" x:Name="endpoint" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0" />
                                 <TextBlock Grid.Column="2" FontWeight="SemiBold" TextWrapping="Wrap" Text="Time (UTC)" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
                                 <TextBlock Grid.Column="3" FontWeight="SemiBold" TextWrapping="Wrap" Text="Status" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
                                 <TextBlock Grid.Column="4" FontWeight="SemiBold" TextWrapping="Wrap" Text="Gate" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
                                 <TextBlock Grid.Column="5" FontWeight="SemiBold" TextWrapping="Wrap" Text="Terminal" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
+                            
                             </Grid>
                         </Border>
-
-                        <StackPanel x:Name="flightsStackPanel" Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top" >
-
-                            <!--<Border Height="55" BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.95*"/>
-                                        <ColumnDefinition Width="1.2*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="0.9*"/>
-                                        <ColumnDefinition Width="0.7*"/>
-                                        <ColumnDefinition Width="0.65*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"/>
-
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Grid.Column="0" Text="AB 223" FontFamily="Ubuntu" FontSize="20" Padding="20,17,0,0" />
-                                    <TextBlock Grid.Column="1" Text="London (LHR)" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="2" Text="10:30" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="3" Text="On Time" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="4" Text="A3" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="5" Text="2" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-
-                                </Grid>
-                            </Border>
-
-                            <Border Height="55" BorderThickness="0,0,0,1" BorderBrush="Black">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.95*"/>
-                                        <ColumnDefinition Width="1.2*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="0.9*"/>
-                                        <ColumnDefinition Width="0.7*"/>
-                                        <ColumnDefinition Width="0.65*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"/>
-
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Grid.Column="0" Text="AB 223" FontFamily="Ubuntu" FontSize="20" Padding="20,17,0,0" />
-                                    <TextBlock Grid.Column="1" Text="London (LHR)" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="2" Text="10:30" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="3" Text="On Time" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="4" Text="A3" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-                                    <TextBlock Grid.Column="5" Text="2" FontFamily="Ubuntu" FontSize="20" Padding="0,17,0,0" />
-
-                                </Grid>
-                            </Border>-->
-
-
-
-
-
-                        </StackPanel>
-
-
-
 
                     </Grid>
 
 
 
                 </Border>
-                <Button Content="Button" HorizontalAlignment="Left" Height="53" Margin="866,489,0,0" Grid.Row="1" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
             </Grid>
 
         </ScrollViewer>
