@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Airport_Management_System
 {
@@ -28,142 +27,170 @@ namespace Airport_Management_System
         private Dictionary<int, TextBlock> statusMap;
         private Dictionary<int, TextBlock> messageMap;
 
+        private SolidColorBrush green;
+        private SolidColorBrush red;
+        private SolidColorBrush orange;
 
+        private SolidColorBrush darkGreen;
+        private SolidColorBrush darkRed;
+        private SolidColorBrush darkOrange;
 
+        private SqlCommand availableGatesQuery;
+        private SqlCommand maintenanceGatesQuery;
+        private SqlCommand occupiedGatesQuery;
 
         public GatesControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
 
+            AssignGlobalValues();
+
+            Populate_Maps();
+
+            Task.Run(() => QueryGatesTable(MainWindow.cts.Token));
+            Task.Run(() => Update_Available_Gates_Count(MainWindow.cts.Token));
+            Task.Run(() => Update_Occupied_Gates_Count(MainWindow.cts.Token));
+            Task.Run(() => Update_Maintenance_Gates_Count(MainWindow.cts.Token));
+        }
+
+        private void AssignGlobalValues()
+        {
             gatesMap = new Dictionary<int, Border>();
             statusMap = new Dictionary<int, TextBlock>();
             messageMap = new Dictionary<int, TextBlock>();
 
-            Task.Run(() => QueryGatesTable(MainWindow.cts.Token));
+            green = new SolidColorBrush(Color.FromRgb(186, 255, 190));
+            red = new SolidColorBrush(Color.FromRgb(255, 192, 192));
+            orange = new SolidColorBrush(Color.FromRgb(255, 215, 166));
+
+            darkGreen = new SolidColorBrush(Color.FromRgb(30, 168, 67));
+            darkRed = new SolidColorBrush(Color.FromRgb(247, 28, 28));
+            darkOrange = new SolidColorBrush(Color.FromRgb(248, 142, 12));
+
+            availableGatesQuery = new SqlCommand("SELECT COUNT(1) FROM gates_table WHERE status_col = 1;", MainWindow.sqlConnection);
+            maintenanceGatesQuery = new SqlCommand("SELECT COUNT(1) FROM gates_table WHERE status_col = 2;", MainWindow.sqlConnection);
+            occupiedGatesQuery = new SqlCommand("SELECT COUNT(1) FROM gates_table WHERE status_col = 3;", MainWindow.sqlConnection);
         }
 
         private void Populate_Maps()
         {
-            gatesMap.Add(1, t1a);
-            gatesMap.Add(2, t1b);
-            gatesMap.Add(3, t1c);
-            gatesMap.Add(4, t1d);
-            gatesMap.Add(5, t1e);
-            gatesMap.Add(6, t1f);
+            int k = 1;
+            char c = 'a';
+            for (int i = 1; i <= 18; i++)
+            {
+                string borderName = $"t{k}{c}";
+                Border b = FindName(borderName) as Border;
+                gatesMap.Add(i, b);
 
-            statusMap.Add(1, t1aStatus);
-            statusMap.Add(2, t1bStatus);
-            statusMap.Add(3, t1cStatus);
-            statusMap.Add(4, t1dStatus);
-            statusMap.Add(5, t1eStatus);
-            statusMap.Add(6, t1fStatus);
+                string statusName = $"{borderName}Status";
+                TextBlock status = FindName(statusName) as TextBlock;
+                statusMap.Add(i, status);
 
-            messageMap.Add(1, t1aMessage);
-            messageMap.Add(2, t1bMessage);
-            messageMap.Add(3, t1cMessage);
-            messageMap.Add(4, t1dMessage);
-            messageMap.Add(5, t1eMessage);
-            messageMap.Add(6, t1fMessage);
+                string messageName = $"{borderName}Message";
+                TextBlock message = FindName(messageName) as TextBlock;
+                messageMap.Add(i, message);
+
+                if (i == 6 || i == 12)
+                {
+                    k++;
+                    c = 'a';
+                }
+                else
+                {
+                    c = (char)(c + 1);
+                }
+            }
         }
 
         private async Task QueryGatesTable(CancellationToken token)
-        {            
+        {
             using (SqlCommand gatesQuery = new SqlCommand("SELECT * FROM gates_table", MainWindow.sqlConnection))
             {
                 using (SqlDataReader gatesReader = await gatesQuery.ExecuteReaderAsync(token))
                 {
-
                     while (gatesReader.Read())
                     {
                         Dispatcher.InvokeAsync(() =>
                         {
-                            
-
-
-
-
-
+                            UpdateGate(Convert.ToInt16(gatesReader[0]), Convert.ToInt16(gatesReader[2]), gatesReader[3].ToString());
                         }).Task.Wait();
-
                     }
                 }
             }
-
         }
 
-
-        private void ewan()
+        private async Task Update_Available_Gates_Count(CancellationToken token)
         {
-
-            Border gatesBorder = new Border()
+            using (availableGatesQuery)
             {
-                CornerRadius = new CornerRadius(15),
-                Margin = new Thickness(65, 0, 65, 25),
-                Background = Brushes.White,
-                Height = 1290
-            };
-            Grid.SetRow(gatesBorder, 1);
-
-            outerGrid.Children.Add(gatesBorder);
-
-            Grid gatesGrid = new Grid();
-            gatesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            gatesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            gatesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-
-            //  gatesGrid.Children.Add(terminal1GatesBorder);
-
-            //  Terminal 1 --------------------
-            Border terminal1GatesBorder = new Border();
-            Grid.SetRow(terminal1GatesBorder, 0);
-
-            Grid terminal1GatesGrid = new Grid();
-            addGrid_Row_And_Column_Definitions(terminal1GatesGrid);
-
-            terminal1GatesGrid.Children.Add(Get_Terminal_Header("Terminal 1", 0));
-
-
-
-            //< Border Grid.Column = "0" Grid.Row = "1" Background = "#FFBAFFBE" Margin = "31,0,15,25" CornerRadius = "8,8,8,8" >
-            //                        < Grid >
-            //                            < TextBlock Margin = "26,20,0,74" Text = "Gate 1A" FontFamily = "Ubuntu" FontWeight = "SemiBold" FontSize = "30" ></ TextBlock >
-
-            //                            < TextBlock Margin = "26,66,0,53" Text = "Available" FontWeight = "Medium" FontSize = "23" FontFamily = "Ubuntu" Foreground = "#FF00AE0A" ></ TextBlock >
-
-            //                            < TextBlock Margin = "26,107,0,15" Text = "Ready for Assignment" FontFamily = "Ubuntu" Foreground = "#FF787878" FontSize = "18" ></ TextBlock >
-
-            //                        </ Grid >
-            //                    </ Border >
-
-            // ------------------
-
-
-
+                using (SqlDataReader availableCountReader = await availableGatesQuery.ExecuteReaderAsync(token))
+                {
+                    while (availableCountReader.Read())
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            availableCount.Text = availableCountReader[0].ToString();
+                        }).Task.Wait();
+                    }
+                }
+            }
         }
 
-        private TextBlock Get_Terminal_Header(string text, int row)
+        private async Task Update_Maintenance_Gates_Count(CancellationToken token)
         {
-            TextBlock newTerminalHeader = new TextBlock()
+            using (maintenanceGatesQuery)
             {
-                Text = text,
-                FontWeight = FontWeights.Bold,
-                FontFamily = new FontFamily("Ubuntu"),
-                FontSize = 30,
-                Padding = new Thickness(30, 25, 0, 0)
-            };
-            Grid.SetRow(newTerminalHeader, row);
-            return newTerminalHeader;
+                using (SqlDataReader maintenanceCountReader = await maintenanceGatesQuery.ExecuteReaderAsync(token))
+                {
+                    while (maintenanceCountReader.Read())
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            maintenanceCount.Text = maintenanceCountReader[0].ToString();
+                        }).Task.Wait();
+                    }
+                }
+            }
         }
 
-        private void addGrid_Row_And_Column_Definitions(Grid grid)
+        private async Task Update_Occupied_Gates_Count(CancellationToken token)
         {
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            using (occupiedGatesQuery)
+            {
+                using (SqlDataReader OccupiedCountReader = await occupiedGatesQuery.ExecuteReaderAsync(token))
+                {
+                    while (OccupiedCountReader.Read())
+                    {
+                        Dispatcher.InvokeAsync(() =>
+                        {
+                            occupiedCount.Text = OccupiedCountReader[0].ToString();
+                        }).Task.Wait();
+                    }
+                }
+            }
+        }
 
-            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.45, GridUnitType.Star) });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+        private void UpdateGate(int index, int status, string details)
+        {
+            switch (status)
+            {
+                case 1:
+                    gatesMap[index].Background = green;
+                    statusMap[index].Text = "Available";
+                    statusMap[index].Foreground = darkGreen;
+                    break;
+                case 2:
+                    gatesMap[index].Background = orange;
+                    statusMap[index].Text = "Maintenance";
+                    statusMap[index].Foreground = darkOrange;
+                    break;
+                case 3:
+                    gatesMap[index].Background = red;
+                    statusMap[index].Text = "Occupied";
+                    statusMap[index].Foreground = darkRed;
+                    break;
+            }
+            messageMap[index].Text = details;
         }
     }
 }

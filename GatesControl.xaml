@@ -9,7 +9,7 @@
     <Grid Background="White">
         <TextBlock Height="59" TextWrapping="Wrap" Text="Gate Operations" VerticalAlignment="Top" Foreground="White" Background="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
-        <ScrollViewer Margin="0,59,0,0" Focusable="False">
+        <ScrollViewer Margin="0,59,0, 0" Focusable="False">
 
             <Grid x:Name="outerGrid" Background="#FFF6F6F6">
 
@@ -29,33 +29,33 @@
                         <Border Grid.Column="0" BorderThickness="1" Margin="40,25,40,25" Background="#FF98FDB3" CornerRadius="8,8,8,8">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="35,20,0,0" TextWrapping="Wrap" Text="Available" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
-                                <TextBlock HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="42" VerticalAlignment="Top" Foreground="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
+                                <TextBlock x:Name="availableCount" HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="42" VerticalAlignment="Top" Foreground="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Column="1" BorderThickness="1" Background="#FFFFC0C0" CornerRadius="8,8,8,8" Margin="40,25,40,25">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="35,20,0,0" TextWrapping="Wrap" Text="Occupied " VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
-                                <TextBlock HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Foreground="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
+                                <TextBlock x:Name="occupiedCount" HorizontalAlignment="Left" Margin="29,58,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Foreground="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Column="2" BorderThickness="1" Margin="40,25,40,25" Background="#FFFFD7A6" CornerRadius="8,8,8,8">
                             <Grid>
                                 <TextBlock Margin="35,20,0,0" TextWrapping="Wrap" Text="Maintenance" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22" HorizontalAlignment="Left" Width="137"/>
-                                <TextBlock Margin="29,58,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Foreground="#FFF88E0C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55" HorizontalAlignment="Left" Width="143"/>
+                                <TextBlock x:Name="maintenanceCount" Margin="29,58,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Foreground="#FFF88E0C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55" HorizontalAlignment="Left" Width="143"/>
                             </Grid>
                         </Border>
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="White" Height="1290">
+                <Border Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="White" Height="1240">
                     
                     <Grid Margin="0, 0, 0, 0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="430"/>
+                            <RowDefinition Height="405"/>
+                            <RowDefinition Height="405"/>
                         </Grid.RowDefinitions>
 
                         <Border Grid.Row="0">
@@ -77,20 +77,20 @@
 
                                 <Border x:Name="t1a" Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1aStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1aStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
-                                        <TextBlock x:Name="t1aMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t1aMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"/>
 
                                     </Grid>
                                 </Border>
 
                                 <Border x:Name="t1b" Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1B" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1B" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1bStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1bStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
                                         <TextBlock x:Name="t1bMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
@@ -99,9 +99,9 @@
 
                                 <Border x:Name="t1c" Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1C" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1C" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1cStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1cStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
                                         <TextBlock x:Name="t1cMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
@@ -110,9 +110,9 @@
 
                                 <Border x:Name="t1d" Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1D" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1D" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1dStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1dStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
                                         <TextBlock x:Name="t1dMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
@@ -121,9 +121,9 @@
 
                                 <Border x:Name="t1e" Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1E" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1E" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1eStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1eStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
                                         <TextBlock x:Name="t1eMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
@@ -132,9 +132,9 @@
 
                                 <Border x:Name="t1f" Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1F" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 1F" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock x:Name="t1fStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t1fStatus" Margin="26,66,0,53" Text="Available" FontSize="23" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FF00AE0A"/>
 
                                         <TextBlock x:Name="t1fMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
@@ -163,68 +163,68 @@
 
                                 <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 2" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
 
-                                <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2a" Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2A" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2aStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2aMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2b" Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2B" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2bStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2bMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2c" Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2C" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2cStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2cMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2d" Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2D" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2dStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2dMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2e" Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2E" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2eStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2eMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t2f" Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 2F" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t2fStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t2fMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
@@ -251,68 +251,68 @@
 
                                 <TextBlock Grid.Row="0" Margin="0,0,0,0" Text="Terminal 3" FontWeight="Bold" FontFamily="Ubuntu" FontSize="30" Padding="30,25,0,0"></TextBlock>
 
-                                <Border Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3a" Grid.Column="0" Grid.Row="1" Background="#FFBAFFBE" Margin="31,0,15,25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3A" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3aStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3aMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3b" Grid.Column="1" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3B" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3bStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3bMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3c" Grid.Column="2" Grid.Row="1" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3C" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3cStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3cMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3d" Grid.Column="0" Grid.Row="2" Background="#FFBAFFBE" Margin="31, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3D" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3dStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3dMessage"  Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3e" Grid.Column="1" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 15, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3E" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3eStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3eMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
 
-                                <Border Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
+                                <Border x:Name="t3f" Grid.Column="2" Grid.Row="2" Background="#FFBAFFBE" Margin="15, 0, 31, 25" CornerRadius="8,8,8,8">
                                     <Grid>
-                                        <TextBlock Margin="26,20,0,74" Text="Gate 1A" FontFamily="Ubuntu" FontWeight="SemiBold" FontSize="30"></TextBlock>
+                                        <TextBlock Margin="26,20,0,74" Text="Gate 3F" FontFamily="Ubuntu" FontSize="30"/>
 
-                                        <TextBlock Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
+                                        <TextBlock x:Name="t3fStatus" Margin="26,66,0,53" Text="Available" FontWeight="Medium" FontSize="23" FontFamily="Ubuntu" Foreground="#FF00AE0A"></TextBlock>
 
-                                        <TextBlock Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
+                                        <TextBlock x:Name="t3fMessage" Margin="26,107,0,15" Text="Ready for Assignment" FontFamily="Ubuntu" Foreground="#FF787878" FontSize="18"></TextBlock>
 
                                     </Grid>
                                 </Border>
