@@ -7,6 +7,464 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
     <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" Height="125" Margin="280,222,0,0" TextWrapping="Wrap" Text="Staffs" VerticalAlignment="Top" Width="283" FontSize="72"/>
+        <TextBlock x:Name="header" Height="59" TextWrapping="Wrap" Text="Airport Staffs" VerticalAlignment="Top" Foreground="White" Background="#FFF88E0C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+
+        <ScrollViewer Margin="0,59,0,0" Focusable="False">
+
+            <Grid x:Name="outerMostGrid" Background="#FFF6F6F6">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" CornerRadius="15" Margin="65,0,65,0" Background="White" VerticalAlignment="Center" Height="106" >
+
+                    <Grid>
+
+                        <Border Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="38" Width="238">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="48"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Margin="0,0,0,0" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="8,0,0,8" >
+
+                                    <TextBox x:Name="searchBox" Text="Search Staff"
+                                     Foreground="Gray" TextWrapping="Wrap" 
+                                     VerticalContentAlignment="Center" FontFamily="Ubuntu" 
+                                     FontSize="16" Padding="10,0,10,0"  
+                                     BorderBrush="{x:Null}" Background="{x:Null}" 
+                                     GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" BorderThickness="0,0,0,0" Margin="0,0,-1,-1"/>
+
+                                </Border>
+                                <Border MouseDown="Border_MouseDown" Cursor="Hand" Margin="0,0,0,0" Background="Transparent" BorderBrush="Black" BorderThickness="0,1,1,1" CornerRadius="0,8,8,0" Grid.Column="1">
+                                    <Image Source="/Icons/search-icon.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="22"/>
+                                </Border>
+
+                            </Grid>
+
+
+                        </Border>
+
+                        <Border x:Name="RoleDropDown" Margin="0,33,320,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right">
+                            <Grid>
+
+                                <TextBlock Margin="0,0,39,0" Text="Role" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+
+                                <Border MouseDown="Role_DropDown_Click" Margin="128, 0, 0, 0" HorizontalAlignment="Right" Cursor="Hand" Background="White" CornerRadius="0,8,8,0">
+                                    <Polygon x:Name="RoleDropDownArrow" Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
+                                </Border>
+
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="ShiftsDropDown" Margin="0,33,165,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="31*"/>
+                                    <ColumnDefinition Width="106*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="0,0,39,0" Text="Shift" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0" Grid.ColumnSpan="2"/>
+
+                                <Border MouseDown="Shift_DropDown_Click" Margin="67,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39" Grid.Column="1">
+                                    <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
+                                </Border>
+
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="StatusDropDown" Margin="0,33,10,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
+                            <Grid>
+                                <TextBlock Margin="0,0,39,0" Text="Status" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+
+                                <Border MouseDown="Status_DropDown_Click" Margin="98,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
+                                    <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Border>
+
+                <Border x:Name="flightsBorder" Grid.Row="1" CornerRadius="5" Margin="65,0,65,55" Background="White" VerticalAlignment="Top" Height="498" >
+
+                    <Grid x:Name="flightsGrid">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Background="#FFFFD7A6" CornerRadius="5,5,0,0" >
+                            <Grid Grid.Row="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.9*"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" FontWeight="SemiBold" TextWrapping="Wrap" Text="Name" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="20,16,0,0"/>
+                                <TextBlock Grid.Column="1" FontWeight="SemiBold" TextWrapping="Wrap" Text="Role" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0" />
+                                <TextBlock Grid.Column="2" FontWeight="SemiBold" TextWrapping="Wrap" Text="Shift" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
+                                <TextBlock Grid.Column="3" FontWeight="SemiBold" TextWrapping="Wrap" Text="Status" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
+
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+
+                </Border>
+                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="138" Margin="0,94,385,0" VerticalAlignment="Top" Width="169" BorderBrush="Black" Grid.RowSpan="2">
+                    <Grid >
+                        <ScrollViewer>
+                            <Grid>
+                                <TextBlock Text="Air Traffic Controller" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Aircraft Mechanic" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Aircraft Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Airport Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Baggage Handler" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,136,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Cabin Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,170,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Cargo Operations" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,204,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Cargo Supervisor" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,238,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Co-Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,272,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Customer Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,306,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Dispatcher" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,340,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Fuel Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,374,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Ground Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,408,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Ground Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,442,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Maintenance Engineer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,476,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Maintenance Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,510,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Passenger Assistance" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,544,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Passenger Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,578,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,612,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Ramp Agent" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,646,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Ramp Agent" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,646,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Security Officer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,680,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFE9E9E9"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="Shifts" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="104" Margin="0,94,230,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+
+                    <Grid>
+                        <TextBlock Text="Morning" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="Afternoon" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="Night" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+
+
+                </Border>
+
+                <Border x:Name="Status" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="138" Margin="0,94,75,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+
+                    <Grid>
+                        <TextBlock Text="On-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="Off-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="Sick" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="On Leave" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+
+                </Border>
+            </Grid>
+
+        </ScrollViewer>
     </Grid>
 </UserControl>

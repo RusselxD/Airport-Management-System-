@@ -78,7 +78,7 @@ namespace Airport_Management_System
             homePageControl = new HomePageControl(this);
             flightsControl = new FlightsControl();
             servicesControl = new ServicesControl(sqlConnection);
-            gatesControl = new GatesControl(sqlConnection);
+            gatesControl = new GatesControl();
             staffControl = new StaffControl(sqlConnection);
             reportControl = new ReportControl(sqlConnection);
 

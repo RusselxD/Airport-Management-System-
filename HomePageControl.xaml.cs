@@ -41,8 +41,6 @@ namespace Airport_Management_System
 
         SqlCommand alertsSelectQuery;
 
-        // TODO: sqlcommand dispose properly
-
 
         // ------------------------------------- DEFAULT, REUSABLE ELEMENTS ------------------------------------- //
 
@@ -77,7 +75,6 @@ namespace Airport_Management_System
             this.window = window;
 
             InitializeComponent();
-         //   this.sqlConnection = sqlConnection;
 
             appIsRunning = true;
             InitializeDefaultElements();
@@ -90,7 +87,6 @@ namespace Airport_Management_System
             Task.Run(() => QueryAlertsTable(MainWindow.cts.Token));
 
             RecentActivitiesPanel.Children.Add(GetRecentActivityText("Logged in as airport_admin"));
-
         }
 
         private void InitializeDefaultElements()
@@ -495,9 +491,14 @@ namespace Airport_Management_System
             addRecentAct("Assigned Flight Nigga to Gate NIGGA");
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Go_To_Flights_Window(object sender, MouseButtonEventArgs e)
         {
             window.changeCurrentControl(1);
+        }
+
+        private void Go_To_Gates_Window(object sender, MouseButtonEventArgs e)
+        {
+            window.changeCurrentControl(3);
         }
     }
 }

@@ -31,7 +31,7 @@
                             <Grid Margin="-1,-1,-1,-1">
                                 <TextBlock HorizontalAlignment="Left" Margin="35,25,0,0" TextWrapping="Wrap" Text="Active Flights" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="29,63,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Foreground="#FF1EA843" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
-                                <Image MouseDown="Image_MouseDown" Source="/Icons/goto-green.png" Cursor="Hand" HorizontalAlignment="Right" Height="50" Margin="0,71,29,0" VerticalAlignment="Top" Width="50" >
+                                <Image MouseDown="Go_To_Flights_Window" Source="/Icons/goto-green.png" Cursor="Hand" HorizontalAlignment="Right" Height="50" Margin="0,71,29,0" VerticalAlignment="Top" Width="50" >
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Style.Triggers>
@@ -41,10 +41,8 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <!-- Animate scale transform to 0.1 on hover -->
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1.1" Duration="0:0:0.10" />
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1.1" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.10" />
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </Trigger.EnterActions>
@@ -52,10 +50,8 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <!-- Return to original scale when no longer hovering -->
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                 To="1" Duration="0:0:0.10" />
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                 To="1" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.10" />
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </Trigger.ExitActions>
@@ -79,7 +75,7 @@
                             <Grid Margin="-1,-1,-1,-1">
                                 <TextBlock HorizontalAlignment="Left" Margin="35,25,0,0" TextWrapping="Wrap" Text="Occupied Gates" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="22"/>
                                 <TextBlock HorizontalAlignment="Left" Margin="29,63,0,0" TextWrapping="Wrap" Text="8/15" VerticalAlignment="Top" Foreground="#FFF71C1C" FontFamily="Ubuntu" FontWeight="Bold" FontSize="55"/>
-                                <Image Source="/Icons/goto-red.png" Cursor="Hand" HorizontalAlignment="Right" Height="50" Margin="0,71,29,0" VerticalAlignment="Top" Width="50" >
+                                <Image MouseDown="Go_To_Gates_Window" Source="/Icons/goto-red.png" Cursor="Hand" HorizontalAlignment="Right" Height="50" Margin="0,71,29,0" VerticalAlignment="Top" Width="50" >
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Style.Triggers>
@@ -89,8 +85,8 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <!-- Animate scale transform to 0.1 on hover -->
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.10" />
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.10" />
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </Trigger.EnterActions>
@@ -133,8 +129,8 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <!-- Animate scale transform to 0.1 on hover -->
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.10" />
-                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.10" />
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.10" />
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </Trigger.EnterActions>

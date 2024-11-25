@@ -39,7 +39,7 @@ namespace Airport_Management_System
         private SqlCommand maintenanceGatesQuery;
         private SqlCommand occupiedGatesQuery;
 
-        public GatesControl(SqlConnection sqlConnection)
+        public GatesControl()
         {
             InitializeComponent();
 
