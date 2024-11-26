@@ -89,9 +89,9 @@
                     </Grid>
                 </Border>
 
-                <Border x:Name="flightsBorder" Grid.Row="1" CornerRadius="5" Margin="65,0,65,55" Background="White" VerticalAlignment="Top" Height="498" >
+                <Border Grid.Row="1" CornerRadius="5" Margin="65,0,65,0" Background="White" VerticalAlignment="Top" Height="550" >
 
-                    <Grid x:Name="flightsGrid">
+                    <Grid>
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55"/>
@@ -105,7 +105,6 @@
                                     <ColumnDefinition Width="1.2*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="0.9*"/>
-
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" FontWeight="SemiBold" TextWrapping="Wrap" Text="Name" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="20,16,0,0"/>
@@ -116,14 +115,190 @@
                             </Grid>
                         </Border>
 
+                        <Border Grid.Row="1">
+                            <StackPanel>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="Sick" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Leave" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.9*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
+                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                        </Border>
+
+
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
                     </Grid>
 
                 </Border>
-                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="138" Margin="0,94,385,0" VerticalAlignment="Top" Width="169" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,385,0" VerticalAlignment="Top" Width="169" BorderBrush="Black" Grid.RowSpan="2">
                     <Grid >
                         <ScrollViewer>
                             <Grid>
-                                <TextBlock Text="Air Traffic Controller" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                                <TextBlock Text="All" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -134,7 +309,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Aircraft Mechanic" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
+                                <TextBlock Text="Air Traffic Controller" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0, 34, 0, 0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -145,7 +320,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Aircraft Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                                <TextBlock Text="Aircraft Mechanic" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -156,7 +331,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Airport Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
+                                <TextBlock Text="Aircraft Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -167,7 +342,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Baggage Handler" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,136,0,0">
+                                <TextBlock Text="Airport Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,136,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -178,7 +353,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Cabin Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,170,0,0">
+                                <TextBlock Text="Baggage Handler" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,170,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -189,7 +364,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Cargo Operations" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,204,0,0">
+                                <TextBlock Text="Cabin Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,204,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -200,7 +375,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Cargo Supervisor" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,238,0,0">
+                                <TextBlock Text="Cargo Operations" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,238,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -211,7 +386,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Co-Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,272,0,0">
+                                <TextBlock Text="Cargo Supervisor" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,272,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -222,7 +397,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Customer Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,306,0,0">
+                                <TextBlock Text="Co-Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,306,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -233,7 +408,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Dispatcher" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,340,0,0">
+                                <TextBlock Text="Customer Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,340,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -244,7 +419,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Fuel Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,374,0,0">
+                                <TextBlock Text="Dispatcher" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,374,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -255,7 +430,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Ground Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,408,0,0">
+                                <TextBlock Text="Fuel Technician" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,408,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -266,7 +441,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Ground Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,442,0,0">
+                                <TextBlock Text="Ground Crew" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,442,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -277,7 +452,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Maintenance Engineer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,476,0,0">
+                                <TextBlock Text="Ground Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,476,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -288,7 +463,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Maintenance Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,510,0,0">
+                                <TextBlock Text="Maintenance Engineer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,510,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -299,7 +474,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Passenger Assistance" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,544,0,0">
+                                <TextBlock Text="Maintenance Manager" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,544,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -310,7 +485,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Passenger Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,578,0,0">
+                                <TextBlock Text="Passenger Assistance" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,578,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -321,7 +496,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,612,0,0">
+                                <TextBlock Text="Passenger Service" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,612,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -332,7 +507,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Ramp Agent" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,646,0,0">
+                                <TextBlock Text="Pilot" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,646,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -343,7 +518,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Ramp Agent" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,646,0,0">
+                                <TextBlock Text="Ramp Agent" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,680,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -354,7 +529,7 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBlock Text="Security Officer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,680,0,0">
+                                <TextBlock Text="Security Officer" Cursor="Hand" MouseDown="Role_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,714,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -370,10 +545,10 @@
                     </Grid>
                 </Border>
 
-                <Border x:Name="Shifts" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="104" Margin="0,94,230,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Shifts" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,230,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
 
                     <Grid>
-                        <TextBlock Text="Morning" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                        <TextBlock Text="All" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,0,0,0">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -384,7 +559,7 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBlock Text="Afternoon" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
+                        <TextBlock Text="Morning" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -395,7 +570,18 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBlock Text="Night" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                        <TextBlock Text="Afternoon" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFE9E9E9"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="Night" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -412,54 +598,67 @@
 
                 </Border>
 
-                <Border x:Name="Status" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="138" Margin="0,94,75,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Status" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,75,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+                    <ScrollViewer>
+                        <Grid>
+                            <TextBlock Text="All" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFE9E9E9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="On-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0, 34, 0, 0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFE9E9E9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="Off-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFE9E9E9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="Sick" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFE9E9E9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="On Leave" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,136,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFE9E9E9"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </ScrollViewer>
 
-                    <Grid>
-                        <TextBlock Text="On-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FFE9E9E9"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBlock Text="Off-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,34,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FFE9E9E9"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBlock Text="Sick" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FFE9E9E9"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBlock Text="On Leave" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,102,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#FFE9E9E9"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </Grid>
 
 
                 </Border>

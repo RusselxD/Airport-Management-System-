@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +23,11 @@ namespace Airport_Management_System
     /// </summary>
     public partial class StaffControl : UserControl
     {
+        private List<List<string>> staffs;
+
         public StaffControl(SqlConnection sqlConnection)
         {
+            staffs = new List<List<string>>();
             InitializeComponent();
         }
 
@@ -57,12 +61,11 @@ namespace Airport_Management_System
         {
             DoubleAnimation showRoles = new DoubleAnimation
             {
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)) // Duration of 2 seconds
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)) 
             };
 
             if(rolesIsOpen)
             {
-                RoleDropDown.CornerRadius = new CornerRadius(8, 8, 8, 8);
                 showRoles.From = 138;
                 showRoles.To = 0;
                 rolesIsOpen = false;
@@ -74,6 +77,14 @@ namespace Airport_Management_System
                 showRoles.To = 138;
                 rolesIsOpen = true;
             }
+
+            showRoles.Completed += (s, args) =>
+            {
+                if (!rolesIsOpen)
+                {
+                    RoleDropDown.CornerRadius = new CornerRadius(8);
+                }
+            };
 
             Roles.BeginAnimation(HeightProperty, showRoles);
 
@@ -90,13 +101,12 @@ namespace Airport_Management_System
         {
             DoubleAnimation showShifts = new DoubleAnimation
             {
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)) // Duration of 2 seconds
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)) 
             };
 
             if (shiftsIsOpen)
             {
-                ShiftsDropDown.CornerRadius = new CornerRadius(8, 8, 8, 8);
-                showShifts.From = 104;
+                showShifts.From = 138;
                 showShifts.To = 0;
                 shiftsIsOpen = false;
             }
@@ -104,11 +114,19 @@ namespace Airport_Management_System
             {
                 ShiftsDropDown.CornerRadius = new CornerRadius(8, 8, 0, 0);
                 showShifts.From = 0;
-                showShifts.To = 104;
+                showShifts.To = 138;
                 shiftsIsOpen = true;
             }
 
-            Shifts.BeginAnimation(HeightProperty, showShifts);
+            showShifts.Completed += (s, args) =>
+            {
+                if (!shiftsIsOpen)
+                {
+                    ShiftsDropDown.CornerRadius = new CornerRadius(8);
+                }
+            };
+
+            Shifts.BeginAnimation(HeightProperty, showShifts, HandoffBehavior.SnapshotAndReplace);            
         }
 
         private void Status_MouseDown(object sender, MouseButtonEventArgs e)
@@ -122,12 +140,11 @@ namespace Airport_Management_System
         {
             DoubleAnimation showStatus = new DoubleAnimation
             {
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)) // Duration of 2 seconds
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)) 
             };
 
             if (statusIsOpen)
             {
-                StatusDropDown.CornerRadius = new CornerRadius(8, 8, 8, 8);
                 showStatus.From = 138;
                 showStatus.To = 0;
                 statusIsOpen = false;
@@ -139,6 +156,14 @@ namespace Airport_Management_System
                 showStatus.To = 138;
                 statusIsOpen = true;
             }
+
+            showStatus.Completed += (s, args) =>
+            {
+                if (!statusIsOpen)
+                {
+                    StatusDropDown.CornerRadius = new CornerRadius(8);
+                }
+            };
 
             Status.BeginAnimation(HeightProperty, showStatus);
         }
