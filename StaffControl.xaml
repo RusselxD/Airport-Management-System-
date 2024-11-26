@@ -49,10 +49,11 @@
 
                         </Border>
 
+                        <TextBlock Margin="0,14,320,0" Text="Role" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="169"></TextBlock>
                         <Border x:Name="RoleDropDown" Margin="0,33,320,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right">
                             <Grid>
 
-                                <TextBlock Margin="0,0,39,0" Text="Role" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
 
                                 <Border MouseDown="Role_DropDown_Click" Margin="128, 0, 0, 0" HorizontalAlignment="Right" Cursor="Hand" Background="White" CornerRadius="0,8,8,0">
                                     <Polygon x:Name="RoleDropDownArrow" Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -61,13 +62,14 @@
                             </Grid>
                         </Border>
 
+                        <TextBlock Margin="0,14,165,0" Text="Shift" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="139"></TextBlock>
                         <Border x:Name="ShiftsDropDown" Margin="0,33,165,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="31*"/>
                                     <ColumnDefinition Width="106*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="0,0,39,0" Text="Shift" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0" Grid.ColumnSpan="2"/>
+                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0" Grid.ColumnSpan="2"/>
 
                                 <Border MouseDown="Shift_DropDown_Click" Margin="67,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39" Grid.Column="1">
                                     <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -76,9 +78,10 @@
                             </Grid>
                         </Border>
 
+                        <TextBlock Margin="0,14,10,0" Text="Status" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="139"></TextBlock>
                         <Border x:Name="StatusDropDown" Margin="0,33,10,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
                             <Grid>
-                                <TextBlock Margin="0,0,39,0" Text="Status" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
 
                                 <Border MouseDown="Status_DropDown_Click" Margin="98,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
                                     <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -101,7 +104,7 @@
                         <Border Grid.Row="0" Background="#FFFFD7A6" CornerRadius="5,5,0,0" >
                             <Grid Grid.Row="0" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="1.15*"/>
                                     <ColumnDefinition Width="1.2*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="0.9*"/>
@@ -120,7 +123,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -130,7 +133,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0" ></TextBlock>
                                         </Border>
 
 
@@ -139,7 +142,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -149,7 +152,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -158,7 +161,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -168,7 +171,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Sick" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="Sick" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -177,7 +180,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -187,7 +190,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Leave" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Leave" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -196,7 +199,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -206,7 +209,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -215,7 +218,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -225,7 +228,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -234,7 +237,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -244,7 +247,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -253,7 +256,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -263,7 +266,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
@@ -272,7 +275,7 @@
                                 <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.15*"/>
                                             <ColumnDefinition Width="1.2*"/>
                                             <ColumnDefinition Width="1*"/>
                                             <ColumnDefinition Width="0.9*"/>
@@ -282,7 +285,7 @@
                                         <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
                                         <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,4,0,0" Grid.ColumnSpan="2" Margin="0,8,58,8" ></TextBlock>
+                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
                                         </Border>
 
 
