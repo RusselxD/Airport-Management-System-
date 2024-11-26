@@ -49,11 +49,11 @@
 
                         </Border>
 
-                        <TextBlock Margin="0,14,320,0" Text="Role" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="169"></TextBlock>
-                        <Border x:Name="RoleDropDown" Margin="0,33,320,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right">
+                        <TextBlock Margin="0,14,285,0" Text="Role" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="210"></TextBlock>
+                        <Border x:Name="RoleDropDown" Width="210" Margin="0,33,285,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right">
                             <Grid>
 
-                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+                                <TextBlock x:Name="roleFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="16" Padding="10,10.5,0,0"/>
 
                                 <Border MouseDown="Role_DropDown_Click" Margin="128, 0, 0, 0" HorizontalAlignment="Right" Cursor="Hand" Background="White" CornerRadius="0,8,8,0">
                                     <Polygon x:Name="RoleDropDownArrow" Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -62,28 +62,25 @@
                             </Grid>
                         </Border>
 
-                        <TextBlock Margin="0,14,165,0" Text="Shift" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="139"></TextBlock>
-                        <Border x:Name="ShiftsDropDown" Margin="0,33,165,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
+                        <TextBlock Margin="0,14,150,0" Text="Shift" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="125"></TextBlock>
+                        <Border x:Name="ShiftsDropDown" Margin="0,33,150,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="125">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="31*"/>
-                                    <ColumnDefinition Width="106*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0" Grid.ColumnSpan="2"/>
 
-                                <Border MouseDown="Shift_DropDown_Click" Margin="67,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39" Grid.Column="1">
+                                <TextBlock x:Name="shiftFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="16" Padding="10,10.5,0,0" Grid.ColumnSpan="2"/>
+
+                                <Border MouseDown="Shift_DropDown_Click" Margin="84,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
                                     <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
                                 </Border>
 
                             </Grid>
                         </Border>
 
-                        <TextBlock Margin="0,14,10,0" Text="Status" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="139"></TextBlock>
-                        <Border x:Name="StatusDropDown" Margin="0,33,10,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="139">
+                        <TextBlock Margin="0,14,20,0" Text="Status" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120"></TextBlock>
+                        <Border x:Name="StatusDropDown" Margin="0,33,20,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="120">
                             <Grid>
-                                <TextBlock Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontWeight="Medium" FontSize="17" Padding="10,9.5,0,0"/>
+                                <TextBlock x:Name="statusFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="16" Padding="10,10.5,0,0"/>
 
-                                <Border MouseDown="Status_DropDown_Click" Margin="98,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
+                                <Border MouseDown="Status_DropDown_Click" Margin="79,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
                                     <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
                                 </Border>
                             </Grid>
@@ -92,7 +89,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" CornerRadius="5" Margin="65,0,65,0" Background="White" VerticalAlignment="Top" Height="550" >
+                <Border x:Name="staffsBorder" Grid.Row="1" CornerRadius="5" Margin="65,0,65,0" Background="White" VerticalAlignment="Top" Height="550" >
 
                     <Grid>
 
@@ -119,185 +116,15 @@
                         </Border>
 
                         <Border Grid.Row="1">
-                            <StackPanel>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0" ></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Sick" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFFFC0C0" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Leave" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBFBFBF" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="Off Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
-                                <Border Height="55" BorderThickness="0, 0, 0, 1" BorderBrush="Black">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1.15*"/>
-                                            <ColumnDefinition Width="1.2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="0.9*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="John Smith" FontSize="19" FontFamily="Ubuntu" Padding="20,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="Ground Manager" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <TextBlock Grid.Column="2" Text="Morning" FontSize="19" FontFamily="Ubuntu" Padding="0,17,0,0"></TextBlock>
-                                        <Border Grid.Column="3" Background="#FFBAFFA7" Margin="0, 5, 5, 5" CornerRadius="5">
-                                            <TextBlock Text="On Duty" FontSize="19" FontFamily="Ubuntu" Padding="10,12,0,0"></TextBlock>
-                                        </Border>
-
-
-                                    </Grid>
-                                </Border>
+                            <StackPanel x:Name="staffsPanel">
+                                <!--Staffs are added here--> 
                             </StackPanel>
                         </Border>
 
                     </Grid>
 
                 </Border>
-                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,385,0" VerticalAlignment="Top" Width="169" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,352,0" VerticalAlignment="Top" Width="207" BorderBrush="Black" Grid.RowSpan="2">
                     <Grid >
                         <ScrollViewer>
                             <Grid>
@@ -548,7 +375,7 @@
                     </Grid>
                 </Border>
 
-                <Border x:Name="Shifts" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,230,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Shifts" CornerRadius="0, 0, 5, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,215,0" VerticalAlignment="Top" Width="125" BorderBrush="Black" Grid.RowSpan="2">
 
                     <Grid>
                         <TextBlock Text="All" Cursor="Hand" MouseDown="Shift_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,0,0,0">
@@ -597,11 +424,9 @@
                         </TextBlock>
 
                     </Grid>
-
-
                 </Border>
 
-                <Border x:Name="Status" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,75,0" VerticalAlignment="Top" Width="139" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Status" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,85,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" Grid.RowSpan="2">
                     <ScrollViewer>
                         <Grid>
                             <TextBlock Text="All" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0">
@@ -615,7 +440,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock Text="On-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0, 34, 0, 0">
+                            <TextBlock Text="On Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0, 34, 0, 0">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
@@ -626,7 +451,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock Text="Off-Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
+                            <TextBlock Text="Off Duty" Cursor="Hand" MouseDown="Status_MouseDown" VerticalAlignment="Top" Height="34" FontSize="14" FontFamily="Ubuntu" Padding="8,10,0,0" Margin="0,68,0,0">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>

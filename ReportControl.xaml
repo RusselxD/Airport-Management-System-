@@ -7,6 +7,61 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
     <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" Height="125" Margin="216,202,0,0" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Width="283" FontSize="72"/>
+        <TextBlock Height="59" TextWrapping="Wrap" Text="Home" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+
+        <ScrollViewer Margin="0,59,0,0" Focusable="False">
+            <Grid Background="#FFF6F6F6">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="165"/>
+                    <RowDefinition Height="280"/>
+                </Grid.RowDefinitions>
+
+                <Border CornerRadius="15" Margin="65,35,65,25" Background="White">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Today's Flight Summary" FontFamily="Ubuntu" FontSize="25" FontWeight="Bold" Padding="30,25,0,0" Grid.ColumnSpan="2" Margin="0,0,227,0"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Text="Total Flights: " FontFamily="Ubuntu" FontSize="20" Padding="50,12,0,0" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="170,0.5,0,0" Width="90" Text="25" FontFamily="Ubuntu" FontSize="20" Padding="25,11.6,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,43,156,51" Text="Arrivals: " FontFamily="Ubuntu" FontSize="20" Padding="50,12,0,0"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="170,44,0,0" Width="90" Text="15" FontFamily="Ubuntu" FontSize="20" Padding="25,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,87,118,0" Text="Departures: " FontFamily="Ubuntu" FontSize="20" Padding="50,12,0,5"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="170,88,0,0" Width="90" Text="15" FontFamily="Ubuntu" FontSize="20" Padding="25,11.1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Text="On Time: " FontFamily="Ubuntu" FontSize="20" Padding="50,12,0,0" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="133,0,0,0" Width="90" Text="25" FontFamily="Ubuntu" FontSize="20" Padding="25,12,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="0,43,156,51" Text="Delayed: " FontFamily="Ubuntu" FontSize="20" Padding="50,12,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Margin="133,44,0,0" Width="90" Text="15" FontFamily="Ubuntu" FontSize="20" Padding="25,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
+
+                        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Text="Landed Flights: " FontFamily="Ubuntu" FontSize="20" Padding="40,12,0,0" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Grid.Column="2" Grid.Row="1" Margin="170,1,0,0" Width="90" Text="25" FontFamily="Ubuntu" FontSize="20" Padding="25,11.5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border Height="140" x:Name="alertsContainer" Grid.Row="1" CornerRadius="15" Margin="65,0,65,25" Background="#FF91FFAF" VerticalAlignment="Top" >
+                    
+                </Border>
+
+                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,38" Background="#FFCBF0FF" CornerRadius="15,15,15,15">
+                   
+                </Border>
+
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

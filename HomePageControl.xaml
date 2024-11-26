@@ -8,7 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="998">
 
     <Grid Background="#FFF6F6F6">
-        <TextBlock Height="59" TextWrapping="Wrap" Text="Dashboard" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+        <TextBlock Height="59" TextWrapping="Wrap" Text="Home" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
         <ScrollViewer Margin="0,59,0,0" Focusable="False">
             <Grid x:Name="dashboardInnerGrid">
