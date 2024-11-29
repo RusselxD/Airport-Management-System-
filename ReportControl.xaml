@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
     <Grid>
-        <TextBlock Height="59" TextWrapping="Wrap" Text="Home" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+        <TextBlock Height="59" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Foreground="White" Background="#FF046892" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
         <ScrollViewer Margin="0,59,0,0" Focusable="False">
             <Grid Background="#FFF6F6F6">
@@ -76,9 +76,9 @@
                         <ProgressBar x:Name="terminal2Bar" Grid.Row="2" Margin="140, 3, 90, 20" Background="#FFEBEBEB" Foreground="#FF27ABE2" BorderBrush="#FFEBEBEB" ></ProgressBar>
                         <ProgressBar x:Name="terminal3Bar" Grid.Row="3" Margin="140, 3, 90, 20" Background="#FFE9EBEB" Foreground="#FF27ABE2" BorderBrush="#FFEBEBEB" ></ProgressBar>
 
-                        <TextBlock Grid.Row="1" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
-                        <TextBlock Grid.Row="2" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
-                        <TextBlock Grid.Row="3" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock x:Name="terminal1BarText" Grid.Row="1" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock x:Name="terminal2BarText" Grid.Row="2" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock x:Name="terminal3BarText" Grid.Row="3" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
 
                     </Grid>
 
@@ -86,10 +86,14 @@
 
                 <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,10" Background="White" CornerRadius="15,15,15,15" Grid.ColumnSpan="2">
                     <Grid>
-                        
-                        
-                        
-                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Staff Attendance" FontFamily="Ubuntu" FontSize="25" FontWeight="Bold" Padding="30,25,0,0" Margin="0,0,227,0"></TextBlock>
+
                     </Grid>
                 </Border>
 

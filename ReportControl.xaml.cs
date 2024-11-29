@@ -27,35 +27,37 @@ namespace Airport_Management_System
         {
             InitializeComponent();
 
-            terminal1Bar.Value = 50;
-            terminal2Bar.Value = 40;
-            terminal3Bar.Value = 90;
-
             Task.Run(() => QueryStats(MainWindow.cts.Token));
 
         }
 
-        string[] flightsDataQueries = 
+        string[] flightsDataQueries =
         {
             "SELECT COUNT(1) FROM arrival_flights",
             "SELECT COUNT(1) FROM departure_flights",
             "SELECT (SELECT COUNT(1) FROM departure_flights WHERE flight_status = 'On Time') + (SELECT COUNT(1) FROM arrival_flights WHERE flight_status = 'On Time');",
             "SELECT (SELECT COUNT(1) FROM departure_flights WHERE flight_status = 'Delayed') + (SELECT COUNT(1) FROM arrival_flights WHERE flight_status = 'Delayed');",
-            "SELECT COUNT(1) FROM arrival_flights WHERE flight_status = 'Landed';"
+            "SELECT COUNT(1) FROM arrival_flights WHERE flight_status = 'Landed';",
+            "SELECT COUNT(1) FROM gates_table WHERE gate_id <= 6 AND status_col = 3;",
+            "SELECT COUNT(1) FROM gates_table WHERE gate_id BETWEEN 7 AND 12 AND status_col = 3;",
+            "SELECT COUNT(1) FROM gates_table WHERE gate_id > 12 AND status_col = 3;"
         };
 
-        int[] vvvv = new int[5];
+        int[] vvvv = new int[8];
         // arrivals
         // deps
         // on time
         // delay
         // landed
+        // terminal 1 occupied
+        // terminal 2 occupied
+        // terminal 3 occupied
 
         private async Task QueryStats(CancellationToken token)
         {
-            try
+            while (!token.IsCancellationRequested)
             {
-                for(int i = 0; i < 5; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     SqlDataReader countReader = null;
                     SqlCommand countQuery = new SqlCommand(flightsDataQueries[i], MainWindow.sqlConnection);
@@ -76,17 +78,26 @@ namespace Airport_Management_System
                     delayed.Text = vvvv[3].ToString();
                     landed.Text = vvvv[4].ToString();
 
-
                     int t = vvvv[0] + vvvv[1];
                     totalFlights.Text = t.ToString();
 
-                    double p = (double)vvvv[2] / t * 100;
-                    onTime.Text = $"{p.ToString("F2")}%";
+                    double p = (double)vvvv[2] / (vvvv[2] + vvvv[3]) * 100;
+                    onTime.Text = $"{p.ToString("#.##")}%";
+
+                    double t1 = (double)vvvv[5] / 6 * 100;
+                    double t2 = (double)vvvv[6] / 6 * 100;
+                    double t3 = (double)vvvv[7] / 6 * 100;
+
+                    terminal1Bar.Value = t1;
+                    terminal2Bar.Value = t2;
+                    terminal3Bar.Value = t3;
+
+                    terminal1BarText.Text = $"{t1.ToString("#.")}%";
+                    terminal2BarText.Text = $"{t2.ToString("#.")}%";
+                    terminal3BarText.Text = $"{t3.ToString("#.")}%";
                 });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+
+                await Task.Delay(1000);
             }
         }
     }

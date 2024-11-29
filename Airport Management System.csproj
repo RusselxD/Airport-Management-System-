@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddNewFlight.xaml.cs">
+      <DependentUpon>AddNewFlight.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlightsControl.xaml.cs">
       <DependentUpon>FlightsControl.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,10 @@
     <Compile Include="StaffControl.xaml.cs">
       <DependentUpon>StaffControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddNewFlight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConnectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

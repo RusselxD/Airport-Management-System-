@@ -465,8 +465,6 @@ namespace Airport_Management_System
 
             border.BeginAnimation(Border.HeightProperty, alertHeightAnimation);
 
-            //   border.BeginAnimation(Border.OpacityProperty, opacityAnimation);
-
             // this is for accessing the border by name once deleted
             string name = $"_{alertID}";
             deleteIcon.Name = name;
@@ -488,6 +486,7 @@ namespace Airport_Management_System
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            AddNewFlight anf = new AddNewFlight();
             addRecentAct("Assigned Flight Nigga to Gate NIGGA");
         }
 
