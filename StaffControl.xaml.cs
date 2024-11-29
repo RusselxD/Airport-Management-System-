@@ -62,7 +62,7 @@ namespace Airport_Management_System
             filterIsOn = roleFilterIsOn || shiftFilterIsOn || statusFilterIsOn;
             InitializeComponent();
 
-            Task.Run(() => QueryStaffsTable(CancellationToken.None));
+            Task.Run(() => QueryStaffsTable(MainWindow.cts.Token));
 
             InitializeAnimations();
         }
