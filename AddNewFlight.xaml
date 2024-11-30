@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
         mc:Ignorable="d"
-        Title="AddNewFlight" Height="630" Width="451">
+        Title="AddNewFlight" Height="557" Width="451" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="BorderBrush" Value="#FFB4B4B4"/>
@@ -27,35 +27,37 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TextBlock Margin="27,20,0,0" Text="Add New Flight" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="20" FontWeight="Bold"/>
-        <RadioButton Content="Departure" HorizontalAlignment="Left" Margin="27,62,0,0" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="15" Padding="4,-1,0,0" IsChecked="True"/>
-        <RadioButton Content="Arrival" HorizontalAlignment="Left" Margin="145,62,0,0" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="15" Padding="4,-1,0,0"/>
-
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,99,0,0" TextWrapping="Wrap" Text="Flight Number" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,120,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5">
-            <TextBox TextWrapping="Wrap" Text="" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="390*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="27,20,0,0" Text="Add New Flight" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,99,0,0" TextWrapping="Wrap" Text="Flight Number" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,120,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <TextBox TextWrapping="Wrap" x:Name="flightNumber" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
 
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,169,0,0" TextWrapping="Wrap" Text="Destination" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,190,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5">
-            <TextBox TextWrapping="Wrap" Text="" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <TextBlock x:Name="endPointLabel" HorizontalAlignment="Left" Height="19" Margin="29,169,0,0" TextWrapping="Wrap" Text="Destination" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,190,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <TextBox TextWrapping="Wrap" x:Name="endPoint" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
 
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,239,0,0" TextWrapping="Wrap" Text="Time (UTC)" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border BorderBrush="#FF686868" Cursor="Hand" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,260,0,0" VerticalAlignment="Top" Width="43" CornerRadius="5,5,5,5">
-            <TextBox TextWrapping="Wrap" Text="12" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,239,0,0" TextWrapping="Wrap" Text="Time (UTC)" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,260,0,0" VerticalAlignment="Top" Width="43" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <TextBox TextWrapping="Wrap" x:Name="hour" MaxLength="2" BorderBrush="Transparent" Background="{x:Null}" Padding="9.5,7,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
 
-        <Border BorderBrush="#FF686868" Cursor="Hand" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="78,260,0,0" VerticalAlignment="Top" Width="43" CornerRadius="5,5,5,5">
-            <TextBox TextWrapping="Wrap" Text="" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="19,260,0,0" VerticalAlignment="Top" Width="43" CornerRadius="5,5,5,5" Grid.Column="1">
+            <TextBox TextWrapping="Wrap" x:Name="minute" MaxLength="2" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        <TextBlock HorizontalAlignment="Left" Height="18" Margin="72,268,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" Width="4" FontFamily="Ubuntu" FontSize="15"/>
+        <TextBlock HorizontalAlignment="Left" Height="18" Margin="12,268,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" Width="4" FontFamily="Ubuntu" FontSize="15" Padding="0.3,0,0,0" Grid.Column="1" FontWeight="Bold"/>
 
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,309,0,0" TextWrapping="Wrap" Text="Status" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border MouseDown="Open_Status_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,330,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5">
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,309,0,0" TextWrapping="Wrap" Text="Status" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
+        <Border MouseDown="Open_Status_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,330,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
             <TextBlock x:Name="status" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        <Border Panel.ZIndex="15" x:Name="statusChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,363.5,0,0" VerticalAlignment="Top" Width="392" Background="White">
+        <Border Panel.ZIndex="15" x:Name="statusChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,364,0,0" VerticalAlignment="Top" Width="392" Background="White" Grid.ColumnSpan="2">
             <StackPanel Background="White">
                 <TextBlock Text="On Time" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Status">
                     <TextBlock.Style>
@@ -79,25 +81,14 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <TextBlock Text="Landed" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Status">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFE8E8E8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
             </StackPanel>
         </Border>
 
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,379,0,0" TextWrapping="Wrap" Text="Gate" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border MouseDown="Open_Gate_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,400,0,0" VerticalAlignment="Top" Width="179" CornerRadius="5,5,5,5">
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,379,0,0" TextWrapping="Wrap" Text="Gate" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
+        <Border MouseDown="Open_Gate_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,400,0,0" VerticalAlignment="Top" Width="179" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
             <TextBlock x:Name="gate" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        <Border Panel.ZIndex="10" x:Name="gateChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,434,0,0" VerticalAlignment="Top" Width="179" Background="White">
+        <Border Panel.ZIndex="10" x:Name="gateChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,434,0,0" VerticalAlignment="Top" Width="179" Background="White" Grid.ColumnSpan="2">
             <ScrollViewer Background="White">
                 <StackPanel>
                     <TextBlock Text="1A" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Gate">
@@ -303,47 +294,65 @@
 
         </Border>
 
-        <TextBlock HorizontalAlignment="Left" Height="19" Margin="229,379,0,0" TextWrapping="Wrap" Text="Terminal" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15"/>
-        <Border Panel.ZIndex="5" MouseDown="Open_Terminal_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="229,400,0,0" VerticalAlignment="Top" Width="179" CornerRadius="5,5,5,5">
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="168,379,0,0" TextWrapping="Wrap" Text="Terminal" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.Column="1"/>
+        <Border Panel.ZIndex="5" MouseDown="Open_Terminal_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="168,400,0,0" VerticalAlignment="Top" Width="190" CornerRadius="5,5,5,5" Grid.Column="1">
             <TextBlock x:Name="terminal" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        <Border Panel.ZIndex="5" x:Name="terminalChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="229,434,0,0" VerticalAlignment="Top" Width="179" Background="White">
-            <StackPanel Background="White">
-                <TextBlock Text="On Time" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFE8E8E8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBlock Text="Delayed" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFE8E8E8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBlock Text="Landed" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFE8E8E8"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </StackPanel>
+        <Border Panel.ZIndex="5" x:Name="terminalChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="168,434,0,0" VerticalAlignment="Top" Width="190" Background="White" Grid.Column="1">
+            <ScrollViewer>
+                <StackPanel Background="White">
+                    <TextBlock Text="1" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFE8E8E8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="2" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFE8E8E8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="3" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFE8E8E8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Border BorderBrush="#FF111827" Cursor="Hand" BorderThickness="1" MouseDown="Add_New_Flight" HorizontalAlignment="Left" Height="40" Margin="27,460,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#FF111827" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF293959" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Label Content="Add Flight" FontWeight="Medium" FontFamily="Ubuntu" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White"/>
         </Border>
 
+
+        <RadioButton x:Name="departure" Content="Departure" Checked="Change_EndPoint" Cursor="Hand" HorizontalAlignment="Left" Margin="27,62,0,0" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="15" Padding="4,-1,0,0" IsChecked="True" Grid.ColumnSpan="2"/>
+        <RadioButton Content="Arrival" Checked="Change_EndPoint" Cursor="Hand" HorizontalAlignment="Left" Margin="84,62,0,0" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="15" Padding="4,-1,0,0" Grid.Column="1"/>
     </Grid>
 </Window>

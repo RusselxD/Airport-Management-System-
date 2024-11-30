@@ -58,6 +58,9 @@
     <Compile Include="AddNewFlight.xaml.cs">
       <DependentUpon>AddNewFlight.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AssignGate.xaml.cs">
+      <DependentUpon>AssignGate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlightsControl.xaml.cs">
       <DependentUpon>FlightsControl.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <DependentUpon>StaffControl.xaml</DependentUpon>
     </Compile>
     <Page Include="AddNewFlight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AssignGate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

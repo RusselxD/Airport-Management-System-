@@ -473,7 +473,7 @@ namespace Airport_Management_System
             alertsMap.Add(name, border);
         }
 
-        private void addRecentAct(string message)
+        public void addRecentAct(string message)
         {
             TextBlock newActivity = GetRecentActivityText(message);
 
@@ -484,10 +484,9 @@ namespace Airport_Management_System
             dashboardInnerGrid.RowDefinitions[2].Height = new GridLength(actsRow);
         }
 
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Open_Add_Flight_Window(object sender, MouseButtonEventArgs e)
         {
-            AddNewFlight anf = new AddNewFlight();
-            addRecentAct("Assigned Flight Nigga to Gate NIGGA");
+            new AddNewFlight(this);
         }
 
         private void Go_To_Flights_Window(object sender, MouseButtonEventArgs e)
@@ -498,6 +497,11 @@ namespace Airport_Management_System
         private void Go_To_Gates_Window(object sender, MouseButtonEventArgs e)
         {
             window.changeCurrentControl(3);
+        }
+
+        private void Open_Assign_Gate_Table(object sender, MouseButtonEventArgs e)
+        {
+            new AssignGate(this);
         }
     }
 }

@@ -176,11 +176,11 @@
                     <Grid HorizontalAlignment="Stretch">
                         <TextBlock HorizontalAlignment="Left" Height="36" Margin="30,30,0,0" TextWrapping="Wrap" Text="Quick Actions" VerticalAlignment="Top" Width="170" FontFamily="Ubuntu Medium" FontSize="25" FontWeight="Bold"/>
 
-                        <Border MouseDown="Border_MouseDown" BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="30,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF0B8ABF" CornerRadius="8,8,8,8" Cursor="Hand">
+                        <Border MouseDown="Open_Add_Flight_Window" BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="30,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF0B8ABF" CornerRadius="8,8,8,8" Cursor="Hand">
                             <TextBlock TextWrapping="Wrap" Text="Add Flight" Foreground="White" Margin="-1,-1,-1,-1" FontFamily="Ubuntu" FontSize="20" Padding="45,19,0,0"/>
                         </Border>
 
-                        <Border BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="235,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF1EA843" CornerRadius="8,8,8,8" Cursor="Hand">
+                        <Border MouseDown="Open_Assign_Gate_Table" BorderThickness="1" HorizontalAlignment="Left" Height="61" Margin="235,80,0,0" VerticalAlignment="Top" Width="180" Background="#FF1EA843" CornerRadius="8,8,8,8" Cursor="Hand">
                             <TextBlock TextWrapping="Wrap" Foreground="White" Margin="-1,-1,-1,-1" FontFamily="Ubuntu" FontSize="20" Padding="38,19,0,0"><Run Text="Assign Gate"/><LineBreak/><Run/></TextBlock>
                         </Border>
                         <TextBlock HorizontalAlignment="Left" Height="30" Margin="30,160,0,0" TextWrapping="Wrap" Text="Recent Activities" VerticalAlignment="Top" Width="183" FontFamily="Ubuntu" FontSize="21"/>
