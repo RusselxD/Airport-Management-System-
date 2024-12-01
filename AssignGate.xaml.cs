@@ -33,9 +33,6 @@ namespace Airport_Management_System
         }
 
         Border chosenFlight;
-
-       
-
         Border chosenGate;
 
         private async Task Query_Gates(CancellationToken token)
@@ -59,7 +56,7 @@ namespace Airport_Management_System
                                 occupiedGatesList.Add((gatesReader[1].ToString(), gatesReader[3].ToString()));
                             }
                         }
-                    } 
+                    }
                 }, token);
 
                 await Dispatcher.InvokeAsync(() =>
@@ -80,7 +77,6 @@ namespace Airport_Management_System
 
                         Border b = new Border()
                         {
-                            Name = $"_{g.GateName}",
                             CornerRadius = new CornerRadius(5),
                             BorderThickness = new Thickness(1.5)
                         };
@@ -95,7 +91,7 @@ namespace Airport_Management_System
                                 {
                                     if (chosenGate != b)
                                     {
-                                        if(chosenGate != null)
+                                        if (chosenGate != null)
                                             chosenGate.Background = Brushes.White;
 
                                         gate.Text = g.GateName;
@@ -168,7 +164,7 @@ namespace Airport_Management_System
 
                 await Dispatcher.InvokeAsync(() =>
                 {
-                    foreach(var gate in occupiedGatesList)
+                    foreach (var gate in occupiedGatesList)
                     {
                         TextBlock tb = new TextBlock()
                         {
@@ -190,7 +186,7 @@ namespace Airport_Management_System
 
         private async Task Query_Flights(CancellationToken token)
         {
-            var flightsList = await Task.Run( async () =>
+            var flightsList = await Task.Run(async () =>
             {
                 List<(string flightNum, string assignMode)> list = new List<(string, string)>();
 
@@ -219,7 +215,7 @@ namespace Airport_Management_System
 
             await Dispatcher.InvokeAsync(() =>
             {
-                foreach(var f in flightsList)
+                foreach (var f in flightsList)
                 {
                     Border b = new Border()
                     {
@@ -279,13 +275,18 @@ namespace Airport_Management_System
 
         private void Clear(object sender, MouseButtonEventArgs e)
         {
+            Clear_Window();
+        }
+
+        private void Clear_Window()
+        {
             if (chosenFlight != null)
             {
                 chosenFlight.Background = Brushes.White;
                 chosenFlight = null;
             }
-                
-            if(chosenGate != null)
+
+            if (chosenGate != null)
             {
                 chosenGate.Background = Brushes.White;
                 chosenGate = null;
@@ -297,11 +298,83 @@ namespace Airport_Management_System
             dashLine.Text = "";
         }
 
-        private void Click_Assign(object sender, MouseButtonEventArgs e)
+        private async Task<bool> Update_Database(CancellationToken token)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    string updateGateQuery = "UPDATE gates_table SET status_col = 3, details_col = @DetailsValue WHERE name_col = @GateName";
+                    using (SqlCommand update = new SqlCommand(updateGateQuery, MainWindow.sqlConnection))
+                    {
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            update.Parameters.AddWithValue("@DetailsValue", $"{flight.Text} - {purpose.Text}");
+                            update.Parameters.AddWithValue("@GateName", $"{gate.Text}");
+                        });
+
+                        await update.ExecuteNonQueryAsync(token);
+                    }
+
+                    int gateID = 0;
+
+                    using (SqlCommand getGateID = new SqlCommand("SELECT gate_id FROM gates_table WHERE name_col = @GateValue", MainWindow.sqlConnection))
+                    {
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            getGateID.Parameters.AddWithValue("@GateValue", $"{gate.Text}");
+                        });
+                        using (SqlDataReader getGateIDReader = await getGateID.ExecuteReaderAsync(token))
+                        {
+                            while (await getGateIDReader.ReadAsync())
+                            {
+                                gateID = Convert.ToInt16(getGateIDReader[0]);
+                            }
+                        }
+                    }
+
+                    string flights_table = "";
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        flights_table = purpose.Text.Equals("Boarding") ? "departure_flights" : "arrival_flights";
+                    });
+
+                    string updateFlightQuery = $"UPDATE {flights_table} SET flight_status = @StatusValue, gate = @GateValue, terminal = @TerminalValue, gate_id = @GateIDValue WHERE flight = @FlightValue";
+                    using (SqlCommand update = new SqlCommand(updateFlightQuery, MainWindow.sqlConnection))
+                    {
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            update.Parameters.AddWithValue("@StatusValue", $"{purpose.Text}");
+                            update.Parameters.AddWithValue("@GateValue", $"{gate.Text}");
+                            update.Parameters.AddWithValue("@TerminalValue", $"{gate.Text.ElementAt(0)}");
+                            update.Parameters.AddWithValue("@GateIDValue", $"{gateID}");
+                            update.Parameters.AddWithValue("@FlightValue", $"{flight.Text}");
+                        });
+
+                        await update.ExecuteNonQueryAsync(token);
+                    }
+                });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private async void Click_Assign(object sender, MouseButtonEventArgs e)
         {
             if (Input_Is_Invalid()) return;
 
-            homePage.addRecentAct($"Assigned Flight {chosenFlight.Name} to Gate {chosenGate.Name.Substring(1)}");
+            if (await Task.Run(() => Update_Database(MainWindow.cts.Token)))
+            {
+                homePage.addRecentAct($"Assigned Flight {chosenFlight.Name} to Gate {gate.Text}");
+                MessageBox.Show("Gate successfully assigned.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                Clear_Window();
+                // TODO : Remove flight in flights, add it in occupiedGates, update border of gate
+            }
+
 
         }
 
