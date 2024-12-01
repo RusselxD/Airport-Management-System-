@@ -42,9 +42,12 @@ namespace Airport_Management_System
         public GatesControl()
         {
             InitializeComponent();
+            Refresh();
+        }
 
+        public void Refresh()
+        {
             AssignGlobalValues();
-
             Populate_Maps();
 
             Task.Run(() => QueryGatesTable(MainWindow.cts.Token));

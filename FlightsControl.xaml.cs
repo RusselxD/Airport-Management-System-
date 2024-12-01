@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -24,21 +26,16 @@ namespace Airport_Management_System
     /// </summary>
     public partial class FlightsControl : UserControl
     {
-        private DoubleAnimation heightAnimation;
-        private DoubleAnimation opacityAnimation;
-
         private SolidColorBrush darkGreenColor;
         private SolidColorBrush lighterGreenColor;
 
-        private StackPanel departurePanel;
-        private StackPanel arrivalPanel;
-
         private bool departureIsShown;
+
+        List<List<string>> departures;
+        List<List<string>> arrivals;
 
         public FlightsControl()
         {
-            // TODO: yung kapag nag palit from departure to arrival or vice versa, yung size ng inner at outer margins i-resize
-
             InitializeComponent();
 
             departureIsShown = true;
@@ -50,156 +47,114 @@ namespace Airport_Management_System
             arrivalButton.Cursor = Cursors.Hand;
 
             endpoint.Text = "Destination";
-            flightsGrid.Children.Add(departurePanel);
-
-            Task.Run(() => QueryDepartureFlights(MainWindow.cts.Token));
-            Task.Run(() => QueryArrivalFlights(MainWindow.cts.Token));
+            Refresh();
         }
 
-        private void Initialize_Reusable_Elements()
+        public async void Refresh()
         {
-            departurePanel = new StackPanel()
-            {
-                Name = "departurePanel",
-                VerticalAlignment = VerticalAlignment.Top
-            };
-            Grid.SetRow(departurePanel, 1);
+            departures = new List<List<string>>();
+            arrivals = new List<List<string>>();
 
-            arrivalPanel = new StackPanel()
-            {
-                Name = "arrivalPanel",
-                VerticalAlignment = VerticalAlignment.Top
-            };
-            Grid.SetRow(arrivalPanel, 1);
+            await Task.Run(() => QueryDepartureFlights(MainWindow.cts.Token));
+            await Task.Run(() => QueryArrivalFlights(MainWindow.cts.Token));
 
-            darkGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF06611E"));
-            lighterGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF90FDAD"));
-
-            this.heightAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 55, // Target height, adjust as needed
-                Duration = TimeSpan.FromSeconds(0.4), // Duration of the animation
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } // Smooth easing
-            };
-
-            this.opacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(0.4),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            };
+            UpdateDisplayedFlights();
         }
-
-        private int departureFlights = 0;
 
         private async Task QueryDepartureFlights(CancellationToken token)
         {
-            SqlDataReader departureReader = null;
-            SqlCommand flightsQuery = new SqlCommand("SELECT * FROM departure_flights", MainWindow.sqlConnection);
-            int l1;
-
-            while (!token.IsCancellationRequested)
+            try
             {
-                l1 = 0;
-
-                using (departureReader = await flightsQuery.ExecuteReaderAsync(token))
+                await Task.Run(async () =>
                 {
-                    while (departureReader.Read())
+                    using (SqlCommand flightsQuery = new SqlCommand("SELECT * FROM departure_flights", MainWindow.sqlConnection))
+                    using (SqlDataReader departureReader = await flightsQuery.ExecuteReaderAsync(token))
                     {
-                        l1++;
-
-                        if (l1 > departureFlights)
+                        while (await departureReader.ReadAsync(token))
                         {
-                            departureFlights = l1;
-
-                            string flight = departureReader[1].ToString();
-                            string dest = departureReader[2].ToString();
-                            string time = departureReader[3].ToString();
-                            string status = departureReader[4].ToString();
-                            string gate = departureReader[5].ToString();
-                            int terminal = Convert.ToInt16(departureReader[6]);
+                            List<string> flight = new List<string>();
+                            flight.Add(departureReader[1].ToString());
+                            flight.Add(departureReader[2].ToString());
+                            flight.Add(departureReader[3].ToString());
+                            flight.Add(departureReader[4].ToString());
+                            flight.Add(departureReader[5].ToString());
+                            flight.Add(departureReader[6].ToString());
 
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                Add_New_Flight(Create_New_Row(flight, dest, time, status, gate, terminal), departurePanel);
-                                if(departureIsShown && departureFlights > 8)
-                                {
-                                    flightsBorder.Height += 55;
-                                    outerMostGrid.Height += 55;
-                                }
+                                departures.Add(flight);
                             });
-
                         }
-
-
-                    }
-                }
-
-                if (token.IsCancellationRequested)
-                    break;
-
-                await Task.Delay(5, token);
+                    };
+                });
             }
-
-            departureReader?.Dispose();
-            departureReader?.Close();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private async Task QueryArrivalFlights(CancellationToken token)
         {
-            SqlDataReader arrivalReader = null;
-            SqlCommand flightsQuery = new SqlCommand("SELECT * FROM arrival_flights", MainWindow.sqlConnection);
-            int l1;
-
-            while (!token.IsCancellationRequested)
+            try
             {
-                l1 = 0;
-
-                using (arrivalReader = await flightsQuery.ExecuteReaderAsync(token))
+                await Task.Run(async() =>
                 {
-                    while (arrivalReader.Read())
+                    using (SqlCommand flightsQuery = new SqlCommand("SELECT * FROM arrival_flights", MainWindow.sqlConnection))
+                    using (SqlDataReader arrivalReader = await flightsQuery.ExecuteReaderAsync(token))
                     {
-                        l1++;
-
-                        if (l1 > arrivalFlights)
+                        while (await arrivalReader.ReadAsync(token))
                         {
-                            arrivalFlights = l1;
-
-                            string flight = arrivalReader[1].ToString();
-                            string origin = arrivalReader[2].ToString();
-                            string time = arrivalReader[3].ToString();
-                            string status = arrivalReader[4].ToString();
-                            string gate = arrivalReader[5].ToString();
-                            int terminal = Convert.ToInt16(arrivalReader[6]);
-
+                            List<string> flight = new List<string>();
+                            flight.Add(arrivalReader[1].ToString());
+                            flight.Add(arrivalReader[2].ToString());
+                            flight.Add(arrivalReader[3].ToString());
+                            flight.Add(arrivalReader[4].ToString());
+                            flight.Add(arrivalReader[5].ToString());
+                            flight.Add(arrivalReader[6].ToString());
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                Add_New_Flight(Create_New_Row(flight, origin, time, status, gate, terminal), arrivalPanel);
-                                if (!departureIsShown && arrivalFlights > 8)
-                                {
-                                    flightsBorder.Height += 55;
-                                    outerMostGrid.Height += 55;
-                                }
+                                arrivals.Add(flight);
                             });
-
                         }
-
-                    }
-                }
-
-                if (token.IsCancellationRequested)
-                    break;
-
-                await Task.Delay(5, token);
+                    };
+                });
             }
-
-            arrivalReader?.Dispose();
-            arrivalReader?.Close();
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        private int arrivalFlights = 0;
+        private void UpdateDisplayedFlights()
+        {
+            flightsBorder.Height = 498;
+            outerMostGrid.Height = 741;
+            flightsPanel.Children.Clear();
+
+            int i = 0;
+            List<List<string>> flightsToAdd;
+
+            flightsToAdd = departureIsShown ? departures : arrivals;
+
+            foreach (List<string> flight in flightsToAdd)
+            {
+                i++;
+                if (i > 8)
+                {
+                    flightsBorder.Height += 55;
+                    outerMostGrid.Height += 55;
+                }
+
+                flightsPanel.Children.Add(Create_New_Row(flight[0], flight[1], flight[2], flight[3], flight[4], flight[5]));                
+            }
+        }
+
+        private void Initialize_Reusable_Elements()
+        {
+            darkGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF06611E"));
+            lighterGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF90FDAD"));
+        }
 
         private void searchBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -252,7 +207,7 @@ namespace Airport_Management_System
             return tb;
         }
 
-        private Border Create_New_Row(string flight, string dest, string time, string status, string gate, int terminal)
+        private Border Create_New_Row(string flight, string dest, string time, string status, string gate, string terminal)
         {
             Border border = new Border
             {
@@ -293,23 +248,6 @@ namespace Airport_Management_System
             return border;
         }
 
-        private void Add_New_Flight(Border newFlight, StackPanel flightsPanel)
-        {
-            flightsPanel.Children.Add(newFlight);
-
-            newFlight.BeginAnimation(Border.HeightProperty, heightAnimation);
-            newFlight.BeginAnimation(Border.OpacityProperty, opacityAnimation);
-
-            //i++;
-            //if (i > 9)
-            //{
-            //    flightsBorder.Height += 55;
-            //    outerMostGrid.Height += 55;
-            //}
-        }
-
-       // private int i = 1;
-
         private void Departure_Button_Click(object sender, MouseButtonEventArgs e)
         {
             departureButton.Background = darkGreenColor;
@@ -323,42 +261,10 @@ namespace Airport_Management_System
             arrivalButton.MouseDown += Arrival_Button_CLick;
             arrivalText.Foreground = Brushes.Black;
 
-            if(departurePanel.Parent != null)
-            {
-                ((Grid)departurePanel.Parent).Children.Remove(departurePanel);
-            }
-
             endpoint.Text = "Destination";
-            flightsGrid.Children.Remove(arrivalPanel);
-            flightsGrid.Children.Add(departurePanel);
-
-           // if (departureFlights < 9 && arrivalFlights < 9) return;
-
-            
-
-
-
-                //if (departureFlights > arrivalFlights)
-                //{
-                //    int nigga = departureFlights - 8;
-                //    int l = nigga - arrivalFlights;
-
-                //    flightsBorder.Height += (l * 55);
-                //    outerMostGrid.Height += (l * 55);
-                //} 
-                //else if (departureFlights < arrivalFlights)
-                //{
-                //    int nigga = arrivalFlights - 8;
-                //    int l = nigga - departureFlights;
-
-                //    flightsBorder.Height -= (l * 55);
-                //    outerMostGrid.Height -= (l * 55);
-                //}
-
-                departureIsShown = true;
-
+            departureIsShown = true;
+            UpdateDisplayedFlights();
         }
-
 
         private void Arrival_Button_CLick(object sender, MouseButtonEventArgs e)
         {
@@ -373,34 +279,10 @@ namespace Airport_Management_System
             departureButton.MouseDown += Departure_Button_Click;
             departureText.Foreground = Brushes.Black;
 
-            if (arrivalPanel.Parent != null)
-            {
-                ((Grid)arrivalPanel.Parent).Children.Remove(arrivalPanel);
-            }
-
             endpoint.Text = "Origin";
-            flightsGrid.Children.Remove(departurePanel);
-            flightsGrid.Children.Add(arrivalPanel);
-
-            //if (arrivalFlights > departureFlights)
-            //{
-            //    int nigga = arrivalFlights - 8;
-
-            //    int l = nigga - departureFlights;
-
-            //    flightsBorder.Height += (l * 55);
-            //    outerMostGrid.Height += (l * 55);
-            //}
-            //else if (arrivalFlights < departureFlights)
-            //{
-            //    int nigga = departureFlights - 8;
-            //    int l = nigga - arrivalFlights;
-
-            //    flightsBorder.Height -= (l * 55);
-            //    outerMostGrid.Height -= (l * 55);
-            //}
 
             departureIsShown = false;
+            UpdateDisplayedFlights();
         }
     }
 }

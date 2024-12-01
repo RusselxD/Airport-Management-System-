@@ -22,18 +22,17 @@ namespace Airport_Management_System
     public partial class AssignGate : Window
     {
         private HomePageControl homePage;
+        private Border chosenFlight;
+        private Border chosenGate;
+
         public AssignGate(HomePageControl homePage)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            Task.Run(() => Query_Gates(MainWindow.cts.Token));
-            Task.Run(() => Query_Flights(MainWindow.cts.Token));
+            Refresh_Window();
             this.homePage = homePage;
             Show();
         }
-
-        Border chosenFlight;
-        Border chosenGate;
 
         private async Task Query_Gates(CancellationToken token)
         {
@@ -41,7 +40,6 @@ namespace Airport_Management_System
             {
                 List<(string GateName, int status)> gates = new List<(string, int)>();
                 List<(string gateName, string gateDetails)> occupiedGatesList = new List<(string, string)>();
-
 
                 await Task.Run(async () =>
                 {
@@ -298,6 +296,22 @@ namespace Airport_Management_System
             dashLine.Text = "";
         }
 
+        private bool Input_Is_Invalid()
+        {
+            if (chosenFlight == null)
+            {
+                MessageBox.Show("Choose a flight.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+
+            if (chosenGate == null)
+            {
+                MessageBox.Show("Choose a gate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return true;
+            }
+            return false;
+        }
+
         private async Task<bool> Update_Database(CancellationToken token)
         {
             try
@@ -371,27 +385,46 @@ namespace Airport_Management_System
             {
                 homePage.addRecentAct($"Assigned Flight {chosenFlight.Name} to Gate {gate.Text}");
                 MessageBox.Show("Gate successfully assigned.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 Clear_Window();
-                // TODO : Remove flight in flights, add it in occupiedGates, update border of gate
+                Refresh_Window();
+                homePage.Refresh_Gate_And_Flight_Controls();
             }
-
-
         }
 
-        private bool Input_Is_Invalid()
+        private async void Refresh_Window()
         {
-            if (chosenFlight == null)
-            {
-                MessageBox.Show("Choose a flight.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return true;
-            }
+            flights.Children.Clear();
+            terminal1.Children.Clear();
+            terminal2.Children.Clear();
+            terminal3.Children.Clear();
+            occupiedGates.Children.Clear();
 
-            if (chosenGate == null)
+            terminal1.Children.Add(Create_Terminal_Header("Terminal 1"));
+            terminal2.Children.Add(Create_Terminal_Header("Terminal 2"));
+            terminal3.Children.Add(Create_Terminal_Header("Terminal 3"));
+
+            await Task.Run(() => Query_Gates(MainWindow.cts.Token));
+            await Task.Run(() => Query_Flights(MainWindow.cts.Token));
+        }
+
+        private TextBlock Create_Terminal_Header(string text)
+        {
+            TextBlock terminalHeader = new TextBlock()
             {
-                MessageBox.Show("Choose a gate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return true;
-            }
-            return false;
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Height = 58,
+                Width = 139,
+                TextWrapping = TextWrapping.Wrap,
+                FontFamily = new FontFamily("Ubuntu"),
+                FontSize = 19,
+                FontWeight = FontWeights.Medium,
+                Padding = new Thickness(20, 25, 0, 0),
+                Text = text
+            };
+            Grid.SetColumnSpan(terminalHeader, 2);
+            return terminalHeader;
         }
     }
 }

@@ -298,5 +298,11 @@ namespace Airport_Management_System
                 }
             }
         }
+
+        public void Refresh_Flight_And_Gate_Controls()
+        {
+            flightsControl.Refresh();
+            gatesControl.Refresh();
+        }
     }
 }

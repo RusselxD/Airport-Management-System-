@@ -91,6 +91,8 @@
                             </Grid>
                         </Border>
 
+                        <StackPanel x:Name="flightsPanel" Grid.Row="1"></StackPanel>
+                        
                     </Grid>
 
 

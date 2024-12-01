@@ -39,8 +39,13 @@
         </Border>
 
         <TextBlock x:Name="endPointLabel" HorizontalAlignment="Left" Height="19" Margin="29,169,0,0" TextWrapping="Wrap" Text="Destination" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
-        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,190,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
-            <TextBox TextWrapping="Wrap" x:Name="endPoint" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <Border Cursor="Hand" MouseDown="Open_EndPoint_Choices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,190,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <TextBlock x:Name="endPoint" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
+        </Border>
+        <Border x:Name="endPointChoices" Panel.ZIndex="20" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,224,0,0" VerticalAlignment="Top" Width="392" Grid.ColumnSpan="2" Background="White">
+            <ScrollViewer>
+                <StackPanel x:Name="endPointChoicesStack"/>
+            </ScrollViewer>
         </Border>
 
         <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,239,0,0" TextWrapping="Wrap" Text="Time (UTC)" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
@@ -295,48 +300,10 @@
         </Border>
 
         <TextBlock HorizontalAlignment="Left" Height="19" Margin="168,379,0,0" TextWrapping="Wrap" Text="Terminal" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.Column="1"/>
-        <Border Panel.ZIndex="5" MouseDown="Open_Terminal_Choices" Cursor="Hand" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="168,400,0,0" VerticalAlignment="Top" Width="190" CornerRadius="5,5,5,5" Grid.Column="1">
+        <Border Panel.ZIndex="5" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="168,400,0,0" VerticalAlignment="Top" Width="190" CornerRadius="5,5,5,5" Grid.Column="1">
             <TextBlock x:Name="terminal" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        <Border Panel.ZIndex="5" x:Name="terminalChoices" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="168,434,0,0" VerticalAlignment="Top" Width="190" Background="White" Grid.Column="1">
-            <ScrollViewer>
-                <StackPanel Background="White">
-                    <TextBlock Text="1" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FFE8E8E8"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock Text="2" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FFE8E8E8"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock Text="3" FontFamily="Ubuntu" FontSize="14" Padding="10,9,0,9" Cursor="Hand" MouseDown="Choose_Terminal">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FFE8E8E8"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </StackPanel>
-            </ScrollViewer>
-        </Border>
+        
         <Border BorderBrush="#FF111827" Cursor="Hand" BorderThickness="1" MouseDown="Add_New_Flight" HorizontalAlignment="Left" Height="40" Margin="27,460,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
             <Border.Style>
                 <Style TargetType="Border">

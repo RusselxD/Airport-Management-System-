@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,8 +43,125 @@ namespace Airport_Management_System
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            ewan();
             Show();
             this.homePage = homePage;
+        }
+
+        private void ewan()
+        {
+            string[] endPointTerminals = new string[]
+            {
+                "Abu Dhabi (AUH)",
+                "Addis Ababa (ADD)",
+                "Amsterdam (AMS)",
+                "Auckland (AKL)",
+                "Cape Town (CPT)",
+                "Chicago (ORD)",
+                "Dallas (DFW)",
+                "Delhi (DEL)",
+                "Doha (DOH)",
+                "Dubai (DXB)",
+                "Frankfurt (FRA)",
+                "Helsinki (HEL)",
+                "Hong Kong (HKG)",
+                "Istanbul (IST)",
+                "Johannesburg (JNB)",
+                "Kuala Lumpur (KUL)",
+                "London (LHR)",
+                "Los Angeles (LAX)",
+                "Madrid (MAD)",
+                "Manchester (MAN)",
+                "Manila (MNL)",
+                "Moscow (SVO)",
+                "New York (JFK)",
+                "Osaka (KIX)",
+                "Paris (CDG)",
+                "San Francisco (SFO)",
+                "Seoul (ICN)",
+                "Singapore (SIN)",
+                "Sydney (SYD)",
+                "Tel Aviv (TLV)",
+                "Tokyo (NRT)",
+                "Toronto (YYZ)",
+                "Vienna (VIE)"
+            };
+
+            Style style = new Style(typeof(TextBlock));
+            Trigger trigger = new Trigger
+            {
+                Property = UIElement.IsMouseOverProperty,
+                Value = true
+            };
+            trigger.Setters.Add(new Setter(TextBlock.BackgroundProperty, new SolidColorBrush(Color.FromRgb(232, 232, 232))));
+            style.Triggers.Add(trigger);
+
+            foreach (string s in endPointTerminals)
+            {
+                TextBlock tb = new TextBlock()
+                {
+                    FontFamily = new FontFamily("Ubuntu"),
+                    FontSize = 14,
+                    Padding = new Thickness(10, 9, 0, 9),
+                    Cursor = Cursors.Hand,
+                    Text = s
+                };
+
+                tb.Style = style;
+
+                tb.MouseDown += Choose_EndPoint;
+
+                endPointChoicesStack.Children.Add(tb);
+            }
+
+        }
+
+        DoubleAnimation showEndPointChoices = new DoubleAnimation()
+        {
+            Duration = TimeSpan.FromMilliseconds(300)
+        };
+
+        private bool endPointChoicesIsOpen = false;
+
+        private void Choose_EndPoint(object sender, MouseButtonEventArgs e)
+        {
+            endPoint.Text = (sender as TextBlock).Text;
+
+            showEndPointChoices.From = 105;
+            showEndPointChoices.To = 0;
+
+            endPointChoicesIsOpen = !endPointChoicesIsOpen;
+
+            endPointChoices.BeginAnimation(Border.HeightProperty, showEndPointChoices);
+        }
+
+        private void Open_EndPoint_Choices(object sender, MouseButtonEventArgs e)
+        {
+            Border b = sender as Border;
+
+            if (endPointChoicesIsOpen)
+            {
+                showEndPointChoices.From = 105;
+                showEndPointChoices.To = 0;
+            }
+            else
+            {
+                showEndPointChoices.From = 0;
+                showEndPointChoices.To = 105;
+                b.CornerRadius = new CornerRadius(8, 8, 0, 0);
+            }
+
+            endPointChoicesIsOpen = !endPointChoicesIsOpen;
+
+            showEndPointChoices.Completed += (s, args) =>
+            {
+                if (!endPointChoicesIsOpen)
+                {
+                    b.CornerRadius = new CornerRadius(8);
+                }
+            };
+
+            endPointChoices.BeginAnimation(Border.HeightProperty, showEndPointChoices);
         }
 
         private void Choose_Status(object sender, MouseButtonEventArgs e)
@@ -91,7 +209,9 @@ namespace Airport_Management_System
 
         private void Choose_Gate(object sender, MouseButtonEventArgs e)
         {
-            gate.Text = (sender as TextBlock).Text;
+            string gateChosen = (sender as TextBlock).Text;
+            gate.Text = gateChosen;
+            terminal.Text = gateChosen[0].ToString();
 
             showGateChoices.From = 70;
             showGateChoices.To = 0;
@@ -130,50 +250,6 @@ namespace Airport_Management_System
             };
 
             gateChoices.BeginAnimation(Border.HeightProperty, showGateChoices);
-        }
-
-        private void Choose_Terminal(object sender, MouseButtonEventArgs e)
-        {
-            terminal.Text = (sender as TextBlock).Text;
-
-            showTerminalChoices.From = 70;
-            showTerminalChoices.To = 0;
-
-            terminalChoicesIsOpen = !terminalChoicesIsOpen;
-
-            terminalChoices.BeginAnimation(Border.HeightProperty, showTerminalChoices);
-        }
-
-        private bool terminalChoicesIsOpen = false;
-
-        private void Open_Terminal_Choices(object sender, MouseButtonEventArgs e)
-        {
-            Border b = sender as Border;
-
-            if (terminalChoicesIsOpen)
-            {
-                showTerminalChoices.From = 70;
-                showTerminalChoices.To = 0;
-            }
-            else
-            {
-                showTerminalChoices.From = 0;
-                showTerminalChoices.To = 70;
-                b.CornerRadius = new CornerRadius(8, 8, 0, 0);
-            }
-
-            terminalChoicesIsOpen = !terminalChoicesIsOpen;
-
-            showTerminalChoices.Completed += (s, args) =>
-            {
-                if (!terminalChoicesIsOpen)
-                {
-                    b.CornerRadius = new CornerRadius(8);
-                }
-            };
-
-
-            terminalChoices.BeginAnimation(Border.HeightProperty, showTerminalChoices);
         }
 
         private void Change_EndPoint(object sender, RoutedEventArgs e)
@@ -231,34 +307,34 @@ namespace Airport_Management_System
             return true;
         }
 
-        Dictionary<string, int> gatesMap = new Dictionary<string, int>
-        {
-            { "1A", 1 },
-            { "1B", 2 },
-            { "1C", 3 },
-            { "1D", 4 },
-            { "1E", 5 },
-            { "1F", 6 },
-            { "2A", 7 },
-            { "2B", 8 },
-            { "2C", 9 },
-            { "2D", 10 },
-            { "2E", 11 },
-            { "2F", 12 },
-            { "3A", 13 },
-            { "3B", 14 },
-            { "3C", 15 },
-            { "3D", 16 },
-            { "3E", 17 },
-            { "3F", 18 },
-        };
-
         private void Add_New_Flight(object sender, MouseButtonEventArgs e)
         {
             if (!Input_Is_Valid())
             {
                 return;
             }
+
+            Dictionary<string, int> gatesMap = new Dictionary<string, int>
+            {
+                { "1A", 1 },
+                { "1B", 2 },
+                { "1C", 3 },
+                { "1D", 4 },
+                { "1E", 5 },
+                { "1F", 6 },
+                { "2A", 7 },
+                { "2B", 8 },
+                { "2C", 9 },
+                { "2D", 10 },
+                { "2E", 11 },
+                { "2F", 12 },
+                { "3A", 13 },
+                { "3B", 14 },
+                { "3C", 15 },
+                { "3D", 16 },
+                { "3E", 17 },
+                { "3F", 18 },
+            };
 
             string table = departure.IsChecked == true ? "departure_flights" : "arrival_flights";
 
@@ -286,7 +362,7 @@ namespace Airport_Management_System
                     command.Parameters.AddWithValue("@Value7", val7);
 
                     int success = command.ExecuteNonQuery();
-                    if(success == 1)
+                    if (success == 1)
                     {
                         string a = departure.IsChecked == true ? "Departures" : "Arrivals";
                         homePage.addRecentAct($"Added Flilght {val1} to {a}.");
@@ -301,7 +377,7 @@ namespace Airport_Management_System
                         gate.Text = "";
                         terminal.Text = "";
                     }
-                    
+
                 }
 
             }

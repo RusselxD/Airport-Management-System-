@@ -503,5 +503,10 @@ namespace Airport_Management_System
         {
             new AssignGate(this);
         }
+
+        public void Refresh_Gate_And_Flight_Controls()
+        {
+            window.Refresh_Flight_And_Gate_Controls();
+        }
     }
 }
