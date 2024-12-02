@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Airport_Management_System"
-             mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="998">
-    <Grid>
+             mc:Ignorable="d" d:DesignWidth="998" Height="800">
+    <Grid >
         <TextBlock Height="59" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Foreground="White" Background="#FF046892" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
         <ScrollViewer Margin="0,59,0,0" Focusable="False">
-            <Grid Background="#FFF6F6F6">
+            <Grid Background="#FFF6F6F6" Height="1160">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="363*"/>
                     <ColumnDefinition Width="128*"/>
@@ -72,9 +71,9 @@
                         <TextBlock Grid.Row="2" Text="Terminal 2" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,700,0"></TextBlock>
                         <TextBlock Grid.Row="3" Text="Terminal 3" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,700,0"></TextBlock>
 
-                        <ProgressBar x:Name="terminal1Bar" Grid.Row="1" Margin="140, 3, 90, 20" Background="#FFEBEBEB" Foreground="#FF27ABE2" BorderBrush="#FFEBEBEB" ></ProgressBar>
-                        <ProgressBar x:Name="terminal2Bar" Grid.Row="2" Margin="140, 3, 90, 20" Background="#FFEBEBEB" Foreground="#FF27ABE2" BorderBrush="#FFEBEBEB" ></ProgressBar>
-                        <ProgressBar x:Name="terminal3Bar" Grid.Row="3" Margin="140, 3, 90, 20" Background="#FFE9EBEB" Foreground="#FF27ABE2" BorderBrush="#FFEBEBEB" ></ProgressBar>
+                        <ProgressBar x:Name="terminal1Bar" Grid.Row="1" Margin="140, 3, 90, 20" Background="#FFFAFAFA" Foreground="#FF27ABE2" BorderBrush="{x:Null}" ></ProgressBar>
+                        <ProgressBar x:Name="terminal2Bar" Grid.Row="2" Margin="140, 3, 90, 20" Background="#FFFAFAFA" Foreground="#FF27ABE2" BorderBrush="{x:Null}" ></ProgressBar>
+                        <ProgressBar x:Name="terminal3Bar" Grid.Row="3" Margin="140, 3, 90, 20" Background="#FFFAFAFA" Foreground="#FF27ABE2" BorderBrush="{x:Null}" ></ProgressBar>
 
                         <TextBlock x:Name="terminal1BarText" Grid.Row="1" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
                         <TextBlock x:Name="terminal2BarText" Grid.Row="2" Text="86%" FontFamily="Ubuntu" FontSize="17" Padding="30,9,0,0" Margin="0,0,40,0" HorizontalAlignment="Right"></TextBlock>
@@ -84,15 +83,131 @@
 
                 </Border>
 
-                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,10" Background="White" CornerRadius="15,15,15,15" Grid.ColumnSpan="2">
+                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,-385" Background="White" CornerRadius="15,15,15,15" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
-                            
+
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="Staff Attendance" FontFamily="Ubuntu" FontSize="25" FontWeight="Bold" Padding="30,25,0,0" Margin="0,0,227,0"></TextBlock>
+
+                        <Border Grid.Row="1" Margin="35,5,35,0" Background="#FFFAFAFA" CornerRadius="5,5,5,5" VerticalAlignment="Top" Height="50">
+                            <Grid>
+                                <Label Margin="30,0,476,0" FontFamily="Ubuntu" Content=" Morning Shift (6:00 - 14:00):" FontSize="18" VerticalContentAlignment="Center"/>
+                                <Label x:Name="morningStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" HorizontalContentAlignment="Right" Margin="0,0,30,0"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="35,67,35,339" Background="#FFFAFAFA" CornerRadius="5,5,5,5" VerticalAlignment="Top" Height="50">
+                            <Grid>
+                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Afternoon Shift (14:00 - 22:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label x:Name="afternoonStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" Margin="0,0,30,0" HorizontalContentAlignment="Right"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="35,129,35,256" VerticalAlignment="Top" Height="50" Background="#FFFAFAFA">
+                            <Grid>
+                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Night Shift (22:00 - 6:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label x:Name="nightStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" Margin="0,0,30,0" HorizontalContentAlignment="Right"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="0,172,0,-10" HorizontalAlignment="Left" Width="493" BorderBrush="#FF454545">
+
+                            <Grid>
+                                <TextBlock x:Name="barChartTop" Margin="0,30,431,232" Text="210" FontFamily="Ubuntu" FontSize="13" Padding="30,3.5,0,0"></TextBlock>
+
+                                <Rectangle Margin="62,40,427,39" Stroke="Black" StrokeThickness="2" VerticalAlignment="Top" Height="228"/>
+                                <Rectangle Margin="62,264,10,39" Stroke="Black" StrokeThickness="2" VerticalAlignment="Top" Height="4"/>
+
+                                <ProgressBar x:Name="onDutyBar" Margin="26,122,243,125" BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="#FF3E9725" Background="White" VerticalAlignment="Top" Height="60">
+                                    <ProgressBar.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ProgressBar.RenderTransform>
+                                </ProgressBar>
+                                <TextBlock x:Name="barChartMid" Margin="2,134,429,128" Text="105" FontFamily="Ubuntu" FontSize="13" Padding="30,3.5,0,0"/>
+                                <TextBlock Margin="2,245,429,17" Text="  0" FontFamily="Ubuntu" FontSize="13" Padding="30,3.5,0,0"/>
+                                <TextBlock Margin="108,272,323,-10" Text="On Duty" FontFamily="Ubuntu" FontSize="13" Padding="8,7,0,0"/>
+                                <TextBlock Margin="199,272,232,-10" Text="Off Duty" FontFamily="Ubuntu" FontSize="13" Padding="7,7,0,0"/>
+                                <TextBlock Margin="291,272,140,-10" Text="Sick" FontFamily="Ubuntu" FontSize="13" Padding="20,7,0,0"/>
+                                <TextBlock Margin="382,272,49,-10" Text="On Leave" FontFamily="Ubuntu" FontSize="13" Padding="4.5,7,0,0"/>
+                                <ProgressBar x:Name="offDutyBar" Margin="118,122,151,125" BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="#FFE2E2E2" Background="White" VerticalAlignment="Top" Height="60">
+                                    <ProgressBar.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ProgressBar.RenderTransform>
+                                </ProgressBar>
+                                <ProgressBar x:Name="sickBar" Margin="210,122,59,125" BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="#FFDC2929" Background="White" VerticalAlignment="Top" Height="60">
+                                    <ProgressBar.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ProgressBar.RenderTransform>
+                                </ProgressBar>
+                                <ProgressBar x:Name="onLeaveBar" Margin="301,122,-32,125" BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Foreground="#FFDC2929" Background="White" Height="60" VerticalAlignment="Top">
+                                    <ProgressBar.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ProgressBar.RenderTransform>
+                                </ProgressBar>
+
+
+                            </Grid>
+
+                        </Border>
+
+                        <Border Grid.Row="1" VerticalAlignment="Bottom" Height="281" Margin="500,0,0,0" >
+                            <Grid>
+
+                                <Border Margin="10,0,10,0" VerticalAlignment="Top" Height="50" Background="#FFFAFAFA" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Text="On Duty: " FontFamily="Ubuntu" FontWeight="Medium" FontSize="18" Padding="20,14,0,0" HorizontalAlignment="Left" Width="164" Foreground="#FF41A126"/>
+                                        <Label x:Name="onDutyLabel" Content="9" FontFamily="Ubuntu" FontSize="18" Margin="165,0,0,0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5,5,20,5"></Label>
+                                    </Grid>
+                                </Border>
+                                <Border Margin="10,63,10,0" VerticalAlignment="Top" Height="50" Background="#FFFAFAFA" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Text="Off Duty: " FontFamily="Ubuntu" FontWeight="Medium" FontSize="18" Padding="20,14,0,0" HorizontalAlignment="Left" Width="164" Foreground="#FF9B9B9B"/>
+                                        <Label x:Name="offDutyLabel" Content="9" FontFamily="Ubuntu" FontSize="18" Margin="165,0,0,0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5,5,20,5"></Label>
+                                    </Grid>
+                                </Border>
+                                <Border Margin="10,126,10,0" VerticalAlignment="Top" Height="50" Background="#FFFAFAFA" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Text="Sick: " FontFamily="Ubuntu" FontWeight="Medium" FontSize="18" Padding="20,14,0,0" HorizontalAlignment="Left" Width="164" Foreground="#FFDC2929"/>
+                                        <Label x:Name="sickLabel" Content="9" FontFamily="Ubuntu" FontSize="18" Margin="165,0,0,0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5,5,20,5"></Label>
+                                    </Grid>
+                                </Border>
+                                <Border Margin="10,189,10,0" VerticalAlignment="Top" Height="50" Background="#FFF7F7F7" CornerRadius="8,8,8,8">
+                                    <Grid>
+                                        <TextBlock Text="On Leave: " FontFamily="Ubuntu" FontWeight="Medium" FontSize="18" Padding="20,14,0,0" HorizontalAlignment="Left" Width="164" Foreground="#FFDC2929"/>
+                                        <Label x:Name="onLeaveLabel" Content="9" FontFamily="Ubuntu" FontSize="18" Margin="165,0,0,0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5,5,20,5"></Label>
+                                    </Grid>
+                                </Border>
+
+
+                            </Grid>
+                        </Border>
 
                     </Grid>
                 </Border>

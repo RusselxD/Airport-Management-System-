@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Airport_Management_System"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignWidth="800" Height="589">
 
     <ScrollViewer HorizontalAlignment="Center" Width="806">
 
-        <Grid Height="1150" Background="#F3F6FA" Width="822">
+        <Grid Height="1200" Background="#F3F6FA" Width="822">
             <Grid.RowDefinitions>
                 <RowDefinition Height="186*"/>
                 <RowDefinition Height="48*"/>
@@ -17,8 +16,9 @@
                 <RowDefinition Height="30*"/>
                 <RowDefinition Height="485*"/>
             </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Center" Height="72" Margin="0,69,0,0" TextWrapping="Wrap" Text="Airport Management System" VerticalAlignment="Top" Width="590" FontFamily="Ubuntu" FontSize="45" Padding="10,15,10,15"/>
-            <TextBlock HorizontalAlignment="Center" Height="51" Margin="0,140,0,0" TextWrapping="Wrap" Text="Enterprise Aviation Operations Platform v1.0" VerticalAlignment="Top" Width="332" FontFamily="Ubuntu" FontSize="16" Padding="10,5,10,15" Foreground="Black"/>
+            <Image Source="/Icons/app-logo.png" Margin="340,31,340,113"></Image>
+            <TextBlock HorizontalAlignment="Center" Height="72" TextWrapping="Wrap" Text="Airport Management System" VerticalAlignment="Top" Width="590" FontFamily="Ubuntu" FontSize="45" Padding="10,15,10,15" Margin="0,100,0,0"/>
+            <TextBlock HorizontalAlignment="Center" Height="51" Margin="0,172,0,0" TextWrapping="Wrap" Text="Enterprise Aviation Operations Platform v1.0" VerticalAlignment="Top" Width="332" FontFamily="Ubuntu" FontSize="16" Padding="10,5,10,15" Foreground="Black" Grid.RowSpan="2"/>
 
 
             <Border BorderThickness="1" HorizontalAlignment="Center" Height="106" Margin="0,19,0,0" VerticalAlignment="Top" Width="716" Background="#FFFFFBEB" Grid.RowSpan="2" Grid.Row="1">
@@ -90,32 +90,22 @@
 
             </Border>
 
-            <Border BorderThickness="1" HorizontalAlignment="Center" Height="62" Margin="0,456,0,0" Grid.Row="4" VerticalAlignment="Top" Width="397" CornerRadius="10,10,10,10" Cursor="Hand" Background="#FF3385DD">
+            <Border MouseDown="Proceed_To_Database_Login" BorderThickness="1" HorizontalAlignment="Center" Height="62" Margin="0,456,0,0" Grid.Row="4" VerticalAlignment="Top" Width="397" CornerRadius="10,10,10,10" Cursor="Hand">
+
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="#FF5BAAFF" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF278FFF" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
 
                 <Grid>
-                    <TextBlock HorizontalAlignment="Left" Height="22" Margin="29,0,0,0" TextWrapping="Wrap" Text="Continue To Database Connection" VerticalAlignment="Center" Width="321" FontFamily="Ubuntu" Foreground="White" FontSize="20"/>
-                    <Image Source="/Icons/arrow-to-right-icon.png" HorizontalAlignment="Left" Height="24" Margin="337,0,0,0" VerticalAlignment="Center" Width="32"/>
-
-                    <Border BorderBrush="#FF3385DD" BorderThickness="1" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center" Width="395" CornerRadius="10,10,10,10" Panel.ZIndex="10" MouseDown="Proceed_To_Database_Login">
-
-                        <Border.Style>
-
-                            <Style TargetType="Border">
-
-                                <Setter Property="Background" 
-                                    Value="{x:Null}"/>
-
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#33FFFFFF"/>
-                                    </Trigger>
-                                </Style.Triggers>
-
-                            </Style>
-
-                        </Border.Style>
-
-                    </Border>
+                    <TextBlock HorizontalAlignment="Left" Height="22" Margin="29,0,0,0" TextWrapping="Wrap" Text="Continue To Database Connection" VerticalAlignment="Center" Width="321" FontFamily="Ubuntu" Foreground="Black" FontSize="20"/>
+                    <Image Source="/Icons/right-arrow.png" HorizontalAlignment="Left" Height="24" Margin="340,0,0,0" VerticalAlignment="Center" Width="32"/>
 
                 </Grid>
 

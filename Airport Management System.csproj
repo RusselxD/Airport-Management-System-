@@ -61,6 +61,9 @@
     <Compile Include="AssignGate.xaml.cs">
       <DependentUpon>AssignGate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightDetailsWindow.xaml.cs">
+      <DependentUpon>FlightDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlightsControl.xaml.cs">
       <DependentUpon>FlightsControl.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,9 @@
     <Compile Include="StaffControl.xaml.cs">
       <DependentUpon>StaffControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StaffDetailsWindow.xaml.cs">
+      <DependentUpon>StaffDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddNewFlight.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConnectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +158,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StaffDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PreLoginControl.xaml.cs">
@@ -190,9 +204,6 @@
     <Resource Include="Icons\warning-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\arrow-to-right-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Airport Logo\logo1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -211,10 +222,31 @@
     <Resource Include="Icons\goto-orange.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\delete-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Icons\search-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\delete-icon.png" />
+    <Resource Include="Icons\phone-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\shift-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\department-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\sample-picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\app-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\app-icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

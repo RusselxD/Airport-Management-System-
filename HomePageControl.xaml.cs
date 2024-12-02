@@ -39,8 +39,6 @@ namespace Airport_Management_System
         private DoubleAnimation alertBorderOpacityAnimation;
         private DoubleAnimation alertOpacityAnimation;
 
-        SqlCommand alertsSelectQuery;
-
 
         // ------------------------------------- DEFAULT, REUSABLE ELEMENTS ------------------------------------- //
 
@@ -82,11 +80,68 @@ namespace Airport_Management_System
             defaultAlertMessage = GetDefaultAlertMessage();
             AlertsPanel.Children.Add(defaultAlertMessage);
 
-            alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", MainWindow.sqlConnection);
-            
             Task.Run(() => QueryAlertsTable(MainWindow.cts.Token));
+            Task.Run(() => QueryStats(MainWindow.cts.Token));
 
             RecentActivitiesPanel.Children.Add(GetRecentActivityText("Logged in as airport_admin"));
+        }
+
+        private async void QueryStats(CancellationToken token)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    while (!token.IsCancellationRequested)
+                    {
+                        try
+                        {
+                            int[] totals = new int[3];
+                            string[] queries = new string[3]
+                            {
+                            "SELECT (SELECT COUNT(1) FROM departure_flights) + (SELECT COUNT(1) FROM arrival_flights WHERE NOT flight_status = 'Landed');",
+                            "SELECT COUNT(1) FROM gates_table WHERE status_col = 3;",
+                            "SELECT COUNT(1) FROM staffs_table WHERE status_col = 'On Duty';"
+                            };
+
+                            for (int i = 0; i < 3; i++)
+                            {
+                                using (SqlCommand activeFlightsQuery = new SqlCommand(queries[i], MainWindow.sqlConnection))
+                                using (SqlDataReader activeFlightsReader = await activeFlightsQuery.ExecuteReaderAsync(token))
+                                {
+                                    while (await activeFlightsReader.ReadAsync(token))
+                                    {
+                                        totals[i] = Convert.ToInt16(activeFlightsReader[0]);
+                                    }
+                                }
+                            }
+
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                activeFlightsCount.Text = totals[0].ToString();
+                                occupiedGatesCount.Text = $"{totals[1]}/15";
+                                staffOnDutyCount.Text = totals[2].ToString();
+                            });
+                        }
+                        catch (TaskCanceledException)
+                        {
+                            break;
+                        }
+
+                        if (token.IsCancellationRequested) break;
+
+                        await Task.Delay(1000, token);
+                    }
+                });
+            }
+            catch (TaskCanceledException)
+            {
+                // Suppress Task Cancelled Exception
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Source} Query stats", "Exception", MessageBoxButton.OK);
+            }
         }
 
         private void InitializeDefaultElements()
@@ -188,7 +243,7 @@ namespace Airport_Management_System
             };
 
             // ------------------------------------------------------------------------------ //
-            
+
             this.deleteAllIcon = new Image
             {
                 Source = alertDeleteIconImage,
@@ -245,70 +300,89 @@ namespace Airport_Management_System
 
         private async Task QueryAlertsTable(CancellationToken token)
         {
-            SqlDataReader alertsReader = null;
-            int l1;
-
-            while (!token.IsCancellationRequested)
+            try
             {
-                l1 = 0;
-
-                using (alertsReader = await alertsSelectQuery.ExecuteReaderAsync(token))
+                await Task.Run(async () =>
                 {
-                    while (alertsReader.Read())
+                    int l1;
+                    using (SqlCommand alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", MainWindow.sqlConnection))
                     {
-                        l1++;
-
-                        if (l1 > alerts)
+                        while (!token.IsCancellationRequested)
                         {
-                            alerts = l1;
-
-                            if (alerts == 1)
+                            try
                             {
-                                await Dispatcher.InvokeAsync(() =>
+                                using (SqlDataReader alertsReader = await alertsSelectQuery.ExecuteReaderAsync(token))
                                 {
-                                    AlertsPanel.Children.Clear();
-                                    alertsGrid.Children.Add(deleteAllIcon);
-                                    alertsContainer.Background = greenAlertBackground;
-                                    alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
-                                });
+                                    l1 = 0;
+
+                                    while (await alertsReader.ReadAsync(token))
+                                    {
+                                        l1++;
+
+                                        if (l1 > alerts)
+                                        {
+                                            alerts = l1;
+
+                                            if (alerts == 1)
+                                            {
+                                                await Dispatcher.InvokeAsync(() =>
+                                                {
+                                                    AlertsPanel.Children.Clear();
+                                                    alertsGrid.Children.Add(deleteAllIcon);
+                                                    alertsContainer.Background = greenAlertBackground;
+                                                    alertsContainer.BeginAnimation(Border.OpacityProperty, alertBorderOpacityAnimation);
+                                                });
+                                            }
+                                            else
+                                            {
+                                                await Dispatcher.InvokeAsync(() =>
+                                                {
+                                                    alertsContainer.Height += 59;
+
+                                                    alertsRow += 59;
+                                                    dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
+                                                });
+                                            }
+
+                                            int alertID = Convert.ToInt16(alertsReader[0]);
+                                            string alertMessage = alertsReader[1].ToString();
+                                            int alertCode = Convert.ToInt16(alertsReader[2]);
+
+                                            await Dispatcher.InvokeAsync(() =>
+                                            {
+                                                AddAlert(alertID, alertMessage, alertCode);
+                                            });
+                                        }
+                                    }
+                                }
                             }
-                            else
+                            catch (TaskCanceledException)
                             {
-                                await Dispatcher.InvokeAsync(() =>
-                                {
-                                    alertsContainer.Height += 59;
-
-                                    alertsRow += 59;
-                                    dashboardInnerGrid.RowDefinitions[1].Height = new GridLength(alertsRow);
-                                });
+                                break;
                             }
+                            
+                            if (token.IsCancellationRequested)
+                                break;
 
-                            int alertID = Convert.ToInt16(alertsReader[0]);
-                            string alertMessage = alertsReader[1].ToString();
-                            int alertCode = Convert.ToInt16(alertsReader[2]);
-
-                            Dispatcher.InvokeAsync(() =>
-                            {
-                                AddAlert(alertID, alertMessage, alertCode);
-                            }).Task.Wait();
+                            await Task.Delay(10, token);
                         }
-
                     }
-                }
 
-                if (token.IsCancellationRequested)
-                    break;
-
-                await Task.Delay(5, token);
+                });
             }
-
-            alertsReader?.Dispose();
-            alertsReader?.Close();
+            catch(TaskCanceledException)
+            {
+                // Supress Task Cancelled Exception
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message} Query Alerts", "Exception", MessageBoxButton.OK);
+            }
         }
 
         private void Delete_All_Alert(object sender, MouseButtonEventArgs e)
         {
-            List<string> keys = alertsMap.Keys.ToList(); 
+            List<string> keys = alertsMap.Keys.ToList();
 
             foreach (string key in keys)
             {
@@ -363,9 +437,7 @@ namespace Airport_Management_System
         private void Delete_Single_Alert(object sender, RoutedEventArgs e)
         {
             (sender as Image).MouseDown -= Delete_Single_Alert;
-
             string name = (sender as Image).Name;
-
             Delete_Alert(name);
         }
 
@@ -497,6 +569,11 @@ namespace Airport_Management_System
         private void Go_To_Gates_Window(object sender, MouseButtonEventArgs e)
         {
             window.changeCurrentControl(3);
+        }
+
+        private void Go_To_Staffs_Window(object sender, MouseButtonEventArgs e)
+        {
+            window.changeCurrentControl(4);
         }
 
         private void Open_Assign_Gate_Table(object sender, MouseButtonEventArgs e)

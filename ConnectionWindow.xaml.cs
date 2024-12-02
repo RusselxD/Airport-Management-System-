@@ -36,7 +36,6 @@ namespace Airport_Management_System
 
             this.Closing += (s, e) =>
             {
-                // Request cancellation if the user closes the window
                 cts.Cancel();
             };
         }
@@ -44,20 +43,20 @@ namespace Airport_Management_System
         private void Open_Main_Window(SqlConnection connection)
         {
             Window.GetWindow(lc).Close();
-           // MainWindow mw = new MainWindow(connection);
+           // new MainWindow(connection);
         }
 
         // for windows authentication
         public void Connect_With_Windows_Authentication(string serverName, string databaseName)
         {
-            this.connectionString = $@"Server={serverName}; Database={databaseName}; Trusted_Connection=True;";
+            this.connectionString = $@"Server={serverName}; Database={databaseName}; Trusted_Connection=True;MultipleActiveResultSets = True;";
             Connect_To_Database();
         }
 
         // for sql server authentication
         public void Connect_With_SQL_Server_Authentication(string serverName, string databaseName, string userName, string password)
         {
-            this.connectionString = $@"Server={serverName}; Database={databaseName};User Id={userName};Password={password};";
+            this.connectionString = $@"Server={serverName}; Database={databaseName};User Id={userName};Password={password};MultipleActiveResultSets = True;";
             Connect_To_Database();
         }
 

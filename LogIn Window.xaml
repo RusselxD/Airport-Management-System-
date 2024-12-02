@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
-        mc:Ignorable="d"
-        Title="LogIn_Window" Height="589" Width="826" ResizeMode="NoResize">
+        mc:Ignorable="d" Icon="/Icons/app-icon.ico"
+        Title="Log-In" Height="589" Width="826" ResizeMode="NoResize">
     <Grid>
 
-        <ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
+        <ContentControl x:Name="MainContent" ></ContentControl>
         
     </Grid>
 </Window>

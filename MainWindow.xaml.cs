@@ -63,7 +63,7 @@ namespace Airport_Management_System
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            //this.sqlConnection = sqlConnection;
+         //   sqlConnection = connection;
 
             cts = new CancellationTokenSource();
 

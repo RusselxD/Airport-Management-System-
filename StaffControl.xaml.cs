@@ -369,7 +369,7 @@ namespace Airport_Management_System
                 Display_All_Staffs();
             }
         }
-
+         
         private async Task QueryStaffsTable(CancellationToken token)
         {
             SqlDataReader staffsReader = null;
@@ -398,19 +398,69 @@ namespace Airport_Management_System
             staffsReader?.Close();
         }
 
-        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
+        private async void Search_Icon_Click(object sender, MouseButtonEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(searchBox.Text))
+            {
+                MessageBox.Show("Please enter a staff name to search for.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            List<string> details = new List<string>();
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    string name = "";
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        name = searchBox.Text.ToUpper();
+                    });
+
+                    using (SqlCommand findStaffQuery = new SqlCommand("SELECT * FROM staffs_table WHERE name_col = @Name", MainWindow.sqlConnection))
+                    {
+                        findStaffQuery.Parameters.AddWithValue("@Name", name);
+                        using (SqlDataReader findStaffReader = await findStaffQuery.ExecuteReaderAsync())
+                        {
+                            while (await findStaffReader.ReadAsync())
+                            {
+                                details.Add(findStaffReader[1].ToString());
+                                details.Add(findStaffReader[2].ToString());
+                                details.Add(findStaffReader[3].ToString());
+                                details.Add(findStaffReader[4].ToString());
+                                details.Add(findStaffReader[5].ToString());
+                                details.Add(findStaffReader[6].ToString());
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            if (details.Count == 0)
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    MessageBox.Show("No Staff Found. \nEnter the full name.", "No Result", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
+            }
+            else
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    Open_Staff_Details(details);
+                });
+            }
         }
 
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        private void Open_Staff_Details(List<string> details)
         {
-
-        }
-
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
+            new StaffDetailsWindow(details);
         }
 
         private void Role_MouseDown(object sender, MouseButtonEventArgs e)
@@ -516,6 +566,14 @@ namespace Airport_Management_System
             }
 
             Status.BeginAnimation(HeightProperty, showStatus);
+        }
+
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!searchBoxBorder.IsMouseOver)
+            {
+                Keyboard.ClearFocus();
+            }
         }
     }
 }

@@ -98,7 +98,7 @@ namespace Airport_Management_System
         {
             try
             {
-                await Task.Run(async() =>
+                await Task.Run(async () =>
                 {
                     using (SqlCommand flightsQuery = new SqlCommand("SELECT * FROM arrival_flights", MainWindow.sqlConnection))
                     using (SqlDataReader arrivalReader = await flightsQuery.ExecuteReaderAsync(token))
@@ -146,7 +146,7 @@ namespace Airport_Management_System
                     outerMostGrid.Height += 55;
                 }
 
-                flightsPanel.Children.Add(Create_New_Row(flight[0], flight[1], flight[2], flight[3], flight[4], flight[5]));                
+                flightsPanel.Children.Add(Create_New_Row(flight[0], flight[1], flight[2], flight[3], flight[4], flight[5]));
             }
         }
 
@@ -156,27 +156,92 @@ namespace Airport_Management_System
             lighterGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF90FDAD"));
         }
 
-        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if(searchBox.Text == "Search Flight")
-            {
-                searchBox.Text = "";
-                searchBox.Foreground = Brushes.Black;
-            }
-        }
-
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        private async void Search_Icon_Click(object sender, MouseButtonEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(searchBox.Text))
             {
-                searchBox.Text = "Search Flight";
-                searchBox.Foreground = Brushes.Gray;
+                MessageBox.Show("Please enter a flight number to search for.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            List<string> details = new List<string>();
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    string flight = "";
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                         flight = searchBox.Text.ToUpper();
+                    });
+
+                    using (SqlCommand findFlightQuery = new SqlCommand($"SELECT * FROM departure_flights WHERE flight = @Flight", MainWindow.sqlConnection))
+                    {
+                        findFlightQuery.Parameters.AddWithValue("@Flight", flight);
+                        using (SqlDataReader flightReader = await findFlightQuery.ExecuteReaderAsync())
+                        {
+                            while (await flightReader.ReadAsync())
+                            {
+                                details.Add("departure");
+                                details.Add(flightReader[1].ToString());
+                                details.Add(flightReader[2].ToString());
+                                details.Add(flightReader[3].ToString());
+                                details.Add(flightReader[4].ToString());
+                                details.Add(flightReader[5].ToString());
+                                details.Add(flightReader[6].ToString());
+                                details.Add(flightReader[8].ToString());
+                            }
+                        }
+                    }
+                    
+
+                    using (SqlCommand findFlightQuery = new SqlCommand($"SELECT * FROM arrival_flights WHERE flight = @Flight", MainWindow.sqlConnection))
+                    {
+                        findFlightQuery.Parameters.AddWithValue("@Flight", flight);
+                        using (SqlDataReader flightReader = await findFlightQuery.ExecuteReaderAsync())
+                        {
+                            while (await flightReader.ReadAsync())
+                            {
+                                details.Add("arrival");
+                                details.Add(flightReader[1].ToString());
+                                details.Add(flightReader[2].ToString());
+                                details.Add(flightReader[3].ToString());
+                                details.Add(flightReader[4].ToString());
+                                details.Add(flightReader[5].ToString());
+                                details.Add(flightReader[6].ToString());
+                                details.Add(flightReader[8].ToString());
+                            }
+                        }
+                    }
+                    
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            if(details.Count == 0)
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    MessageBox.Show("No Flights Found.", "No Result", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
+            } 
+            else
+            {
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    Open_Flight_Details(details);
+                });
             }
         }
 
-        private void Search_Icon_Click(object sender, MouseButtonEventArgs e)
+        private void Open_Flight_Details(List<string> details)
         {
-            
+            new FlightDetailsWindow(details);
         }
 
         private Grid Create_New_Grid()
@@ -284,5 +349,14 @@ namespace Airport_Management_System
             departureIsShown = false;
             UpdateDisplayedFlights();
         }
+
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!searchBoxBorder.IsMouseOver)
+            {
+                Keyboard.ClearFocus();
+            }
+        }
+
     }
 }
