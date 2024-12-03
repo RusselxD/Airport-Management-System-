@@ -25,6 +25,28 @@ namespace Airport_Management_System
         private Border chosenFlight;
         private Border chosenGate;
 
+        FontFamily ubuntu = new FontFamily("Ubuntu");
+        Thickness terminalHeaderPad = new Thickness(20, 25, 0, 0);
+
+        CornerRadius c1 = new CornerRadius(5);
+        Thickness b1 = new Thickness(1.5);
+        Thickness pad = new Thickness(15, 10, 0, 0);
+
+        SolidColorBrush color1 = new SolidColorBrush(Color.FromRgb(30, 168, 67));
+        SolidColorBrush color2 = new SolidColorBrush(Color.FromRgb(152, 253, 179));
+
+        SolidColorBrush color3 = new SolidColorBrush(Color.FromRgb(255, 215, 166));
+        SolidColorBrush color4 = new SolidColorBrush(Color.FromRgb(248, 142, 12));
+
+        SolidColorBrush color5 = new SolidColorBrush(Color.FromRgb(255, 192, 192));
+        SolidColorBrush color6 = new SolidColorBrush(Color.FromRgb(247, 28, 28));
+
+        Thickness pad1 = new Thickness(22, 13.5, 0, 0);
+
+        Thickness p = new Thickness(10, 13, 0, 0);
+
+        SolidColorBrush grayish = new SolidColorBrush(Color.FromRgb(233, 233, 233));
+
         public AssignGate(HomePageControl homePage)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -75,15 +97,15 @@ namespace Airport_Management_System
 
                         Border b = new Border()
                         {
-                            CornerRadius = new CornerRadius(5),
-                            BorderThickness = new Thickness(1.5)
+                            CornerRadius = c1,
+                            BorderThickness = b1
                         };
 
                         switch (g.status)
                         {
                             case 1:
                                 b.Cursor = Cursors.Hand;
-                                b.BorderBrush = new SolidColorBrush(Color.FromRgb(30, 168, 67));
+                                b.BorderBrush = color1;
 
                                 b.MouseDown += (s, e) =>
                                 {
@@ -93,7 +115,7 @@ namespace Airport_Management_System
                                             chosenGate.Background = Brushes.White;
 
                                         gate.Text = g.GateName;
-                                        b.Background = new SolidColorBrush(Color.FromRgb(152, 253, 179));
+                                        b.Background = color2;
                                         chosenGate = b;
                                     }
                                     else
@@ -104,14 +126,30 @@ namespace Airport_Management_System
                                     }
                                 };
 
+                                b.MouseEnter += (s, e) =>
+                                {
+                                    if (chosenGate != b)
+                                    {
+                                        b.Background = color2;
+                                    }
+                                };
+
+                                b.MouseLeave += (s, e) =>
+                                {
+                                    if (chosenGate != b)
+                                    {
+                                        b.Background = Brushes.White;
+                                    }
+                                };
+
                                 break;
-                            case 2:
-                                b.Background = new SolidColorBrush(Color.FromRgb(255, 215, 166));
-                                b.BorderBrush = new SolidColorBrush(Color.FromRgb(248, 142, 12));
+                            case 2:                                
+                                b.Background = color3;
+                                b.BorderBrush = color4;
                                 break;
                             case 3:
-                                b.Background = new SolidColorBrush(Color.FromRgb(255, 192, 192));
-                                b.BorderBrush = new SolidColorBrush(Color.FromRgb(247, 28, 28));
+                                b.Background = color5;
+                                b.BorderBrush = color6;
                                 break;
                         }
 
@@ -130,9 +168,9 @@ namespace Airport_Management_System
                         TextBlock tb = new TextBlock()
                         {
                             Text = $"{g.GateName}",
-                            FontFamily = new FontFamily("Ubuntu"),
+                            FontFamily = ubuntu,
                             FontSize = 17,
-                            Padding = new Thickness(22, 13.5, 0, 0),
+                            Padding = pad1,
                         };
 
                         b.Child = tb;
@@ -168,9 +206,9 @@ namespace Airport_Management_System
                         {
                             Height = 34,
                             Text = $"{gate.gateName}   |   {gate.gateDetails}",
-                            FontFamily = new FontFamily("Ubuntu"),
+                            FontFamily = ubuntu,
                             FontSize = 16,
-                            Padding = new Thickness(15, 9, 0, 0)
+                            Padding = pad
                         };
                         occupiedGates.Children.Add(tb);
                     }
@@ -225,8 +263,8 @@ namespace Airport_Management_System
                     TextBlock tb = new TextBlock()
                     {
                         Text = $"{f.flightNum} - {f.assignMode}",
-                        Padding = new Thickness(10, 13, 0, 0),
-                        FontFamily = new FontFamily("Ubuntu"),
+                        Padding = p,
+                        FontFamily = ubuntu,
                         FontSize = 16
                     };
 
@@ -234,7 +272,7 @@ namespace Airport_Management_System
 
                     b.MouseEnter += (sender, e) =>
                     {
-                        b.Background = new SolidColorBrush(Color.FromRgb(233, 233, 233));
+                        b.Background = grayish;
                     };
 
                     b.MouseLeave += (sender, e) =>
@@ -253,7 +291,7 @@ namespace Airport_Management_System
                             flight.Text = f.flightNum;
                             purpose.Text = f.assignMode;
                             dashLine.Text = "/";
-                            b.Background = new SolidColorBrush(Color.FromRgb(233, 233, 233));
+                            b.Background = grayish;
                             chosenFlight = b;
                         }
                         else
@@ -417,10 +455,10 @@ namespace Airport_Management_System
                 Height = 58,
                 Width = 139,
                 TextWrapping = TextWrapping.Wrap,
-                FontFamily = new FontFamily("Ubuntu"),
+                FontFamily = ubuntu,
                 FontSize = 19,
                 FontWeight = FontWeights.Medium,
-                Padding = new Thickness(20, 25, 0, 0),
+                Padding = terminalHeaderPad,
                 Text = text
             };
             Grid.SetColumnSpan(terminalHeader, 2);

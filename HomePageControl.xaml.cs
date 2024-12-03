@@ -22,10 +22,10 @@ namespace Airport_Management_System
     {
         public bool appIsRunning { get; set; }
 
-        private Border defaultAlertMessage;
+        private readonly Border defaultAlertMessage;
 
         private int alerts = 0;
-        private Dictionary<string, Border> alertsMap = new Dictionary<string, Border>();
+        private readonly Dictionary<string, Border> alertsMap = new Dictionary<string, Border>();
 
         private int alertsRow = 165;
         private int actsRow = 280;
@@ -42,31 +42,31 @@ namespace Airport_Management_System
 
         // ------------------------------------- DEFAULT, REUSABLE ELEMENTS ------------------------------------- //
 
-        Thickness actPadding = new Thickness(50, 3, 0, 0);
-        Thickness actMargin = new Thickness(0, 0, 0, 5);
-        SolidColorBrush actColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF6D6D6D"));
+        private readonly Thickness actPadding = new Thickness(50, 3, 0, 0);
+        private readonly Thickness actMargin = new Thickness(0, 0, 0, 5);
+        private readonly SolidColorBrush actColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF6D6D6D"));
 
-        SolidColorBrush greenAlertBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFCFCF"));
-        SolidColorBrush redAlertBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF91FFAF"));
+        private readonly SolidColorBrush greenAlertBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFCFCF"));
+        private readonly SolidColorBrush redAlertBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF91FFAF"));
 
-        CornerRadius alertBorderRadius = new CornerRadius(5);
-        Thickness alertMarginThickness = new Thickness(40, 0, 40, 9);
+        private readonly CornerRadius alertBorderRadius = new CornerRadius(5);
+        private readonly Thickness alertMarginThickness = new Thickness(40, 0, 40, 9);
 
-        FontFamily ubuntu = new FontFamily("Ubuntu");
+        private readonly FontFamily ubuntu = new FontFamily("Ubuntu");
 
-        Thickness marginThickness = new Thickness(61, 0, 51, 0);
-        Thickness paddingThickness = new Thickness(0, 3, 0, 0);
+        private readonly Thickness marginThickness = new Thickness(61, 0, 51, 0);
+        private readonly Thickness paddingThickness = new Thickness(0, 3, 0, 0);
 
-        SolidColorBrush alertTextForeground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF1EA843"));
+        private readonly SolidColorBrush alertTextForeground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF1EA843"));
 
-        Thickness alertIconMargin = new Thickness(15, 0, 0, 0);
-        BitmapImage alertIconImage = new BitmapImage(new Uri("pack://application:,,,/Icons/alert-icon.png"));
-        BitmapImage alertDeleteIconImage = new BitmapImage(new Uri("pack://application:,,,/Icons/delete-icon.png"));
-        Thickness alertDeleteIconMargin = new Thickness(0, 0, 25, 0);
+        private readonly Thickness alertIconMargin = new Thickness(15, 0, 0, 0);
+        private readonly BitmapImage alertIconImage = new BitmapImage(new Uri("pack://application:,,,/Icons/alert-icon.png"));
+        private readonly BitmapImage alertDeleteIconImage = new BitmapImage(new Uri("pack://application:,,,/Icons/delete-icon.png"));
+        private readonly Thickness alertDeleteIconMargin = new Thickness(0, 0, 25, 0);
 
         // ------------------------------------------------------------------------------------------------------ //
 
-        private MainWindow window;
+        private readonly MainWindow window;
 
         public HomePageControl(MainWindow window)
         {
@@ -134,13 +134,9 @@ namespace Airport_Management_System
                     }
                 });
             }
-            catch (TaskCanceledException)
+            catch (Exception)
             {
-                // Suppress Task Cancelled Exception
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Source} Query stats", "Exception", MessageBoxButton.OK);
+                // Supress
             }
         }
 
@@ -287,7 +283,7 @@ namespace Airport_Management_System
         {
             TextBlock act = new TextBlock
             {
-                Text = $"{DateTime.Now.ToString("HH:mm:ss")} - {activityText}",
+                Text = $"{DateTime.Now:HH:mm:ss} - {activityText}",
                 FontFamily = ubuntu,
                 FontSize = 17,
                 Foreground = actColor,
@@ -370,13 +366,9 @@ namespace Airport_Management_System
 
                 });
             }
-            catch(TaskCanceledException)
+            catch (Exception)
             {
-                // Supress Task Cancelled Exception
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message} Query Alerts", "Exception", MessageBoxButton.OK);
+                // Supress
             }
         }
 

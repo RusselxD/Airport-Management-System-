@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="998">
     <Grid Background="#FFF6F6F6">
-        <TextBlock Height="59" TextWrapping="Wrap" Text="Home" VerticalAlignment="Top" Foreground="White" Background="#FF0B8ABF" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
+        <TextBlock Height="59" TextWrapping="Wrap" Text="Services" VerticalAlignment="Top" Foreground="White" Background="#FF189881" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
         <ScrollViewer Margin="0,59,0,0" Focusable="False">
             <Grid x:Name="dashboardInnerGrid">
@@ -15,7 +15,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="294"/>
                     <RowDefinition Height="304"/>
-                    <RowDefinition Height="202"/>
+                    <RowDefinition Height="343"/>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0" CornerRadius="15" Margin="65,35,65,25" Background="White">
@@ -69,32 +69,54 @@
 
                         <Border Grid.Row="1" Margin="40,0,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="54" >
                             <Grid>
-                                <TextBlock Text="Security Checkpoint A" FontFamily="Ubuntu" FontSize="20" Padding="20,15,0,0" HorizontalAlignment="Left" Width="386"/>
-                                <Label Content="15 min wait" FontFamily="Ubuntu" FontSize="20" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FF08A02F"/>
+                                <TextBlock Text="Security Checkpoint A" FontFamily="Ubuntu" FontSize="19" Padding="20,16,0,0" HorizontalAlignment="Left" Width="386"/>
+                                <Label Content="15 min wait" FontFamily="Ubuntu" FontSize="19" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FF08A02F"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="1" Margin="40,70,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="54" >
                             <Grid>
-                                <TextBlock Text="Security Checkpoint B" FontFamily="Ubuntu" FontSize="20" Padding="20,15,0,0" HorizontalAlignment="Left" Width="386"/>
-                                <Label Content="25 min wait" FontFamily="Ubuntu" FontSize="20" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FFFF8D19"/>
+                                <TextBlock Text="Security Checkpoint B" FontFamily="Ubuntu" FontSize="19" Padding="20,16,0,0" HorizontalAlignment="Left" Width="386"/>
+                                <Label Content="25 min wait" FontFamily="Ubuntu" FontSize="19" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FFFF8D19"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="1" Margin="40,140,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="54" >
                             <Grid>
-                                <TextBlock Text="Security Checkpoint C" FontFamily="Ubuntu" FontSize="20" Padding="20,15,0,0" HorizontalAlignment="Left" Width="386"/>
-                                <Label Content="10 min wait" FontFamily="Ubuntu" FontSize="20" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FF08A02F"/>
+                                <TextBlock Text="Security Checkpoint C" FontFamily="Ubuntu" FontSize="19" Padding="20,16,0,0" HorizontalAlignment="Left" Width="386"/>
+                                <Label Content="10 min wait" FontFamily="Ubuntu" FontSize="19" HorizontalAlignment="Right" Width="386" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="5,5,20,5" Foreground="#FF08A02F"/>
                             </Grid>
                         </Border>
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="2" BorderThickness="1" Margin="65,0,65,38" Background="#FFCBF0FF" CornerRadius="15,15,15,15">
-                    <Grid >
+                <Border Grid.Row="2" Background="White" Margin="65,0,65,25" CornerRadius="15">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="71*"/>
+                            <RowDefinition Height="208*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Lost and Found" FontFamily="Ubuntu" FontSize="25" FontWeight="Medium" Padding="40,30,0,0" Margin="0,0,0,10"></TextBlock>
+
+                        <Border Grid.Row="1" Margin="40,0,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="45" >
+                            <TextBlock Text="Blue Backpack - Found at Gate A2 (10:30)" FontFamily="Ubuntu" FontSize="16" Padding="20,14.5,5,5"></TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="40,55,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="45" >
+                            <TextBlock Text="White Earbuds - Found at Baggage Claim (18:10)" FontFamily="Ubuntu" FontSize="16" Padding="20,14.5,5,5"></TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="40,110,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="45" >
+                            <TextBlock Text="Phone Charger - Found at Security (11:15)" FontFamily="Ubuntu" FontSize="16" Padding="20,14.5,5,5"></TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1" Margin="40,165,40,0" Background="#FFF9F9F9" CornerRadius="8,8,8,8" VerticalAlignment="Top" Height="45" >
+                            <TextBlock Text="Red Umbrella - Found at Gate 1C (09:15)" FontFamily="Ubuntu" FontSize="16" Padding="20,14.5,5,5"></TextBlock>
+                        </Border>
 
                     </Grid>
                 </Border>
+
 
             </Grid>
         </ScrollViewer>
