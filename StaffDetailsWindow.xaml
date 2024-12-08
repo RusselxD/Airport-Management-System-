@@ -16,7 +16,7 @@
                 <Label x:Name="status" Content="On Duty"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Ubuntu" FontSize="18" Background="#FFE6E6E6" VerticalAlignment="Top" Height="53" HorizontalAlignment="Right" Width="117" Margin="0,30,0,0"/>
 
                 <Border Height="158" VerticalAlignment="Top" Margin="157,30,157,0" Width="160" >
-                    <Image Source="/Icons/sample-picture.png"/>
+                    <Image x:Name="picture" />
                 </Border>
 
                 <Label x:Name="name" Content="FirstName LastName" HorizontalAlignment="Center" Margin="0,198,0,0" FontWeight="Medium" VerticalAlignment="Top" Width="474" Height="62" FontFamily="Ubuntu" FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

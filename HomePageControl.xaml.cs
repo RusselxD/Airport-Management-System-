@@ -119,7 +119,7 @@ namespace Airport_Management_System
                             await Dispatcher.InvokeAsync(() =>
                             {
                                 activeFlightsCount.Text = totals[0].ToString();
-                                occupiedGatesCount.Text = $"{totals[1]}/15";
+                                occupiedGatesCount.Text = $"{totals[1]}";
                                 staffOnDutyCount.Text = totals[2].ToString();
                             });
                         }
@@ -575,7 +575,13 @@ namespace Airport_Management_System
 
         public void Refresh_Gate_And_Flight_Controls()
         {
-            window.Refresh_Flight_And_Gate_Controls();
+            window.Refresh_Flight_Control();
+            window.Refresh_Gate_Control();
+        }
+
+        public void Refresh_Flight_Control()
+        {
+            window.Refresh_Flight_Control();
         }
     }
 }

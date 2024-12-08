@@ -60,11 +60,11 @@
 
                         </Border>
 
-                        <TextBlock Margin="0,14,285,0" Text="Role" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="210"></TextBlock>
+                        <TextBlock Margin="0,14,285,0" Text="Role" FontFamily="Ubuntu" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Width="210"></TextBlock>
                         <Border x:Name="RoleDropDown" Width="210" Margin="0,33,285,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right">
                             <Grid>
 
-                                <TextBlock x:Name="roleFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="16" Padding="10,10.5,0,0"/>
+                                <TextBlock x:Name="roleFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="15" Padding="10,11,0,0"/>
 
                                 <Border MouseDown="Role_DropDown_Click" Margin="128, 0, 0, 0" HorizontalAlignment="Right" Cursor="Hand" Background="White" CornerRadius="0,8,8,0">
                                     <Polygon x:Name="RoleDropDownArrow" Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -73,11 +73,11 @@
                             </Grid>
                         </Border>
 
-                        <TextBlock Margin="0,14,150,0" Text="Shift" FontFamily="Ubuntu" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" Width="125"></TextBlock>
+                        <TextBlock Margin="0,14,150,0" Text="Shift" FontFamily="Ubuntu" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Top" Width="125"></TextBlock>
                         <Border x:Name="ShiftsDropDown" Margin="0,33,150,33" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Right" Width="125">
                             <Grid>
 
-                                <TextBlock x:Name="shiftFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="16" Padding="10,10.5,0,0" Grid.ColumnSpan="2"/>
+                                <TextBlock x:Name="shiftFilter" Margin="0,0,39,0" Text="All" FontFamily="Ubuntu" FontSize="15" Padding="10,11,0,0" Grid.ColumnSpan="2"/>
 
                                 <Border MouseDown="Shift_DropDown_Click" Margin="84,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Background="White" CornerRadius="0,8,8,0" Width="39">
                                     <Polygon Points="20,26 10,11 30,11" Fill="Black" Width="39"/>
@@ -114,28 +114,27 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1.15*"/>
                                     <ColumnDefinition Width="1.2*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.8*"/>
+                                    <ColumnDefinition Width="0.9*"/>
                                     <ColumnDefinition Width="0.9*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" FontWeight="SemiBold" TextWrapping="Wrap" Text="Name" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="20,16,0,0"/>
-                                <TextBlock Grid.Column="1" FontWeight="SemiBold" TextWrapping="Wrap" Text="Role" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0" />
-                                <TextBlock Grid.Column="2" FontWeight="SemiBold" TextWrapping="Wrap" Text="Shift" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
-                                <TextBlock Grid.Column="3" FontWeight="SemiBold" TextWrapping="Wrap" Text="Status" Foreground="Black" FontFamily="Ubuntu" FontSize="20" Padding="0,16,0,0"/>
+                                <TextBlock Grid.Column="0" FontWeight="SemiBold" TextWrapping="Wrap" Text="Name" Foreground="Black" FontFamily="Ubuntu" FontSize="18" Padding="20,17,0,0"/>
+                                <TextBlock Grid.Column="1" FontWeight="SemiBold" TextWrapping="Wrap" Text="Role" Foreground="Black" FontFamily="Ubuntu" FontSize="18" Padding="0,17,0,0" />
+                                <TextBlock Grid.Column="2" FontWeight="SemiBold" TextWrapping="Wrap" Text="Shift" Foreground="Black" FontFamily="Ubuntu" FontSize="18" Padding="0,17,0,0"/>
+                                <TextBlock Grid.Column="3" FontWeight="SemiBold" TextWrapping="Wrap" Text="Status" Foreground="Black" FontFamily="Ubuntu" FontSize="18" Padding="0,17,0,0"/>
 
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="1">
-                            <StackPanel x:Name="staffsPanel">
-                                <!--Staffs are added here-->
+                            <StackPanel x:Name="staffsPanel" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                <!-- Staff items will be added here -->
                             </StackPanel>
                         </Border>
-
                     </Grid>
-
                 </Border>
-                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" BorderThickness="1" HorizontalAlignment="Right" Height="0" Margin="0,94,352,0" VerticalAlignment="Top" Width="207" BorderBrush="Black" Grid.RowSpan="2">
+                <Border x:Name="Roles" CornerRadius="0, 0, 0, 5" Background="White" Panel.ZIndex="5" BorderThickness="1" Grid.RowSpan="2" HorizontalAlignment="Right" Height="0" Margin="0,94,350,0" VerticalAlignment="Top" Width="210" BorderBrush="Black">
                     <Grid >
                         <ScrollViewer>
                             <Grid>
@@ -433,7 +432,6 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-
                     </Grid>
                 </Border>
 
@@ -497,12 +495,8 @@
                             </TextBlock>
                         </Grid>
                     </ScrollViewer>
-
-
-
                 </Border>
             </Grid>
-
         </ScrollViewer>
     </Grid>
 </UserControl>

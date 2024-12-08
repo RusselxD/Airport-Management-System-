@@ -23,7 +23,6 @@ namespace Airport_Management_System
     /// </summary>
     public partial class ReportControl : UserControl
     {
-
         public ReportControl(SqlConnection sqlConnection)
         {
             InitializeComponent();
@@ -72,7 +71,6 @@ namespace Airport_Management_System
         // afternoon on duty count
         // night on duty count
 
-
         private async Task QueryStats(CancellationToken token)
         {
             try
@@ -81,20 +79,27 @@ namespace Airport_Management_System
                 {
                     while (!token.IsCancellationRequested)
                     {
-                        for (int i = 0; i < vvvv.Length; i++)
+                        try
                         {
-                            SqlDataReader countReader = null;
-                            SqlCommand countQuery = new SqlCommand(flightsDataQueries[i], MainWindow.sqlConnection);
-
-                            using (countReader = await countQuery.ExecuteReaderAsync(token))
+                            for (int i = 0; i < vvvv.Length; i++)
                             {
-                                while (await countReader.ReadAsync())
+                                SqlDataReader countReader = null;
+                                SqlCommand countQuery = new SqlCommand(flightsDataQueries[i], MainWindow.sqlConnection);
+
+                                using (countReader = await countQuery.ExecuteReaderAsync(token))
                                 {
-                                    vvvv[i] = Convert.ToInt32(countReader[0]);
+                                    while (await countReader.ReadAsync())
+                                    {
+                                        vvvv[i] = Convert.ToInt32(countReader[0]);
+                                    }
                                 }
                             }
                         }
-
+                        catch (Exception ex)
+                        {
+                            break;
+                        }
+                        
                         int t = vvvv[0] + vvvv[1];
 
                         double p = (double)vvvv[2] / (vvvv[2] + vvvv[3]) * 100;
@@ -151,9 +156,8 @@ namespace Airport_Management_System
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                // Supress
             }
-            
         }
     }
 }

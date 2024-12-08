@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
-        mc:Ignorable="d" Icon="/Icons/app-icon.ico"
-        Title="MainWindow" Height="800" Width="1200">
+        mc:Ignorable="d" Icon="/Icons/app-icon.ico" UseLayoutRounding="False"
+        Title="MainWindow" Height="800" Width="1200" MinWidth="1150">
 
     <Grid>
         <Grid.ColumnDefinitions>

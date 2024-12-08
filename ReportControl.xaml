@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Airport_Management_System"
-             mc:Ignorable="d" d:DesignWidth="998" Height="800">
-    <Grid >
+             mc:Ignorable="d" d:DesignWidth="998" d:DesignHeight="800">
+    <Grid Background="#FFF6F6F6">
         <TextBlock Height="59" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Foreground="White" Background="#FF046892" FontFamily="Ubuntu" FontWeight="Bold" FontSize="23" Padding="25,18,0,0"/>
 
         <ScrollViewer Margin="0,59,0,0" Focusable="False">
-            <Grid Background="#FFF6F6F6" Height="1160">
+            <Grid Height="1160">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="363*"/>
                     <ColumnDefinition Width="128*"/>
@@ -67,9 +67,9 @@
 
                         <TextBlock Grid.Row="0" Text="Gate Utilization" FontFamily="Ubuntu" FontSize="25" FontWeight="Bold" Padding="30,25,0,0" Margin="0,0,227,0"></TextBlock>
 
-                        <TextBlock Grid.Row="1" Text="Terminal 1" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,700,0"></TextBlock>
-                        <TextBlock Grid.Row="2" Text="Terminal 2" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,700,0"></TextBlock>
-                        <TextBlock Grid.Row="3" Text="Terminal 3" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,700,0"></TextBlock>
+                        <TextBlock Grid.Row="1" Text="Terminal 1" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,583,0"></TextBlock>
+                        <TextBlock Grid.Row="1" Text="Terminal 2" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,57,583,57" Grid.RowSpan="3"></TextBlock>
+                        <TextBlock Grid.Row="3" Text="Terminal 3" FontFamily="Ubuntu" FontSize="18" Padding="30,10,0,0" Margin="0,0,583,0"></TextBlock>
 
                         <ProgressBar x:Name="terminal1Bar" Grid.Row="1" Margin="140, 3, 90, 20" Background="#FFFAFAFA" Foreground="#FF27ABE2" BorderBrush="{x:Null}" ></ProgressBar>
                         <ProgressBar x:Name="terminal2Bar" Grid.Row="2" Margin="140, 3, 90, 20" Background="#FFFAFAFA" Foreground="#FF27ABE2" BorderBrush="{x:Null}" ></ProgressBar>
@@ -95,7 +95,7 @@
 
                         <Border Grid.Row="1" Margin="35,5,35,0" Background="#FFFAFAFA" CornerRadius="5,5,5,5" VerticalAlignment="Top" Height="50">
                             <Grid>
-                                <Label Margin="30,0,476,0" FontFamily="Ubuntu" Content=" Morning Shift (6:00 - 14:00):" FontSize="18" VerticalContentAlignment="Center"/>
+                                <Label Margin="30,0,389,0" FontFamily="Ubuntu" Content="Morning Shift (6:00 - 14:00):" FontSize="18" VerticalContentAlignment="Center"/>
                                 <Label x:Name="morningStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" HorizontalContentAlignment="Right" Margin="0,0,30,0"/>
 
                             </Grid>
@@ -103,7 +103,7 @@
 
                         <Border Grid.Row="1" Margin="35,67,35,339" Background="#FFFAFAFA" CornerRadius="5,5,5,5" VerticalAlignment="Top" Height="50">
                             <Grid>
-                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Afternoon Shift (14:00 - 22:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Afternoon Shift (14:00 - 22:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="300"/>
                                 <Label x:Name="afternoonStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" Margin="0,0,30,0" HorizontalContentAlignment="Right"/>
 
                             </Grid>
@@ -111,7 +111,7 @@
 
                         <Border Grid.Row="1" Margin="35,129,35,256" VerticalAlignment="Top" Height="50" Background="#FFFAFAFA">
                             <Grid>
-                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Night Shift (22:00 - 6:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label Margin="30,0,0,0" FontFamily="Ubuntu" Content="Night Shift (22:00 - 6:00):" FontSize="18" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="327"/>
                                 <Label x:Name="nightStaffs" Content="8 Staff Members" HorizontalAlignment="Right" FontWeight="Medium" FontFamily="Ubuntu" FontSize="18" VerticalContentAlignment="Center" Foreground="#FF1BC01F" Width="182" Margin="0,0,30,0" HorizontalContentAlignment="Right"/>
 
                             </Grid>

@@ -80,10 +80,9 @@ namespace Airport_Management_System
                             flight.Add(departureReader[5].ToString());
                             flight.Add(departureReader[6].ToString());
 
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                departures.Add(flight);
-                            });
+
+                            departures.Add(flight);
+
                         }
                     };
                 });
@@ -112,10 +111,9 @@ namespace Airport_Management_System
                             flight.Add(arrivalReader[4].ToString());
                             flight.Add(arrivalReader[5].ToString());
                             flight.Add(arrivalReader[6].ToString());
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                arrivals.Add(flight);
-                            });
+
+                            arrivals.Add(flight);
+
                         }
                     };
                 });
@@ -173,7 +171,7 @@ namespace Airport_Management_System
                     string flight = "";
                     await Dispatcher.InvokeAsync(() =>
                     {
-                         flight = searchBox.Text.ToUpper();
+                        flight = searchBox.Text.ToUpper();
                     });
 
                     using (SqlCommand findFlightQuery = new SqlCommand($"SELECT * FROM departure_flights WHERE flight = @Flight", MainWindow.sqlConnection))
@@ -194,7 +192,7 @@ namespace Airport_Management_System
                             }
                         }
                     }
-                    
+
 
                     using (SqlCommand findFlightQuery = new SqlCommand($"SELECT * FROM arrival_flights WHERE flight = @Flight", MainWindow.sqlConnection))
                     {
@@ -214,7 +212,7 @@ namespace Airport_Management_System
                             }
                         }
                     }
-                    
+
                 });
             }
             catch (Exception ex)
@@ -223,13 +221,13 @@ namespace Airport_Management_System
                 return;
             }
 
-            if(details.Count == 0)
+            if (details.Count == 0)
             {
                 await Dispatcher.InvokeAsync(() =>
                 {
                     MessageBox.Show("No Flights Found.", "No Result", MessageBoxButton.OK, MessageBoxImage.Information);
                 });
-            } 
+            }
             else
             {
                 await Dispatcher.InvokeAsync(() =>

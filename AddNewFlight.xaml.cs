@@ -37,18 +37,131 @@ namespace Airport_Management_System
             Duration = TimeSpan.FromMilliseconds(300)
         };
 
+        DoubleAnimation showAirlineChoices = new DoubleAnimation()
+        {
+            Duration = TimeSpan.FromMilliseconds(300)
+        };
+
         private HomePageControl homePage;
 
         public AddNewFlight(HomePageControl homePage)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            ewan();
+            AddTerminals();
+            AddAirlines();
             Show();
             this.homePage = homePage;
         }
 
-        private void ewan()
+        Dictionary<string, string> airlines = new Dictionary<string, string>
+        {
+            { "Aeroflot", "SU" },
+            { "Air Canada", "AC" },
+            { "Air France", "AF" },
+            { "Air India", "AI" },
+            { "Air New Zealand", "NZ" },
+            { "All Nippon Airways", "NH" },
+            { "American Airlines", "AA" },
+            { "Austrian Airlines", "OS" },
+            { "British Airways", "BA" },
+            { "Cathay Pacific", "CX" },
+            { "Delta Air Lines", "DL" },
+            { "El Al", "LY" },
+            { "Emirates", "EK" },
+            { "Ethiopian Airlines", "ET" },
+            { "Etihad Airways", "EY" },
+            { "Finnair", "AY" },
+            { "Iberia", "IB" },
+            { "Japan Airlines", "JL" },
+            { "KLM", "KL" },
+            { "Korean Air", "KE" },
+            { "Lufthansa", "LH" },
+            { "Malaysia Airlines", "MH" },
+            { "Philippine Airlines", "PR" },
+            { "Qantas", "QF" },
+            { "Qatar Airways", "QR" },
+            { "Singapore Airlines", "SQ" },
+            { "South African Airways", "SA" },
+            { "Turkish Airlines", "TK" },
+            { "United Airlines", "UA" },
+            { "Virgin Atlantic", "VS" }
+        };
+
+        private void AddAirlines()
+        {
+            Style style = new Style(typeof(TextBlock));
+            Trigger trigger = new Trigger
+            {
+                Property = UIElement.IsMouseOverProperty,
+                Value = true
+            };
+            trigger.Setters.Add(new Setter(TextBlock.BackgroundProperty, new SolidColorBrush(Color.FromRgb(232, 232, 232))));
+            style.Triggers.Add(trigger);
+
+            foreach (string s in airlines.Keys)
+            {
+                TextBlock tb = new TextBlock()
+                {
+                    FontFamily = new FontFamily("Ubuntu"),
+                    FontSize = 14,
+                    Padding = new Thickness(10, 9, 0, 9),
+                    Cursor = Cursors.Hand,
+                    Text = s
+                };
+
+                tb.Style = style;
+                tb.MouseDown += Choose_Airline;
+                airlinesChoicesStack.Children.Add(tb);
+            }
+        }
+
+        private bool airlineChoicesIsOpen = false;
+
+        private string chosenAirline;
+
+        private void Open_Airline_Choices(object sender, MouseButtonEventArgs e)
+        {
+            if (airlineChoicesIsOpen)
+            {
+                showAirlineChoices.From = 105;
+                showAirlineChoices.To = 0;
+            }
+            else
+            {
+                showAirlineChoices.From = 0;
+                showAirlineChoices.To = 105;
+                flightNumberBorder.CornerRadius = new CornerRadius(8, 8, 8, 0);
+            }
+
+            airlineChoicesIsOpen = !airlineChoicesIsOpen;
+
+            showAirlineChoices.Completed += (s, args) =>
+            {
+                if (!airlineChoicesIsOpen)
+                {
+                    flightNumberBorder.CornerRadius = new CornerRadius(8);
+                }
+            };
+
+            airlineChoices.BeginAnimation(Border.HeightProperty, showAirlineChoices);
+        }
+
+        private void Choose_Airline(object sender, MouseButtonEventArgs e)
+        {
+            string airlineName = (sender as TextBlock).Text;
+            chosenAirline = airlineName;
+            airlineIATACode.Text = airlines[airlineName];
+
+            showAirlineChoices.From = 105;
+            showAirlineChoices.To = 0;
+
+            airlineChoicesIsOpen = !airlineChoicesIsOpen;
+
+            airlineChoices.BeginAnimation(Border.HeightProperty, showAirlineChoices);
+        }
+
+        private void AddTerminals()
         {
             string[] endPointTerminals = new string[]
             {
@@ -113,7 +226,6 @@ namespace Airport_Management_System
 
                 endPointChoicesStack.Children.Add(tb);
             }
-
         }
 
         DoubleAnimation showEndPointChoices = new DoubleAnimation()
@@ -338,16 +450,17 @@ namespace Airport_Management_System
 
             string table = departure.IsChecked == true ? "departure_flights" : "arrival_flights";
 
-            string insertQuery = $"INSERT INTO {table} VALUES (@Value1, @Value2, @Value3, @Value4, @Value5, @Value6, @Value7)";
+            string insertQuery = $"INSERT INTO {table} VALUES (@Value1, @Value2, @Value3, @Value4, @Value5, @Value6, @Value7, @Value8)";
 
             // Values to insert
-            string val1 = flightNumber.Text;
+            string val1 = $"{airlineIATACode.Text}{flightNumber.Text}";
             string val2 = endPoint.Text;
             string val3 = $"{hour.Text}:{minute.Text}";
             string val4 = status.Text;
             string val5 = gate.Text;
             string val6 = terminal.Text;
             int val7 = gatesMap[val5];
+            string val8 = chosenAirline;
 
             try
             {
@@ -360,15 +473,18 @@ namespace Airport_Management_System
                     command.Parameters.AddWithValue("@Value5", val5);
                     command.Parameters.AddWithValue("@Value6", val6);
                     command.Parameters.AddWithValue("@Value7", val7);
+                    command.Parameters.AddWithValue("@Value8", val8);
 
                     int success = command.ExecuteNonQuery();
                     if (success == 1)
                     {
+                        homePage.Refresh_Flight_Control();
                         string a = departure.IsChecked == true ? "Departures" : "Arrivals";
                         homePage.addRecentAct($"Added Flilght {val1} to {a}.");
 
                         MessageBox.Show("Flight successfully added.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                        airlineIATACode.Text = "";
                         flightNumber.Text = "";
                         endPoint.Text = "";
                         hour.Text = "";
@@ -377,13 +493,11 @@ namespace Airport_Management_System
                         gate.Text = "";
                         terminal.Text = "";
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

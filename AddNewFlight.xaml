@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
         mc:Ignorable="d"
-        Title="AddNewFlight" Height="557" Width="451" ResizeMode="NoResize">
+        Title="Add New Flight" Height="557" Width="451" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="BorderBrush" Value="#FFB4B4B4"/>
@@ -32,10 +32,34 @@
             <ColumnDefinition Width="390*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Margin="27,20,0,0" Text="Add New Flight" VerticalAlignment="Top" FontFamily="Ubuntu" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2"/>
-        
+
         <TextBlock HorizontalAlignment="Left" Height="19" Margin="29,99,0,0" TextWrapping="Wrap" Text="Flight Number" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
-        <Border BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,120,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
-            <TextBox TextWrapping="Wrap" x:Name="flightNumber" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+        <Border x:Name="flightNumberBorder" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="27,120,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
+            <Grid>
+                <Border MouseDown="Open_Airline_Choices" Cursor="Hand" Margin="0,0,195,0" BorderBrush="Transparent" BorderThickness="0.5" CornerRadius="5,0,0,5"  >
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <!-- Default Background -->
+                            <Setter Property="Background" Value="Transparent" />
+                            <!-- Hover Effect -->
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFF0F0F0" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
+                    <TextBlock x:Name="airlineIATACode" TextWrapping="Wrap" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" />
+                </Border>
+
+                <TextBox TextWrapping="Wrap" x:Name="flightNumber" MaxLength="3" BorderBrush="Transparent" Background="{x:Null}" Padding="10,7,0,0" FontFamily="Ubuntu" FontSize="15" Margin="196,0,0,0" />
+            </Grid>
+        </Border>
+        <Border x:Name="airlineChoices" Panel.ZIndex="25" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="0" Margin="27,154,0,0" VerticalAlignment="Top" Width="196" Background="White" Grid.ColumnSpan="2">
+            <ScrollViewer>
+                <StackPanel x:Name="airlinesChoicesStack" />
+            </ScrollViewer>
         </Border>
 
         <TextBlock x:Name="endPointLabel" HorizontalAlignment="Left" Height="19" Margin="29,169,0,0" TextWrapping="Wrap" Text="Destination" FontWeight="Medium" VerticalAlignment="Top" Width="169" FontFamily="Ubuntu" FontSize="15" Grid.ColumnSpan="2"/>
@@ -303,7 +327,7 @@
         <Border Panel.ZIndex="5" BorderBrush="#FF686868" BorderThickness="0.5" HorizontalAlignment="Left" Height="34" Margin="168,400,0,0" VerticalAlignment="Top" Width="190" CornerRadius="5,5,5,5" Grid.Column="1">
             <TextBlock x:Name="terminal" TextWrapping="Wrap" Background="{x:Null}" Padding="10,8,0,0" FontFamily="Ubuntu" FontSize="15" />
         </Border>
-        
+
         <Border BorderBrush="#FF111827" Cursor="Hand" BorderThickness="1" MouseDown="Add_New_Flight" HorizontalAlignment="Left" Height="40" Margin="27,460,0,0" VerticalAlignment="Top" Width="392" CornerRadius="5,5,5,5" Grid.ColumnSpan="2">
             <Border.Style>
                 <Style TargetType="Border">
