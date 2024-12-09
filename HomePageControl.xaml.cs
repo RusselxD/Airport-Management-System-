@@ -81,57 +81,43 @@ namespace Airport_Management_System
             AlertsPanel.Children.Add(defaultAlertMessage);
 
             Task.Run(() => QueryAlertsTable(MainWindow.cts.Token));
-            Task.Run(() => QueryStats(MainWindow.cts.Token));
+            Task.Run(() => RefreshStats(MainWindow.cts.Token));
 
             RecentActivitiesPanel.Children.Add(GetRecentActivityText("Logged in as airport_admin"));
         }
 
-        private async void QueryStats(CancellationToken token)
+        public async void RefreshStats(CancellationToken token)
         {
             try
             {
                 await Task.Run(async () =>
                 {
-                    while (!token.IsCancellationRequested)
+                    int[] totals = new int[3];
+                    string[] queries = new string[3]
                     {
-                        try
-                        {
-                            int[] totals = new int[3];
-                            string[] queries = new string[3]
-                            {
                             "SELECT (SELECT COUNT(1) FROM departure_flights) + (SELECT COUNT(1) FROM arrival_flights WHERE NOT flight_status = 'Landed');",
                             "SELECT COUNT(1) FROM gates_table WHERE status_col = 3;",
                             "SELECT COUNT(1) FROM staffs_table WHERE status_col = 'On Duty';"
-                            };
+                    };
 
-                            for (int i = 0; i < 3; i++)
-                            {
-                                using (SqlCommand activeFlightsQuery = new SqlCommand(queries[i], MainWindow.sqlConnection))
-                                using (SqlDataReader activeFlightsReader = await activeFlightsQuery.ExecuteReaderAsync(token))
-                                {
-                                    while (await activeFlightsReader.ReadAsync(token))
-                                    {
-                                        totals[i] = Convert.ToInt16(activeFlightsReader[0]);
-                                    }
-                                }
-                            }
-
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                activeFlightsCount.Text = totals[0].ToString();
-                                occupiedGatesCount.Text = $"{totals[1]}";
-                                staffOnDutyCount.Text = totals[2].ToString();
-                            });
-                        }
-                        catch (TaskCanceledException)
+                    for (int i = 0; i < 3; i++)
+                    {
+                        using (SqlCommand activeFlightsQuery = new SqlCommand(queries[i], MainWindow.sqlConnection))
+                        using (SqlDataReader activeFlightsReader = await activeFlightsQuery.ExecuteReaderAsync(token))
                         {
-                            break;
+                            while (await activeFlightsReader.ReadAsync(token))
+                            {
+                                totals[i] = Convert.ToInt16(activeFlightsReader[0]);
+                            }
                         }
-
-                        if (token.IsCancellationRequested) break;
-
-                        await Task.Delay(1000, token);
                     }
+
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        activeFlightsCount.Text = totals[0].ToString();
+                        occupiedGatesCount.Text = $"{totals[1]}";
+                        staffOnDutyCount.Text = totals[2].ToString();
+                    });
                 });
             }
             catch (Exception)
@@ -202,16 +188,6 @@ namespace Airport_Management_System
 
             // ---------------------------------------------------------------------------- //
 
-            // ------------------------- DEFAULT, REUSABLE ELEMENTS ------------------------- // 
-
-
-
-
-
-
-
-            // ------------------------------------------------------------------------------ //
-
             // --------------------------------  ANIMATIONS  -------------------------------- //
 
             this.alertHeightAnimation = new DoubleAnimation
@@ -247,10 +223,9 @@ namespace Airport_Management_System
                 HorizontalAlignment = HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Top,
                 Width = 29,
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                Style = this.deleteIconStyle
             };
-
-            this.deleteAllIcon.Style = this.deleteIconStyle;
             this.deleteAllIcon.MouseDown += Delete_All_Alert;
         }
 
@@ -356,7 +331,7 @@ namespace Airport_Management_System
                             {
                                 break;
                             }
-                            
+
                             if (token.IsCancellationRequested)
                                 break;
 

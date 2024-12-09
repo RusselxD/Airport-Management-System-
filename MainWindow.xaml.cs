@@ -77,10 +77,10 @@ namespace Airport_Management_System
 
             homePageControl = new HomePageControl(this);
             flightsControl = new FlightsControl();
-            servicesControl = new ServicesControl(sqlConnection);
+            servicesControl = new ServicesControl();
             gatesControl = new GatesControl();
-            staffControl = new StaffControl(sqlConnection);
-            reportControl = new ReportControl(sqlConnection);
+            staffControl = new StaffControl(homePageControl);
+            reportControl = new ReportControl();
 
             CurrentPage.Content = homePageControl;
             currentControl = 0;

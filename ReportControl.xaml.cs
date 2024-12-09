@@ -23,7 +23,7 @@ namespace Airport_Management_System
     /// </summary>
     public partial class ReportControl : UserControl
     {
-        public ReportControl(SqlConnection sqlConnection)
+        public ReportControl()
         {
             InitializeComponent();
 
@@ -95,7 +95,7 @@ namespace Airport_Management_System
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             break;
                         }
@@ -154,7 +154,7 @@ namespace Airport_Management_System
                     }
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Supress
             }

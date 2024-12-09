@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -25,9 +26,9 @@ namespace Airport_Management_System
     {
         Style hoverStyle;
 
-        List<string> details;
+        private readonly List<string> details;
 
-        Dictionary<string, string> rolesMap = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> rolesMap = new Dictionary<string, string>()
         {
             {"Air Traffic Controller", "Flight Operations" },
             {"Aircraft Mechanic", "Maintenance" },
@@ -52,11 +53,14 @@ namespace Airport_Management_System
             {"Security Officer", "Security" }
         };
 
-        BitmapImage malePic = new BitmapImage(new Uri("/Icons/male-picture.png", UriKind.Relative));
-        BitmapImage femalePic = new BitmapImage(new Uri("/Icons/female-picture.png", UriKind.Relative));
+        private readonly BitmapImage malePic = new BitmapImage(new Uri("/Icons/male-picture.png", UriKind.Relative));
+        private readonly BitmapImage femalePic = new BitmapImage(new Uri("/Icons/female-picture.png", UriKind.Relative));
 
-        public EditStaffDetails(List<string> details)
+        private StaffControl staffControl;
+
+        public EditStaffDetails(List<string> details, StaffControl staffControl)
         {
+            this.staffControl = staffControl;
             this.details = details;
             InitializeComponent();
             InitializeUsableElements();
@@ -175,7 +179,7 @@ namespace Airport_Management_System
 
             foreach (string r in rolesList)
             {
-                Label role = new Label()
+                Label role = new Label
                 {
                     Cursor = Cursors.Hand,
                     Content = r,
@@ -185,8 +189,8 @@ namespace Airport_Management_System
                     Width = 180,
                     Height = 32,
                     Padding = new Thickness(5, 6, 5, 5),
+                    Style = hoverStyle
                 };
-                role.Style = hoverStyle;
 
                 role.MouseDown += (sender, e) =>
                 {
@@ -210,7 +214,7 @@ namespace Airport_Management_System
 
             foreach (string r in statusList)
             {
-                Label status = new Label()
+                Label status = new Label
                 {
                     Cursor = Cursors.Hand,
                     Content = r,
@@ -220,8 +224,8 @@ namespace Airport_Management_System
                     Width = 180,
                     Height = 32,
                     Padding = new Thickness(5, 6, 5, 5),
+                    Style = hoverStyle
                 };
-                status.Style = hoverStyle;
 
                 status.MouseDown += (sender, e) =>
                 {
@@ -243,7 +247,7 @@ namespace Airport_Management_System
 
             foreach (string r in shiftlist)
             {
-                Label shift = new Label()
+                Label shift = new Label
                 {
                     Cursor = Cursors.Hand,
                     Content = r,
@@ -253,8 +257,8 @@ namespace Airport_Management_System
                     Width = 180,
                     Height = 32,
                     Padding = new Thickness(5, 6, 5, 5),
+                    Style = hoverStyle
                 };
-                shift.Style = hoverStyle;
 
                 shift.MouseDown += (sender, e) =>
                 {
@@ -363,6 +367,64 @@ namespace Airport_Management_System
         private void female_Checked(object sender, RoutedEventArgs e)
         {
             picture.Source = femalePic;
+        }
+
+        private async void Confirm_Update(object sender, MouseButtonEventArgs e)
+        {
+            if (!Valid_Input())
+            {
+                return;
+            }
+
+            try
+            {
+                string gender = male.IsChecked == true ? "fas" : "fasf";
+
+                using (SqlCommand command = new SqlCommand("", MainWindow.sqlConnection))
+                {
+                    command.CommandText = "UPDATE staffs_table SET name_col = @name, role_col = @role, shift_col = @shift, status_col = @status, department_col = @department, contact_no = @contact, gender = @gender WHERE name_col = @origName";
+                    command.Parameters.AddWithValue("@origName", details[0]);
+                    command.Parameters.AddWithValue("@name", name.Text);
+                    command.Parameters.AddWithValue("@role", role.Content);
+                    command.Parameters.AddWithValue("@shift", shift.Content);
+                    command.Parameters.AddWithValue("@status", status.Content);
+                    command.Parameters.AddWithValue("@department", department.Text);
+                    command.Parameters.AddWithValue("@contact", contactNo.Text);
+                    command.Parameters.AddWithValue("@gender", gender);
+
+                    int rows = await command.ExecuteNonQueryAsync();
+
+                    if (rows == 1)
+                    {
+                        staffControl.UpdateHomePage($"Updated {details[0]}'s details.");
+                        MessageBox.Show("Staff details updated successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update staff details", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool Valid_Input()
+        {
+            if (name.Text.Length == 0)
+            {
+                MessageBox.Show("Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (contactNo.Text.Length == 0)
+            {
+                MessageBox.Show("Contact number cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -421,6 +421,7 @@ namespace Airport_Management_System
 
             if (await Task.Run(() => Update_Database(MainWindow.cts.Token)))
             {
+                await Task.Run(() => homePage.RefreshStats(MainWindow.cts.Token));
                 homePage.addRecentAct($"Assigned Flight {chosenFlight.Name} to Gate {gate.Text}");
                 MessageBox.Show("Gate successfully assigned.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 

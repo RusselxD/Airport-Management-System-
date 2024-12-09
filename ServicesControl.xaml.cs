@@ -21,7 +21,7 @@ namespace Airport_Management_System
     /// </summary>
     public partial class ServicesControl : UserControl
     {
-        public ServicesControl(SqlConnection sqlConnection)
+        public ServicesControl()
         {
             InitializeComponent();
         }

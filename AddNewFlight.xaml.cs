@@ -101,16 +101,15 @@ namespace Airport_Management_System
 
             foreach (string s in airlines.Keys)
             {
-                TextBlock tb = new TextBlock()
+                TextBlock tb = new TextBlock
                 {
                     FontFamily = new FontFamily("Ubuntu"),
                     FontSize = 14,
                     Padding = new Thickness(10, 9, 0, 9),
                     Cursor = Cursors.Hand,
-                    Text = s
+                    Text = s,
+                    Style = style
                 };
-
-                tb.Style = style;
                 tb.MouseDown += Choose_Airline;
                 airlinesChoicesStack.Children.Add(tb);
             }
@@ -211,16 +210,15 @@ namespace Airport_Management_System
 
             foreach (string s in endPointTerminals)
             {
-                TextBlock tb = new TextBlock()
+                TextBlock tb = new TextBlock
                 {
                     FontFamily = new FontFamily("Ubuntu"),
                     FontSize = 14,
                     Padding = new Thickness(10, 9, 0, 9),
                     Cursor = Cursors.Hand,
-                    Text = s
+                    Text = s,
+                    Style = style
                 };
-
-                tb.Style = style;
 
                 tb.MouseDown += Choose_EndPoint;
 
@@ -478,6 +476,7 @@ namespace Airport_Management_System
                     int success = command.ExecuteNonQuery();
                     if (success == 1)
                     {
+                        Task.Run(() => homePage.RefreshStats(MainWindow.cts.Token));
                         homePage.Refresh_Flight_Control();
                         string a = departure.IsChecked == true ? "Departures" : "Arrivals";
                         homePage.addRecentAct($"Added Flilght {val1} to {a}.");

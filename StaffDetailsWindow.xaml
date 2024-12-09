@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
-        mc:Ignorable="d" ResizeMode="NoResize"
+        mc:Ignorable="d" ResizeMode="NoResize" Icon="/Icons/app-icon.ico"
         Height="560" Width="516">
     <Grid Background="White">
         <Border Margin="20,20,20,20" Background="White" CornerRadius="15,15,15,15" BorderBrush="#FFE6E6E6" BorderThickness="1">

@@ -66,11 +66,14 @@ namespace Airport_Management_System
         Thickness t2 = new Thickness(0, 0, 20, 0);
         Thickness t1 = new Thickness(20, 0, 0, 0);
         CornerRadius c1 = new CornerRadius(4);
-    
+
         // --------------------------------------------------------------------------------------------------------------- //
 
-        public StaffControl(SqlConnection sqlConnection)
+        private HomePageControl homePage;
+
+        public StaffControl(HomePageControl homePage)
         {
+            this.homePage = homePage;
             roleFilterIsOn = false;
             shiftFilterIsOn = false;
             statusFilterIsOn = false;
@@ -358,7 +361,7 @@ namespace Airport_Management_System
 
             await Dispatcher.InvokeAsync(() =>
             {
-                new EditStaffDetails(details);
+                new EditStaffDetails(details, this);
             });
         }
 
@@ -402,7 +405,7 @@ namespace Airport_Management_System
             string name = (sender as Border).Name.Replace('_', ' ');
             List<string> details = await Task.Run(() => Query_Staff_Details(name));
 
-            if(details == null)
+            if (details == null)
             {
                 return;
             }
@@ -722,8 +725,14 @@ namespace Airport_Management_System
             {
                 if (await Task.Run(() => DeleteStaffQuery(name)))
                 {
+                    await Task.Run(() => homePage.RefreshStats(MainWindow.cts.Token));
+                    homePage.addRecentAct($"Deleted {name} from Staff list.");
                     Refresh();
                     MessageBox.Show($"{name} has been successfully deleted.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("An error occurred while deleting the staff.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -759,6 +768,12 @@ namespace Airport_Management_System
                 MessageBox.Show(ex.Message);
             }
             return false;
+        }
+
+        public void UpdateHomePage(string updateMessage)
+        {
+            homePage.addRecentAct(updateMessage);
+            Task.Run(() => homePage.RefreshStats(MainWindow.cts.Token));
         }
     }
 }
