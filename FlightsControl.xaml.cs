@@ -127,10 +127,13 @@ namespace Airport_Management_System
 
         private void UpdateDisplayedFlights()
         {
-            flightsBorder.Height = 498;
-            outerMostGrid.Height = 741;
-            flightsPanel.Children.Clear();
-
+            Dispatcher.Invoke(() =>
+            {
+                flightsBorder.Height = 498;
+                outerMostGrid.Height = 741;
+                flightsPanel.Children.Clear();
+            });
+            
             int i = 0;
             List<List<string>> flightsToAdd;
 
@@ -138,14 +141,13 @@ namespace Airport_Management_System
 
             foreach (List<string> flight in flightsToAdd)
             {
+                flightsPanel.Children.Add(Create_New_Row(flight[0], flight[1], flight[2], flight[3], flight[4], flight[5]));
                 i++;
                 if (i > 8)
                 {
                     flightsBorder.Height += 55;
                     outerMostGrid.Height += 55;
                 }
-
-                flightsPanel.Children.Add(Create_New_Row(flight[0], flight[1], flight[2], flight[3], flight[4], flight[5]));
             }
         }
 

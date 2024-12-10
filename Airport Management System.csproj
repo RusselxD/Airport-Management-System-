@@ -74,6 +74,9 @@
     <Compile Include="GatesControl.xaml.cs">
       <DependentUpon>GatesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Landing.xaml.cs">
+      <DependentUpon>Landing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportControl.xaml.cs">
       <DependentUpon>ReportControl.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HomePageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Landing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,6 +274,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\female-picture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Airport Logo\landing_photo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

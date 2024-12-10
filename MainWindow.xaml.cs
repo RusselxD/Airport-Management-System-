@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Airport_Management_System.Properties;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,7 +22,6 @@ namespace Airport_Management_System
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
     public partial class MainWindow : Window
     {
         public static SqlConnection sqlConnection;
@@ -32,8 +32,6 @@ namespace Airport_Management_System
         private GatesControl gatesControl;
         private StaffControl staffControl;
         private ReportControl reportControl;
-
-        private bool appIsRunning;
 
         /*
          * 0 - Home
@@ -51,19 +49,18 @@ namespace Airport_Management_System
 
         public static CancellationTokenSource cts;
 
-        public MainWindow()
+        public MainWindow(SqlConnection connection)
         {
-            appIsRunning = true;
-
             // NOTE: Connection only temporary.
-            string connectionstring = @"server=DESKTOP-4CVBSIM\SQLEXPRESS; database=airport_database;user id=airport_admin;password=admin;MultipleActiveResultSets = True;";
-            sqlConnection = new SqlConnection(connectionstring);
-            sqlConnection.Open();
+        //    string connectionstring = @"server=DESKTOP-4CVBSIM\SQLEXPRESS; database=airport_database;user id=airport_admin;password=admin;MultipleActiveResultSets = True;";
+       //     sqlConnection = new SqlConnection(connectionstring);
+       //     sqlConnection.Open();
             
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-         //   sqlConnection = connection;
+            sqlConnection = connection;
+
 
             cts = new CancellationTokenSource();
 
@@ -131,9 +128,7 @@ namespace Airport_Management_System
 
         void closeApp()
         {
-            this.appIsRunning = false;
             cts.Cancel();
-            //   homePageControl.CloseConnection();
             sqlConnection.Close();
             sqlConnection.Dispose();
         }
@@ -161,14 +156,14 @@ namespace Airport_Management_System
 
         void DisplayDateAndTime()
         {
-            while (appIsRunning)
+            while (!cts.IsCancellationRequested)
             {
                 Dispatcher.InvokeAsync(() =>
                 {
                     updateDateAndTime(timeStandardIsUTC ? DateTime.UtcNow : DateTime.Now);
                 }).Task.Wait();
 
-                if (!appIsRunning)
+                if (!cts.IsCancellationRequested)
                     break;
                 Thread.Sleep(1);
             }

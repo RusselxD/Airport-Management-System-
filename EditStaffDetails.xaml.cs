@@ -378,7 +378,7 @@ namespace Airport_Management_System
 
             try
             {
-                string gender = male.IsChecked == true ? "fas" : "fasf";
+                string gender = male.IsChecked == true ? "Male" : "Female";
 
                 using (SqlCommand command = new SqlCommand("", MainWindow.sqlConnection))
                 {

@@ -61,7 +61,7 @@ namespace Airport_Management_System
         BitmapImage details = new BitmapImage(new Uri("/Icons/staff-details.png", UriKind.Relative));
         Thickness imageMargin = new Thickness(2);
 
-        Style toolsBorderStyle = new Style(typeof(Border));
+        Style hoverStyle = new Style(typeof(Border));
 
         Thickness t2 = new Thickness(0, 0, 20, 0);
         Thickness t1 = new Thickness(20, 0, 0, 0);
@@ -70,6 +70,8 @@ namespace Airport_Management_System
         // --------------------------------------------------------------------------------------------------------------- //
 
         private HomePageControl homePage;
+
+        TextBlock[] dropDownChoices;
 
         public StaffControl(HomePageControl homePage)
         {
@@ -81,6 +83,18 @@ namespace Airport_Management_System
             filterIsOn = roleFilterIsOn || shiftFilterIsOn || statusFilterIsOn;
 
             InitializeComponent();
+
+            dropDownChoices = new TextBlock[]
+            {
+                all1, role1, role2, role3, 
+                role4, role5, role6, role7, 
+                role8, role9, role10, role11, 
+                role12, role13, role14, role15, 
+                role16, role17, role18, role19, 
+                role20, role21, all2, shift1, shift2,
+                shift3, all3, status1, status2, status3, status4
+            };
+
             Refresh();
             InitializeAnimations();
         }
@@ -132,15 +146,32 @@ namespace Airport_Management_System
                 }
             };
 
-            toolsBorderStyle = new Style(typeof(Border));
-            toolsBorderStyle.Setters.Add(new Setter(Border.BackgroundProperty, Brushes.White));
+            hoverStyle = new Style(typeof(Border));
+            hoverStyle.Setters.Add(new Setter(Border.BackgroundProperty, Brushes.White));
             Trigger isMouseOverTrigger = new Trigger
             {
                 Property = UIElement.IsMouseOverProperty,
                 Value = true
             };
             isMouseOverTrigger.Setters.Add(new Setter(Border.BackgroundProperty, new SolidColorBrush(Color.FromRgb(235, 235, 235))));
-            toolsBorderStyle.Triggers.Add(isMouseOverTrigger);
+            hoverStyle.Triggers.Add(isMouseOverTrigger);
+
+            Style dropDownChoiceHoverEffect = new Style(typeof(TextBlock));
+            Trigger mouseOverTrigger = new Trigger
+            {
+                Property = UIElement.IsMouseOverProperty,
+                Value = true
+            };
+            mouseOverTrigger.Setters.Add(new Setter
+            {
+                Property = TextBlock.BackgroundProperty,
+                Value = new SolidColorBrush(Color.FromRgb(233, 233, 233)) 
+            });
+            dropDownChoiceHoverEffect.Triggers.Add(mouseOverTrigger);
+            foreach (TextBlock tb in dropDownChoices)
+            {
+                tb.Style = dropDownChoiceHoverEffect;
+            }
         }
 
         private void Get_Column_Definition(Grid g)
@@ -252,7 +283,7 @@ namespace Airport_Management_System
                             Margin = t1,
                             CornerRadius = c1,
                         };
-                        editBorder.Style = toolsBorderStyle;
+                        editBorder.Style = hoverStyle;
 
                         editBorder.MouseDown += (ss, e) =>
                         {
@@ -282,7 +313,7 @@ namespace Airport_Management_System
                             Delete_Staff(ss, e);
                         };
 
-                        deleteBorder.Style = toolsBorderStyle;
+                        deleteBorder.Style = hoverStyle;
 
                         System.Windows.Controls.Image deleteImage = new System.Windows.Controls.Image
                         {
@@ -309,7 +340,7 @@ namespace Airport_Management_System
                             Show_Details(ss, e);
                         };
 
-                        detailsBorder.Style = toolsBorderStyle;
+                        detailsBorder.Style = hoverStyle;
 
                         System.Windows.Controls.Image detailsImage = new System.Windows.Controls.Image
                         {

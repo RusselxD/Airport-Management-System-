@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Airport_Management_System.Properties;
 
 namespace Airport_Management_System
 {
@@ -43,7 +34,7 @@ namespace Airport_Management_System
         private void Open_Main_Window(SqlConnection connection)
         {
             Window.GetWindow(lc).Close();
-           // new MainWindow(connection);
+            new MainWindow(connection);
         }
 
         // for windows authentication

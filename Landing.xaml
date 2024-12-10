@@ -1,0 +1,19 @@
+﻿<Window x:Class="Airport_Management_System.Landing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Airport_Management_System"
+        mc:Ignorable="d" WindowStyle="None"
+        AllowsTransparency="True"
+        Title="Landing" Height="432" Width="685" Background="{x:Null}">
+    <Grid>
+        <Image Name="MyImage" 
+               Source="/Airport Logo/landing_photo.jpg" 
+               Opacity="0"
+               Height="435" Margin="0,0,0,0">
+            <!-- Animation Trigger -->
+            
+        </Image>
+    </Grid>
+</Window>

@@ -75,7 +75,7 @@
 
                 <Grid>
                     <TextBlock HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="Important Notices" VerticalAlignment="Top" Width="271" FontSize="22" FontFamily="Ubuntu" Margin="30,23,0,0"/>
-                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,69,0,0" TextWrapping="Wrap" Text="Ensure your network connection is secure before proceeding" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
+                    <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,69,0,0" TextWrapping="Wrap" Text="This application is intended for Global Wings Inc." VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
                     <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,75,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
                     <TextBlock HorizontalAlignment="Left" Height="16" Margin="46,97,0,0" TextWrapping="Wrap" Text="Use of this system constitutes acceptance of all security monitoring" VerticalAlignment="Top" Width="495" FontFamily="Ubuntu" FontSize="15" Foreground="#FF656565"/>
                     <Rectangle HorizontalAlignment="Left" Height="6" Margin="30,102,0,0" VerticalAlignment="Top" Width="6" Fill="#FF656565" RadiusX="10" RadiusY="10"/>
