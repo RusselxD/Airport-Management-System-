@@ -4,11 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport_Management_System"
-        mc:Ignorable="d"
-        Title="FlightDetailsWindow" Height="376" Width="487" ResizeMode="NoResize">
+        mc:Ignorable="d" Icon="/Icons/app-icon.ico"
+        Title="Flight Details" Height="376" Width="487" ResizeMode="NoResize">
     <Grid>
-
-
         <Border Margin="20,20,20,20" Background="White" CornerRadius="15,15,15,15" BorderBrush="#FFE6E6E6" BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect Color="#FFD6D6D6" Direction="0" BlurRadius="20" ShadowDepth="0"/>

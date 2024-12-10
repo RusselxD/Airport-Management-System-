@@ -397,7 +397,9 @@ namespace Airport_Management_System
                     if (rows == 1)
                     {
                         staffControl.UpdateHomePage($"Updated {details[0]}'s details.");
+                        staffControl.Refresh();
                         MessageBox.Show("Staff details updated successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Close();
                     }
                     else
                     {
@@ -413,13 +415,13 @@ namespace Airport_Management_System
 
         private bool Valid_Input()
         {
-            if (name.Text.Length == 0)
+            if (string.IsNullOrWhiteSpace(name.Text))
             {
                 MessageBox.Show("Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
-            if (contactNo.Text.Length == 0)
+            if (string.IsNullOrWhiteSpace(contactNo.Text))
             {
                 MessageBox.Show("Contact number cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;

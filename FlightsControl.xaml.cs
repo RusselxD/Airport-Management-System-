@@ -28,6 +28,7 @@ namespace Airport_Management_System
     {
         private SolidColorBrush darkGreenColor;
         private SolidColorBrush lighterGreenColor;
+        private Style flightBorderStyle;
 
         private bool departureIsShown;
 
@@ -152,6 +153,64 @@ namespace Airport_Management_System
         {
             darkGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF06611E"));
             lighterGreenColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF90FDAD"));
+
+            flightBorderStyle = new Style(typeof(Border));
+            flightBorderStyle.Setters.Add(new Setter(Border.BackgroundProperty, Brushes.White));
+            Trigger isMouseOverTrigger = new Trigger
+            {
+                Property = UIElement.IsMouseOverProperty,
+                Value = true
+            };
+            isMouseOverTrigger.Setters.Add(new Setter(Border.BackgroundProperty, new SolidColorBrush(Color.FromRgb(235, 235, 235))));
+            flightBorderStyle.Triggers.Add(isMouseOverTrigger);
+        }
+
+        private async void Flight_Click(object sender, MouseButtonEventArgs e)
+        {
+            string flight = ((Border)sender).Name;
+            List<string> details = new List<string>();
+            if (departureIsShown)
+            {
+                details.Add("departure");
+            }
+            else
+            {
+                details.Add("arrival");
+            }
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    string table = departureIsShown ? "departure_flights" : "arrival_flights";
+
+                    using (SqlCommand findFlightQuery = new SqlCommand($"SELECT * FROM {table} WHERE flight = @Flight", MainWindow.sqlConnection))
+                    {
+                        findFlightQuery.Parameters.AddWithValue("@Flight", flight);
+                        using (SqlDataReader flightReader = await findFlightQuery.ExecuteReaderAsync())
+                        {
+                            while (await flightReader.ReadAsync())
+                            {
+                                details.Add(flightReader[1].ToString());
+                                details.Add(flightReader[2].ToString());
+                                details.Add(flightReader[3].ToString());
+                                details.Add(flightReader[4].ToString());
+                                details.Add(flightReader[5].ToString());
+                                details.Add(flightReader[6].ToString());
+                                details.Add(flightReader[8].ToString());
+                            }
+                        }
+                    }
+
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            Open_Flight_Details(details);
         }
 
         private async void Search_Icon_Click(object sender, MouseButtonEventArgs e)
@@ -274,9 +333,17 @@ namespace Airport_Management_System
         {
             Border border = new Border
             {
+                Name = flight,
+                Cursor = Cursors.Hand,
                 Height = 55,
                 BorderThickness = new Thickness(0, 0, 0, 1),
-                BorderBrush = Brushes.Black
+                BorderBrush = Brushes.Black,
+                Style = flightBorderStyle
+            };
+
+            border.MouseDown += (sender, e) =>
+            {
+                Flight_Click(sender, e);
             };
 
             Grid grid = Create_New_Grid();

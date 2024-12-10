@@ -85,7 +85,7 @@ namespace Airport_Management_System
             InitializeAnimations();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             staffs = new List<List<string>>();
             filteredStaffs = new List<List<string>>();
