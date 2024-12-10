@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -31,9 +32,17 @@ namespace Airport_Management_System
             this.SizeToContent = SizeToContent.Height;
             MainContent.Content = new LoginControl();
         }
+
         public void AdjustPosition(int n)
         {
-            this.Top += n;
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = this.Top,               
+                To = this.Top + n,             
+                Duration = TimeSpan.FromSeconds(0.15), 
+            };
+
+            this.BeginAnimation(Window.TopProperty, animation);
         }
     }
 }

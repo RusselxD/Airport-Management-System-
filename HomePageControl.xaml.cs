@@ -275,7 +275,7 @@ namespace Airport_Management_System
             {
                 await Task.Run(async () =>
                 {
-                    int l1;
+                    int counter;
                     using (SqlCommand alertsSelectQuery = new SqlCommand("SELECT * FROM alerts_table", MainWindow.sqlConnection))
                     {
                         while (!token.IsCancellationRequested)
@@ -284,15 +284,15 @@ namespace Airport_Management_System
                             {
                                 using (SqlDataReader alertsReader = await alertsSelectQuery.ExecuteReaderAsync(token))
                                 {
-                                    l1 = 0;
+                                    counter = 0;
 
                                     while (await alertsReader.ReadAsync(token))
                                     {
-                                        l1++;
+                                        counter++;
 
-                                        if (l1 > alerts)
+                                        if (counter > alerts)
                                         {
-                                            alerts = l1;
+                                            alerts = counter;
 
                                             if (alerts == 1)
                                             {
